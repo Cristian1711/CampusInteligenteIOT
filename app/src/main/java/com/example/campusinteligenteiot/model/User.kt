@@ -13,7 +13,8 @@ class User (val idUser: String? = null,
             val description: String? = null,
             val profileImage: String? = null,
             val friends: ArrayList<String>? = null,
-            val isDriver: Boolean = false
+            var isDriver: Boolean = false,
+            var rating: ArrayList<Int>? = null
         )
 {
     fun getAge(): String{
