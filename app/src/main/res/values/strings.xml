@@ -8,6 +8,15 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="login_error_email">Debe introducir un email</string>
+    <string name="login_error_passwd">Debe introducir una contraseña</string>
+    <string name="login_success">Ha iniciado sesión satisfactoriamente</string>
+    <string name="login_email">Debe verificar el email</string>
+    <string name="login_error">Error en el inicio de sesión</string>
+    <string name="password">Contraseña</string>
+    <string name="email">Email</string>
+    <string name="google_token">378264786934-iqmrnrmh8eviu0dah9aolgcn4dm3b24a.apps.googleusercontent.com</string>
+    <string name="google_login_error">Ha ocurrido un error</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
