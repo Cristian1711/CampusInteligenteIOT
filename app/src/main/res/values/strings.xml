@@ -17,6 +17,7 @@
     <string name="email">Email</string>
     <string name="google_token">378264786934-iqmrnrmh8eviu0dah9aolgcn4dm3b24a.apps.googleusercontent.com</string>
     <string name="google_login_error">Ha ocurrido un error</string>
+    <string name="email_verified">Email verificado con éxito</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

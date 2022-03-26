@@ -15,16 +15,6 @@ import com.example.campusinteligenteiot.usecases.AuthUserUseCase
 import com.example.campusinteligenteiot.ui.authentication.signin.SigninVMFactory
 import com.example.campusinteligenteiot.ui.authentication.signin.SigninViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [VerifyEmailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class VerifyEmailFragment : Fragment() {
     private lateinit var EMAIL: String
     private lateinit var PASSWD: String
@@ -35,8 +25,8 @@ class VerifyEmailFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val loginViewModel by viewModels<LoginViewModel> {
-        LoginVMFactory(AuthUserUseCaseImpl(UserRepositoryImp()))
+    private val loginViewModel by viewModels<SigninViewModel> {
+        SigninVMFactory(AuthUserUseCase(UserRepository()))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,7 +86,7 @@ class VerifyEmailFragment : Fragment() {
     }
 
     private fun goToRegisterData() {
-        findNavController().navigate(R.id.action_verifyEmailFragment_to_registerUserFragment)
+        //findNavController().navigate(R.id.action_verifyEmailFragment_to_registerUserFragment)
         //findNavController().navigate(R.id.action_verifyEmailFragment_to_phoneNumberFragment)
     }
 }
