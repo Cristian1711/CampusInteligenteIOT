@@ -18,6 +18,14 @@
     <string name="google_token">378264786934-iqmrnrmh8eviu0dah9aolgcn4dm3b24a.apps.googleusercontent.com</string>
     <string name="google_login_error">Ha ocurrido un error</string>
     <string name="email_verified">Email verificado con éxito</string>
+    <string name="register_empty_name">Debe introducir un nombre</string>
+    <string name="register_empty_surname">Debe introducir unos apellidos</string>
+    <string name="register_empty_username">Debe introducir un nombre de usuario</string>
+    <string name="register_success">Perfecto</string>
+    <string name="signup_error_email">Debe introducir un email válido</string>
+    <string name="signup_error_password">Debe introducir una contraseña válida</string>
+    <string name="signup_error_notequal_password">Las contraseñas no coinciden</string>
+    <string name="signup_error">Ha ocurrido un error inesperado. Inténtelo de nuevo</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>

@@ -1,60 +1,105 @@
 package com.example.campusinteligenteiot.ui.authentication.signup
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.repository.UserRepository
+import com.example.campusinteligenteiot.databinding.FragmentSignupBinding
+import com.example.campusinteligenteiot.usecases.AuthUserUseCase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SignUpFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SignupFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SignupFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var EMAIL: String
+    private lateinit var PASSWD: String
+    private val GOOGLE_SIGN_IN = 10
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
+    //private val viewModel by viewModels<SignUpViewModel>()
+    private val  viewModel by viewModels<SignUpViewModel> {
+        SignUpVMFactory(AuthUserUseCase(UserRepository()))
     }
+
+
+    //ViewBiding
+    private  var _binding: FragmentSignupBinding? = null
+    // This property is only valid between onCreateView and onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false)
+        _binding = FragmentSignupBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignupFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SignupFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.registerButton.setOnClickListener {
+            binding.progressBar.visibility = View.VISIBLE
+            setUp()
+            setUpViewModel()
+            binding.progressBar.visibility = View.GONE
+
+        }
+
+    }
+
+
+
+    private fun setUp() {
+        val email = binding.emailEditText.text.toString()
+        val passwd = binding.passwordEditText.text.toString()
+        val passwdRepeat = binding.repeatPasswordEditText.text.toString()
+
+        viewModel.create(email, passwd,passwdRepeat)
+
+        EMAIL = email
+        PASSWD = passwd
+
+    }
+
+    private fun setUpViewModel() {
+        with(viewModel) {
+            successLD.observe(viewLifecycleOwner) {
+
+                openEmailVerify()
+
+                activity?.also {
+                }
+
+            }
+            errorLD.observe(viewLifecycleOwner) {
+                activity?.also {
+                    Toast.makeText(context,R.string.signup_error,Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun openEmailVerify() {
+        val bundle = bundleOf(
+            "email" to EMAIL,
+            "passwd" to PASSWD,
+
+            )
+        findNavController().navigate(R.id.action_signupFragment_to_verifyEmailFragment,bundle)
     }
 }

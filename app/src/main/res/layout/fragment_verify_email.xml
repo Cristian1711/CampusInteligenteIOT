@@ -14,7 +14,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="120dp"
         android:layout_marginEnd="30dp"
-        android:text="Hola, antes de continuar, necesito que verifiques tu Email"
+        android:text="Hola, antes de continuar, es necesario que verifiques tu Email"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold"
