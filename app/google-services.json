@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "663899256549",
+    "project_id": "campusinteligenteiot",
+    "storage_bucket": "campusinteligenteiot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663899256549:android:051e7306d9dffa4430060c",
+        "android_client_info": {
+          "package_name": "com.example.campusinteligenteiot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663899256549-av4aubn23diu5akgto3308i4d8bl5drp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.campusinteligenteiot",
+            "certificate_hash": "b804f816c70633b490606d77771857ef639ec433"
+          }
+        },
+        {
+          "client_id": "663899256549-bvp4vrurmmigj6piv4tk2kureku820qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXtNNsCSAGVQnNIx_DF-oMyo-qjX5vk9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663899256549-bvp4vrurmmigj6piv4tk2kureku820qp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
