@@ -57,5 +57,32 @@
         android:id="@+id/registerCollegeDegreeFragment"
         android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterCollegeDegreeFragment"
         android:label="fragment_register_college_degree"
-        tools:layout="@layout/fragment_register_college_degree" />
+        tools:layout="@layout/fragment_register_college_degree" >
+        <action
+            android:id="@+id/action_registerCollegeDegreeFragment_to_registerBirthdateFragment"
+            app:destination="@id/registerBirthdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerBirthdateFragment"
+        android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterBirthdateFragment"
+        android:label="fragment_register_birthdate"
+        tools:layout="@layout/fragment_register_birthdate" >
+        <action
+            android:id="@+id/action_registerBirthdateFragment_to_registerImageFragment"
+            app:destination="@id/registerImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerImageFragment"
+        android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterImageFragment"
+        android:label="fragment_register_image"
+        tools:layout="@layout/fragment_register_image" >
+        <action
+            android:id="@+id/action_registerImageFragment_to_registerDescriptionFragment"
+            app:destination="@id/registerDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerDescriptionFragment"
+        android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterDescriptionFragment"
+        android:label="fragment_register_description"
+        tools:layout="@layout/fragment_register_description" />
 </navigation>

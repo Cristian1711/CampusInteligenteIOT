@@ -27,6 +27,10 @@
     <string name="signup_error_notequal_password">Las contraseñas no coinciden</string>
     <string name="signup_error">Ha ocurrido un error inesperado. Inténtelo de nuevo</string>
     <string name="register_college_degree_error">Debe seleccionar una carrera</string>
+    <string name="register_birthdate_error">Debe seleccionar una fecha</string>
+    <string name="register_image_error">Error al subir la imagen</string>
+    <string name="register_image_success">Se ha subido la imagen con éxito</string>
+    <string name="firestore_upload_error">Se ha producido un error al subir los datos. Inténtelo de nuevo</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
