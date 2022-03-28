@@ -26,7 +26,14 @@
     <string name="signup_error_password">Debe introducir una contraseña válida</string>
     <string name="signup_error_notequal_password">Las contraseñas no coinciden</string>
     <string name="signup_error">Ha ocurrido un error inesperado. Inténtelo de nuevo</string>
+    <string name="register_college_degree_error">Debe seleccionar una carrera</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string-array name="collegeDegrees">
+        <item>Ingenieria Informatica</item>
+        <item>Traduccion e Interpretacion</item>
+        <item>Biologia</item>
+    </string-array>
 </resources>

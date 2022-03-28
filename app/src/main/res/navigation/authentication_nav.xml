@@ -39,5 +39,23 @@
         android:id="@+id/verifyEmailFragment"
         android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.VerifyEmailFragment"
         android:label="fragment_verify_email"
-        tools:layout="@layout/fragment_verify_email" />
+        tools:layout="@layout/fragment_verify_email" >
+        <action
+            android:id="@+id/action_verifyEmailFragment_to_registerNameFragment"
+            app:destination="@id/registerNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerNameFragment"
+        android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterNameFragment"
+        android:label="fragment_register_name"
+        tools:layout="@layout/fragment_register_name" >
+        <action
+            android:id="@+id/action_registerNameFragment_to_registerCollegeDegreeFragment"
+            app:destination="@id/registerCollegeDegreeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerCollegeDegreeFragment"
+        android:name="com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterCollegeDegreeFragment"
+        android:label="fragment_register_college_degree"
+        tools:layout="@layout/fragment_register_college_degree" />
 </navigation>
