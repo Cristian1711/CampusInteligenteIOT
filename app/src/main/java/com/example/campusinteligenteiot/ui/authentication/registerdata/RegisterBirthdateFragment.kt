@@ -7,13 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.databinding.FragmentRegisterBirthdateBinding
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.*
 
 
 class RegisterBirthdateFragment : Fragment() {
 
+    private val viewModel by viewModels<RegisterBirthdateViewModel>()
+    private var friendId = "2dhCruKw3IJAKR5jrCxH"
     private var NAME = "name"
     private var SURNAME = "surname"
     private var USERNAME = "username"
@@ -21,6 +29,15 @@ class RegisterBirthdateFragment : Fragment() {
     private var DAY = 0
     private var MONTH = 0
     private var YEAR = 0
+    private var FRIENDS = arrayListOf(
+        friendId
+    )
+    private var DESCRIPTION = "nada"
+    private var ISDRIVER = false
+    private var PROFILEIMAGE = "nada"
+    private var RATING = hashMapOf(
+        "rating" to 0
+    )
     //private var PHONENUMBER = "phonenumber"
 
     //ViewBiding
@@ -59,6 +76,15 @@ class RegisterBirthdateFragment : Fragment() {
         binding.etDate.setOnClickListener {
             showDatePickerDialog()
         }
+
+        binding.nextButton.setOnClickListener {
+            if (DAY != 0 && MONTH != 0 && YEAR != 0) {
+                uploadDataFirestore()
+                goNext()
+            }else {
+                Toast.makeText(context,R.string.register_birthdate_error,Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun showDatePickerDialog() {
@@ -77,11 +103,6 @@ class RegisterBirthdateFragment : Fragment() {
         MONTH = selectedMonth
         YEAR = year
 
-        if (DAY != 0 && MONTH != 0 && YEAR != 0) {
-            goNext()
-        }else {
-            Toast.makeText(context,R.string.register_birthdate_error,Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun goNext() {
@@ -98,6 +119,47 @@ class RegisterBirthdateFragment : Fragment() {
         findNavController().navigate(
             R.id.action_registerBirthdateFragment_to_registerImageFragment,
             bundle)
+
+    }
+
+    private fun uploadDataFirestore() {
+        val birthdate = Calendar.getInstance()
+
+        birthdate.clear()
+        birthdate.set(Calendar.YEAR,YEAR)
+        birthdate.set(Calendar.MONTH,MONTH)
+        birthdate.set(Calendar.DAY_OF_MONTH,DAY)
+
+        val email = Firebase.auth.currentUser?.email.toString()
+        val userId = Firebase.auth.currentUser?.uid.toString()
+
+
+        val data = hashMapOf(
+            "name" to NAME,
+            "surname" to SURNAME,
+            "collegeDegree" to COLLEGEDEGREE,
+            "birthdate" to Timestamp(birthdate.timeInMillis/1000,0),
+            "email" to email,
+            "userName" to USERNAME,
+            "description" to DESCRIPTION,
+            "friends" to FRIENDS,
+            "isDriver" to ISDRIVER,
+            "profileImage" to PROFILEIMAGE,
+            "rating" to RATING
+            //"phonenumber" to PHONENUMBER
+        )
+        val db = Firebase.firestore
+        db.collection("User")
+            .document(userId)
+            .set(data)
+            .addOnSuccessListener {
+
+            }.addOnFailureListener {
+
+                Toast.makeText(context, R.string.firestore_upload_error, Toast.LENGTH_SHORT)
+                    .show()
+
+            }
 
     }
 

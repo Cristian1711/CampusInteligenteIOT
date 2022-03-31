@@ -177,7 +177,7 @@ class SigninFragment : Fragment() {
     }
 
     private fun openSignUp() {
-        //findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        findNavController().navigate(R.id.action_signinFragment_to_signupFragment)
 
     }
 }

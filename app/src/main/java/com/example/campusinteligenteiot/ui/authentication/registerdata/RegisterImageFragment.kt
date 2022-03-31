@@ -43,7 +43,7 @@ class RegisterImageFragment : Fragment() {
     private var NAME = "name"
     private var SURNAME = "surname"
     private var USERNAME = "username"
-    private var GENDER = "gender"
+    private var COLLEGEDEGREE = "collegeDegree"
     private var DAY = 0
     private var MONTH = 0
     private var YEAR = 0
@@ -126,6 +126,7 @@ class RegisterImageFragment : Fragment() {
 
         val storageRef = storage.reference
         val name = Firebase.auth.currentUser?.uid.toString()
+        println(name)
         val sdf = SimpleDateFormat("dd/M/yyyy_hh:mm:ss")
         val currentDate = sdf.format(Date()).toString()
         val pathImage = storageRef.child("profiles/$name/$currentDate.png")
@@ -155,6 +156,7 @@ class RegisterImageFragment : Fragment() {
 
     private fun uploadDataFirestore(currentDate: String ) {
         val userId = Firebase.auth.currentUser?.uid.toString()
+        println(userId)
         val url = "gs://campusinteligenteiot.appspot.com/profiles/$userId/$currentDate.png"
         val db = Firebase.firestore
         db.collection("User")

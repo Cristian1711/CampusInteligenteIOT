@@ -15,7 +15,7 @@ import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.databinding.FragmentRegisterCollegeDegreeBinding
 
 
-class RegisterCollegeDegreeFragment : Fragment(), AdapterView.OnItemClickListener {
+class RegisterCollegeDegreeFragment : Fragment() {
 
     private var NAME = "name"
     private var SURNAME = "surname"
@@ -58,6 +58,9 @@ class RegisterCollegeDegreeFragment : Fragment(), AdapterView.OnItemClickListene
         setUp()
 
         binding.nextButton.setOnClickListener {
+            COLLEGEDEGREE = binding.collegeDegreeTypeTextView.editableText.toString()
+            println("ESTA ES LA CARRERA SELECCIONADA")
+            println(COLLEGEDEGREE)
             if (COLLEGEDEGREE != "collegeDegree") {
                 goNext()
             }else {
@@ -67,26 +70,13 @@ class RegisterCollegeDegreeFragment : Fragment(), AdapterView.OnItemClickListene
     }
 
     fun setUp() {
-        val genders = resources.getStringArray(R.array.collegeDegrees)
-        val adapter = context?.let {
-            ArrayAdapter(
-                it,
-                R.layout.list_item,
-                genders
-            )
-        }
+        val collegeDegrees = resources.getStringArray(R.array.collegeDegrees)
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item,
+            collegeDegrees)
 
-        with(binding.collegeDegreeTypeTextView) {
-            setAdapter(adapter)
-            onItemClickListener = this@RegisterCollegeDegreeFragment
-        }
+        binding.collegeDegreeTypeTextView.setAdapter(adapter)
     }
 
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val item = parent?.getItemAtPosition(position).toString()
-        COLLEGEDEGREE = item
-
-    }
 
     private fun goNext() {
 
