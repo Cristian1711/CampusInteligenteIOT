@@ -3,9 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/navigation_home">
+    app:startDestination="@id/navigation_map">
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_map"
         android:name="com.example.campusinteligenteiot.ui.home.main.MainHomeFragment"
         android:label="Home" />
+    <fragment
+        android:id="@+id/navigation_car"
+        android:name="com.example.campusinteligenteiot.ui.home.car.CarFragment"
+        android:label="car_fragment"
+        tools:layout="@layout/car_fragment" />
+    <fragment
+        android:id="@+id/navigation_shop"
+        android:name="com.example.campusinteligenteiot.ui.home.shop.ShopFragment"
+        android:label="shop_fragment"
+        tools:layout="@layout/shop_fragment" />
+    <fragment
+        android:id="@+id/navigation_events"
+        android:name="com.example.campusinteligenteiot.ui.home.events.EventsFragment"
+        android:label="events_fragment"
+        tools:layout="@layout/events_fragment" />
+    <fragment
+        android:id="@+id/navigation_schedule"
+        android:name="com.example.campusinteligenteiot.ui.home.schedule.ScheduleFragment"
+        android:label="schedule_fragment"
+        tools:layout="@layout/schedule_fragment" />
 </navigation>

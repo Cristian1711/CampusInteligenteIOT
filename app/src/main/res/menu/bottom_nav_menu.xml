@@ -10,7 +10,7 @@
         android:id="@+id/navigation_shop"
         android:icon="@drawable/ic_shop"
         android:title="Tienda"
-        android:iconTint="@color/colorSecondary"/>
+        android:iconTint="@color/white"/>
     <item
         android:id="@+id/navigation_map"
         android:icon="@drawable/ic_map"
@@ -20,11 +20,11 @@
         android:id="@+id/navigation_events"
         android:icon="@drawable/ic_event"
         android:title="Eventos"
-        android:iconTint="@color/colorSecondary"/>
+        android:iconTint="@color/white"/>
     <item
         android:id="@+id/navigation_schedule"
         android:icon="@drawable/ic_clock"
         android:title="Horario transporte"
-        android:iconTint="@color/colorSecondary"/>
+        android:iconTint="@color/white"/>
 
 </menu>
