@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_car"
+        android:icon="@drawable/ic_car_2"
+        android:title="Compartir coche"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/ic_shop"
+        android:title="Tienda"
+        android:iconTint="@color/colorSecondary"/>
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_map"
+        android:title="Mapa"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_events"
+        android:icon="@drawable/ic_event"
+        android:title="Eventos"
+        android:iconTint="@color/colorSecondary"/>
+    <item
+        android:id="@+id/navigation_extras"
+        android:icon="@drawable/ic_clock"
+        android:title="Horario transporte"
+        android:iconTint="@color/colorSecondary"/>
+
+</menu>
