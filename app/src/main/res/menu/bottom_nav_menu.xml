@@ -22,7 +22,7 @@
         android:title="Eventos"
         android:iconTint="@color/colorSecondary"/>
     <item
-        android:id="@+id/navigation_extras"
+        android:id="@+id/navigation_schedule"
         android:icon="@drawable/ic_clock"
         android:title="Horario transporte"
         android:iconTint="@color/colorSecondary"/>

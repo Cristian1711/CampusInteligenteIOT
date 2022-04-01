@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".ui.spot.spothome.SpotHomeFragment">
+    tools:context=".ui.home.main.MainHomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -258,19 +258,6 @@
                         app:layout_constraintVertical_bias="0.0"
                         tools:src="@tools:sample/avatars" />
 
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/gradiation_black"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-
                     <Button
                         android:id="@+id/nextImg"
                         android:layout_width="match_parent"
@@ -347,7 +334,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="30dp"
-                        android:background="@drawable/buttons_1"
+                        android:background="@drawable/button_1"
                         android:fontFamily="@font/m_semibold"
                         android:text="VALORAR"
                         android:textColor="@color/white"
@@ -461,23 +448,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/spotList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/m_semibold"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19"
-                app:layout_constraintVertical_bias="1.0"
-                tools:ignore="MissingConstraints"
-                tools:listitem="@layout/spot_item">
-
-            </androidx.recyclerview.widget.RecyclerView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
