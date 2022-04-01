@@ -1,8 +1,10 @@
 package com.example.campusinteligenteiot.ui.home
 
 import android.os.Bundle
+import android.view.Gravity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -26,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 
         //val navController = findNavController(R.id.fragmentContainerView2)
         val navHostFragment = supportFragmentManager
@@ -34,6 +37,11 @@ class HomeActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(R.id.navigation_car,R.id.navigation_shop,R.id.navigation_map, R.id.navigation_events,R.id.navigation_schedule)
         )
+
+        binding.DrawerButton.setOnClickListener {
+            drawerLayout.openDrawer(Gravity.RIGHT)
+        }
+
         //setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
