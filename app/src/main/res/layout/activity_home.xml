@@ -24,38 +24,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navGraph="@navigation/mobile_navigation" />
 
-
-        <ImageView
-            android:id="@+id/nada"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="328dp"
-            android:background="@color/colorBackground"
-            android:rotation="30"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ImageProfile"
-            android:layout_width="45dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="338dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
         <ImageButton
             android:id="@+id/DrawerButton"
-            android:layout_width="58dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="336dp"
-            android:background="@android:color/transparent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toEndOf="@+id/nav_host_fragment_activity_home"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

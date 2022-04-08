@@ -21,11 +21,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusInteligenteIOT" >
         <activity
-            android:name=".ui.home.AuxiliaryActivity"
-            android:exported="false"
-            android:label="@string/title_activity_auxiliary"
-            android:theme="@style/Theme.CampusInteligenteIOT.NoActionBar" />
-        <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"

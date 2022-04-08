@@ -35,6 +35,12 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <string name="start_navigation">COMENZAR RUTA</string>
+    <string name="access_token">sk.eyJ1IjoiYW5kcm9pZHNoYWtpbCIsImEiOiJja2k0bDMzcjcwMGZ5MnBuMml5ZGtyeDd6In0.cxt1NubVuc6yVE5CdS6iUQ</string>
+    <string name="map_style">mapbox://styles/cristiangonz/ckx3ys9vz5lv715s9h86rfumh</string>
+    <string name="user_location_permission_explanation">Necesitamos que aceptes los permisos de localizacion para funcionar correctamente.</string>
+    <string name="user_location_permission_not_granted">No has aceptado los permisos de localizacion.</string>
+
     <string-array name="collegeDegrees">
         <item>Ingenieria Informatica</item>
         <item>Traduccion e Interpretacion</item>
