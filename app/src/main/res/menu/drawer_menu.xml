@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_home_icon_icons_com_73532"
+        android:title="Perfil"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_calendar"
+        android:icon="@drawable/ic_calendar2"
+        android:title="Mi horario"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_friends"
+        android:icon="@drawable/ic_user_friends"
+        android:title="Amigos"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_chats"
+        android:icon="@drawable/ic_chat_talk"
+        android:title="Chats"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_config"
+        android:icon="@drawable/ic_settings"
+        android:title="Configuración"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/navigation_log_out"
+        android:icon="@drawable/ic__exit_logout"
+        android:title="Cerrar sesión"
+        android:iconTint="@color/white"/>
+
+</menu>
