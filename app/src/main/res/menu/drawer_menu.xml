@@ -27,7 +27,7 @@
         android:title="Configuración"
         android:iconTint="@color/white"/>
     <item
-        android:id="@+id/navigation_log_out"
+        android:id="@+id/logoutFragment"
         android:icon="@drawable/ic__exit_logout"
         android:title="Cerrar sesión"
         android:iconTint="@color/white"/>

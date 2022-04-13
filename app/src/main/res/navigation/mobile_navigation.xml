@@ -28,4 +28,9 @@
         android:name="com.example.campusinteligenteiot.ui.home.schedule.ScheduleFragment"
         android:label="schedule_fragment"
         tools:layout="@layout/schedule_fragment" />
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.logout.LogoutFragment"
+        android:label="logout_fragment"
+        tools:layout="@layout/logout_fragment" />
 </navigation>
