@@ -33,4 +33,9 @@
         android:name="com.example.campusinteligenteiot.ui.drawer.logout.LogoutFragment"
         android:label="logout_fragment"
         tools:layout="@layout/logout_fragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
 </navigation>

@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_home_icon_icons_com_73532"
         android:title="Perfil"
         android:iconTint="@color/white"/>
