@@ -80,13 +80,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="CristianGonz"
-                    android:textSize="17sp"
-                    android:textColor="@color/black"
+                    android:text="Nombre completo"
+                    android:textSize="16sp"
+                    android:textColor="#5555"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="Cristian González Ortiz"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textAlignment="textStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    card_view:ignore="RtlCompat" />
 
             </LinearLayout>
 
