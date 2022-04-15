@@ -62,6 +62,8 @@
         android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         android:layout_gravity = "start"
+        app:itemIconTint="@drawable/nav_drawer_selector"
+        app:itemTextColor="@drawable/nav_drawer_selector"
         app:headerLayout="@layout/nav_header_drawer"
         app:menu="@menu/drawer_menu"/>
 

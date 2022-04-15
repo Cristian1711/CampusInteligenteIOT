@@ -57,4 +57,18 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Mensajes</string>
+    <string name="sync_header">Sincronización</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Tu firma</string>
+    <string name="reply_title">Acción de respuesta predeterminada</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sincronizar email periódicamente</string>
+    <string name="attachment_title">Descargar archivos adjuntos</string>
+    <string name="attachment_summary_on">Descargar archivos adjuntos automáticamente
+    </string>
+    <string name="attachment_summary_off">Solo descargar archivos adjuntos cuando se especifique</string>
 </resources>

@@ -23,6 +23,7 @@
         <item name="cornerSize">50%</item>
     </style>
 
+
     <style name="Theme.CampusInteligenteIOT.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.CampusInteligenteIOT.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -22,7 +22,7 @@
         android:title="Chats"
         android:iconTint="@color/white"/>
     <item
-        android:id="@+id/navigation_config"
+        android:id="@+id/configFragment"
         android:icon="@drawable/ic_settings"
         android:title="Configuración"
         android:iconTint="@color/white"/>

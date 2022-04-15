@@ -37,5 +37,14 @@
         android:id="@+id/profileFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.profile.ProfileFragment"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" />
+        tools:layout="@layout/profile_fragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_configFragment"
+            app:destination="@id/configFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/configFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.config.ConfigFragment"
+        android:label="config_fragment"
+        tools:layout="@layout/config_fragment" />
 </navigation>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.databinding.ProfileFragmentBinding
 
@@ -24,6 +25,15 @@ class ProfileFragment : Fragment() {
     ): View? {
         _binding = ProfileFragmentBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.settingsButton.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_profileFragment_to_configFragment)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
