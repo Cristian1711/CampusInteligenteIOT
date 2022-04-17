@@ -71,4 +71,8 @@
     <string name="attachment_summary_on">Descargar archivos adjuntos automáticamente
     </string>
     <string name="attachment_summary_off">Solo descargar archivos adjuntos cuando se especifique</string>
+
+    <!-- Streamchat -->
+    <string name="api_key">9xqfjfp5b84m</string>
+
 </resources>

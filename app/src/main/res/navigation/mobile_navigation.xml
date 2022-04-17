@@ -47,4 +47,9 @@
         android:name="com.example.campusinteligenteiot.ui.drawer.config.ConfigFragment"
         android:label="config_fragment"
         tools:layout="@layout/config_fragment" />
+    <fragment
+        android:id="@+id/channelsFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.chats.ChannelsFragment"
+        android:label="channels_fragment"
+        tools:layout="@layout/channels_fragment" />
 </navigation>

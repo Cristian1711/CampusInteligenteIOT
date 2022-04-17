@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.models.DirectionsResponse
@@ -46,7 +47,16 @@ import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.databinding.FragmentMainHomeBinding
+import com.example.campusinteligenteiot.model.User
+import com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterDescriptionViewModel
+import com.example.campusinteligenteiot.ui.drawer.chats.ChannelsViewModel
+import io.getstream.chat.android.client.ChatClient
+import io.getstream.chat.android.client.models.image
+import io.getstream.chat.android.client.models.name
 import kotlinx.android.synthetic.main.fragment_main_home.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,6 +81,9 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     private val TAG = "DirectionsActivity"
     private val geoJsonSourceLayerId = "GeoJsonSourceLayerId"
     private val symbolIconId = "SymbolIconId"
+    private val client = ChatClient.instance()
+    private val viewModel by viewModels<MainHomeViewModel>()
+
     var permsRequestCode = 100
     var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_PHONE_STATE)
@@ -97,6 +110,13 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mapView.getMapAsync(this)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val firebaseUser = viewModel.getUser()
+            println(firebaseUser.userName)
+            println(firebaseUser.profileImage)
+            createUserGetStream(firebaseUser)
+        }
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -322,6 +342,27 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     override fun onLowMemory() {
         super.onLowMemory()
         binding.mapView.onLowMemory()
+    }
+
+    private fun createUserGetStream(firebaseUser: User){
+        val user = io.getstream.chat.android.client.models.User(id = firebaseUser.userName!!).apply {
+            name = firebaseUser.userName
+            image = firebaseUser.profileImage!!
+        }
+        val token = client.devToken(user.id)
+        println("id = ${firebaseUser.name}\n token = $token")
+
+        client.connectUser(
+            user = user,
+            token = token
+        ).enqueue() { result ->
+            if (result.isSuccess) {
+                val user: io.getstream.chat.android.client.models.User = result.data().user
+                val connectionId: String = result.data().connectionId
+            } else {
+                println("NO bro")
+            }
+        }
     }
 
 

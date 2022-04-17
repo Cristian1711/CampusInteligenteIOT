@@ -17,7 +17,7 @@
         android:title="Amigos"
         android:iconTint="@color/white"/>
     <item
-        android:id="@+id/navigation_chats"
+        android:id="@+id/channelsFragment"
         android:icon="@drawable/ic_chat_talk"
         android:title="Chats"
         android:iconTint="@color/white"/>

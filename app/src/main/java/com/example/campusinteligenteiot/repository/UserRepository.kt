@@ -14,11 +14,15 @@ import com.example.campusinteligenteiot.common.Resource
 import com.example.campusinteligenteiot.common.SingleLiveEvent
 import com.example.campusinteligenteiot.model.Image
 import com.example.campusinteligenteiot.model.User
+import kotlinx.coroutines.tasks.await
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class UserRepository {
+
+    private val bd = Firebase.firestore
+    private val userTable = bd.collection("User")
 
      fun signUpDefault(email: String, passwd: String, repeatedPasswd: String) : Resource<FirebaseUser?>? {
         println("creando")
@@ -106,13 +110,14 @@ class UserRepository {
 
      fun documentToUser(document: DocumentSnapshot) : User {
 
-        val email = document.getString("email")
-        val name = document.getString("name")
-        val surname = document.getString("surname")
-        val userName = document.getString("username")
-        val birthdate = Date(2,1,2000)
-        val phoneNumber = document.getString("phoneNumber")
-        val description = document.getString("description")
+         val birthdate = document.getDate("birthdate")
+         val collegeDegree = document.getString("collegeDegree")
+         val description = document.getString("description")
+         val email = document.getString("email")
+         val userName = document.getString("userName")
+         val profileImage = document.getString("profileImage")
+         val name = document.getString("name")
+         val surname = document.getString("surname")
 
 
         val user = User(
@@ -122,12 +127,31 @@ class UserRepository {
             userName,
             birthdate,
             email,
-            "",
-            null,
-            phoneNumber,
-            null)
+            collegeDegree,
+            "677881122",
+            description,
+            profileImage,
+        null,
+        false,
+        null)
 
         return user
+    }
+
+    suspend fun getSingleUser(uid: String): User {
+
+        var user = User()
+        val job1 = userTable.document(uid)
+            .get()
+            .addOnSuccessListener { document ->
+                if(document.exists()){
+                    println("EL DOCUMENTO EXISTE")
+                    user = documentToUser(document)
+                }
+            }
+        job1.await()
+        return user
+
     }
 
 
