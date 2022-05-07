@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.models.DirectionsResponse
@@ -46,10 +48,13 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.UserProvider
+import com.example.campusinteligenteiot.api.model.UsersResponse
 import com.example.campusinteligenteiot.databinding.FragmentMainHomeBinding
 import com.example.campusinteligenteiot.model.User
 import com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterDescriptionViewModel
 import com.example.campusinteligenteiot.ui.drawer.chats.ChannelsViewModel
+import com.google.firebase.storage.FirebaseStorage
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.image
 import io.getstream.chat.android.client.models.name
@@ -82,6 +87,7 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     private val geoJsonSourceLayerId = "GeoJsonSourceLayerId"
     private val symbolIconId = "SymbolIconId"
     private val client = ChatClient.instance()
+    private lateinit var user : UsersResponse
     private val viewModel by viewModels<MainHomeViewModel>()
 
     var permsRequestCode = 100
@@ -105,19 +111,27 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMainHomeBinding.inflate(inflater,container,false)
+        viewModel.resultUsers.observe(viewLifecycleOwner, Observer {
+            println("ESTOY EN EL FRAGMENTO")
+            UserProvider.users = viewModel.resultUsers.value!!
+            println("Lista de usuarios")
+            println(UserProvider.users)
+            GlobalScope.launch(Dispatchers.Main) {
+                user = viewModel.getUserFromLocal(viewModel.getId())
+                println("DATOS USUARIO DE BASE DE DATOS LOCAL")
+                println(user.name)
+                println(user.collegeDegree)
+                println(user.surname)
+                loadProfileImage(user)
+                createUserGetStream(user)
+            }
+        })
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mapView.getMapAsync(this)
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val firebaseUser = viewModel.getUser()
-            println(firebaseUser.userName)
-            println(firebaseUser.profileImage)
-            createUserGetStream(firebaseUser)
-        }
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -345,7 +359,7 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         binding.mapView.onLowMemory()
     }
 
-    private fun createUserGetStream(firebaseUser: User){
+    private fun createUserGetStream(firebaseUser: UsersResponse){
         val user = io.getstream.chat.android.client.models.User(id = firebaseUser.userName!!).apply {
             name = firebaseUser.userName
             image = firebaseUser.profileImage!!
@@ -363,6 +377,15 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
             } else {
                 println("NO bro")
             }
+        }
+    }
+
+    private fun loadProfileImage(user: UsersResponse) {
+        val media = user.profileImage
+        val storageReference = FirebaseStorage.getInstance()
+        val gsReference = storageReference.getReferenceFromUrl(media!!)
+        gsReference.downloadUrl.addOnSuccessListener {
+            Glide.with(requireContext()).load(it).into(binding.profileImage)
         }
     }
 

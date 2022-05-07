@@ -20,6 +20,7 @@ import com.example.campusinteligenteiot.databinding.ActivityHomeBinding
 import com.example.campusinteligenteiot.ui.home.car.CarFragment
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -52,6 +53,8 @@ class HomeActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        binding.navigationView.getHeaderView(0).imageView
+        binding.navigationView.getHeaderView(0).textView2
 
 
         //setupActionBarWithNavController(navController, appBarConfiguration)
