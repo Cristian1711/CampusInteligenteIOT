@@ -10,6 +10,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.UserProvider
+import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.network.UserService
 import com.example.campusinteligenteiot.common.Resource
 import com.example.campusinteligenteiot.common.SingleLiveEvent
 import com.example.campusinteligenteiot.model.Image
@@ -23,6 +26,8 @@ class UserRepository {
 
     private val bd = Firebase.firestore
     private val userTable = bd.collection("User")
+
+    private val api = UserService()
 
      fun signUpDefault(email: String, passwd: String, repeatedPasswd: String) : Resource<FirebaseUser?>? {
         println("creando")
@@ -152,6 +157,17 @@ class UserRepository {
         job1.await()
         return user
 
+    }
+
+    suspend fun searchUserById(id: String):UsersResponse{
+        val response = api.searchUserById(id)
+        return response
+    }
+
+    suspend fun getAllUsers():List<UsersResponse>{
+        val response = api.getAllUsers()
+        UserProvider.users = response
+        return response
     }
 
 
