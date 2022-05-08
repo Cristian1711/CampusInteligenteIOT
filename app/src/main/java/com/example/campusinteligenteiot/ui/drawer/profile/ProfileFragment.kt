@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.drawer.profile
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -34,6 +35,11 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_profileFragment_to_configFragment)
         }
+
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val user_id = sharedPreferences?.getString("user_id", "null")
+        println("EL ID DEL USUARIO ACTUAL ES")
+        println(user_id)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

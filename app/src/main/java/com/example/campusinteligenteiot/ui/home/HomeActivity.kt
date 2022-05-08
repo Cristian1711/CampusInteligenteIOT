@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
@@ -87,7 +88,21 @@ class HomeActivity : AppCompatActivity() {
                     Glide.with(this@HomeActivity).load(it).into(binding.navigationView.getHeaderView(0).imageView)
                     binding.navigationView.getHeaderView(0).textView2.setText(user.name)
                 }
+
+                val sharedPreferences = baseContext.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("user_id", user.id)
+                editor.putString("user_name", user.name)
+                editor.putString("user_collegeDegree", user.collegeDegree)
+                editor.putString("user_description", user.description)
+                editor.putString("user_email", user.email)
+                editor.putString("user_profileimage", user.profileImage)
+                editor.putString("user_surname", user.surname)
+                editor.putString("user_username", user.userName)
+                editor.apply()
             }
+
+
         })
 
 

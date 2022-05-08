@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.ui.home.main
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
@@ -110,21 +111,12 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMainHomeBinding.inflate(inflater,container,false)
-        viewModel.resultUsers.observe(viewLifecycleOwner, Observer {
-            println("ESTOY EN EL FRAGMENTO")
-            UserProvider.users = viewModel.resultUsers.value!!
-            println("Lista de usuarios")
-            println(UserProvider.users)
-            GlobalScope.launch(Dispatchers.Main) {
-                user = viewModel.getUserFromLocal(viewModel.getId())
-                println("DATOS USUARIO DE BASE DE DATOS LOCAL")
-                println(user.name)
-                println(user.collegeDegree)
-                println(user.surname)
-                loadProfileImage(user)
-                createUserGetStream(user)
-            }
-        })
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val user_id = sharedPreferences?.getString("user_id", "null")
+        val user_profileImage = sharedPreferences?.getString("user_profileimage", "null")
+        println("EL ID DEL USUARIO ACTUAL ES (MAPA)")
+        println(user_id)
+        loadProfileImage(user_profileImage!!)
 
         Handler(Looper.getMainLooper()).postDelayed({
             showProfileImage()
@@ -389,10 +381,9 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         }
     }
 
-    private fun loadProfileImage(user: UsersResponse) {
-        val media = user.profileImage
+    private fun loadProfileImage(profileImage: String) {
         val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(media!!)
+        val gsReference = storageReference.getReferenceFromUrl(profileImage!!)
         gsReference.downloadUrl.addOnSuccessListener {
             Glide.with(requireContext()).load(it).into(binding.profileImage)
         }
