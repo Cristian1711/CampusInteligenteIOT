@@ -74,6 +74,7 @@
     </LinearLayout>
     <include
         android:layout_gravity="center"
+        android:id="@+id/item_image"
         android:layout_width="match_parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -87,10 +88,10 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <include layout="@layout/item_edit"/>
-            <include layout="@layout/item_birthdate"/>
-            <include layout="@layout/item_collegedegree"/>
-            <include layout="@layout/item_email"/>
+            <include layout="@layout/item_edit" android:id="@+id/item_edit"/>
+            <include layout="@layout/item_birthdate" android:id="@+id/item_birthdate"/>
+            <include layout="@layout/item_collegedegree" android:id="@+id/item_collegedegree"/>
+            <include layout="@layout/item_email" android:id="@+id/item_email"/>
 
 
         </LinearLayout>
