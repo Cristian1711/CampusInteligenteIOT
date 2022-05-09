@@ -29,6 +29,7 @@ import com.example.campusinteligenteiot.ui.home.car.CarFragment
 import com.example.campusinteligenteiot.ui.home.main.MainHomeViewModel
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 import kotlinx.coroutines.Dispatchers
@@ -91,15 +92,10 @@ class HomeActivity : AppCompatActivity() {
 
                 val sharedPreferences = baseContext.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
-                editor.putString("user_id", user.id)
-                editor.putString("user_name", user.name)
-                editor.putString("user_collegeDegree", user.collegeDegree)
-                editor.putString("user_description", user.description)
-                editor.putString("user_email", user.email)
-                editor.putString("user_profileimage", user.profileImage)
-                editor.putString("user_surname", user.surname)
-                editor.putString("user_username", user.userName)
-                editor.apply()
+                val gson = Gson()
+                val json = gson.toJson(user)
+                editor.putString("current_user", json)
+                editor.commit()
             }
 
 

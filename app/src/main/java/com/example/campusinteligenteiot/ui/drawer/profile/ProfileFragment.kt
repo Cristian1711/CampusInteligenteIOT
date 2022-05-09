@@ -11,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.UsersResponse
 import com.example.campusinteligenteiot.databinding.ProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_collegedegree.view.*
 import kotlinx.android.synthetic.main.item_image.view.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
@@ -25,6 +27,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<ProfileViewModel>()
+    private lateinit var user: UsersResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,23 +36,26 @@ class ProfileFragment : Fragment() {
         _binding = ProfileFragmentBinding.inflate(inflater,container,false)
 
         val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("current_user", "")
+        user = gson.fromJson(json, UsersResponse::class.java)
 
-        val media = sharedPreferences?.getString("user_profileimage", "null")
-
-        loadImage(media)
-
-        binding.itemImage.username.text = sharedPreferences?.getString("user_username", "null")
-
-        binding.itemImage.description.text = sharedPreferences?.getString("user_description", "null")
-
-        binding.itemEdit.name.text = (sharedPreferences?.getString("user_name", "null")
-                + " " + sharedPreferences?.getString("user_surname", "null"))
-
-        binding.itemCollegedegree.collegeDegree.text = sharedPreferences?.getString("user_collegeDegree", "null")
-
-        binding.itemEmail.email.text = sharedPreferences?.getString("user_email", "null")
+        loadImage(user.profileImage)
+        setUserData(user)
 
         return binding.root
+    }
+
+    private fun setUserData(user: UsersResponse) {
+        binding.itemImage.username.text = user.userName
+
+        binding.itemImage.description.text = user.description
+
+        binding.itemEdit.name.text = (user.name + " " + user.surname)
+
+        binding.itemCollegedegree.collegeDegree.text = user.collegeDegree
+
+        binding.itemEmail.email.text = user.email
     }
 
     private fun loadImage(media: String?) {
@@ -67,6 +73,17 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_profileFragment_to_configFragment)
         }
+
+        binding.itemEdit.editButton.setOnClickListener{
+            goToEdit()
+        }
+    }
+
+    private fun goToEdit() {
+        val args = Bundle()
+        val gson = Gson()
+        val json = gson.toJson(user)
+        args.putString("current_user", json)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
