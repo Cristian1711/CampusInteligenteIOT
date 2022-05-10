@@ -1,5 +1,8 @@
 package com.example.campusinteligenteiot.ui.drawer.editprofile
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +16,9 @@ import com.example.campusinteligenteiot.api.model.UsersResponse
 import com.example.campusinteligenteiot.databinding.EditProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class EditProfileFragment : Fragment() {
 
@@ -20,6 +26,8 @@ class EditProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<EditProfileViewModel>()
     private lateinit var user: UsersResponse
+    val IMAGE_CHOOSE = 1000
+    private var imageUri: Uri?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,12 +40,46 @@ class EditProfileFragment : Fragment() {
         val json = arguments?.getString("current_user")
         user = gson.fromJson(json, UsersResponse::class.java)
 
-        loadImage(user.profileImage)
+        GlobalScope.launch(Dispatchers.Main) {
+            val uri = viewModel.getImageFromStorage(user.profileImage)
+            setImage(uri!!)
+        }
+
         setUserData(user)
 
-
-
         return binding.root
+    }
+
+    private fun setImage(uri: Uri) {
+        Glide.with(this).load(uri).into(binding.itemImage.image2)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.itemImage.galleryButton.setOnClickListener{
+            chooseProfileImage()
+        }
+
+        binding.saveDataButton.setOnClickListener{
+            editUser(user)
+            GlobalScope.launch(Dispatchers.Main) {
+                viewModel.saveUser(user.id, user)
+            }
+        }
+    }
+
+    private fun chooseProfileImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_CHOOSE)
+    }
+
+    private fun editUser(user: UsersResponse) {
+
+        user.userName = binding.itemImage.usernameEdit.text.toString()
+        user.description = binding.itemImage.descriptionEdit.text.toString()
+        user.name = binding.itemEdit.nameEdit.text.toString()
     }
 
     private fun setUserData(user: UsersResponse?) {
@@ -51,11 +93,12 @@ class EditProfileFragment : Fragment() {
         binding.itemEmail.email.text = user.email
     }
 
-    private fun loadImage(media: String) {
-        val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(media!!)
-        gsReference.downloadUrl.addOnSuccessListener {
-            Glide.with(this).load(it).into(binding.itemImage.image2)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == IMAGE_CHOOSE && resultCode == Activity.RESULT_OK){
+            imageUri = data?.data
+            binding.itemImage.image2.setImageURI(imageUri)
         }
     }
 

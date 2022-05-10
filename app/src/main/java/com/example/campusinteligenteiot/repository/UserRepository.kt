@@ -1,7 +1,10 @@
 package com.example.campusinteligenteiot.repository
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.util.Log
 import androidx.annotation.IntegerRes
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -17,6 +20,7 @@ import com.example.campusinteligenteiot.common.Resource
 import com.example.campusinteligenteiot.common.SingleLiveEvent
 import com.example.campusinteligenteiot.model.Image
 import com.example.campusinteligenteiot.model.User
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.util.*
 import kotlin.collections.ArrayList
@@ -168,6 +172,20 @@ class UserRepository {
         val response = api.getAllUsers()
         UserProvider.users = response
         return response
+    }
+
+    suspend fun saveUser(id: String, user: UsersResponse){
+        api.saveUser(id, user)
+    }
+
+    fun getImageFromStorage(media: String?): Uri? {
+        val storageReference = FirebaseStorage.getInstance()
+        val gsReference = storageReference.getReferenceFromUrl(media!!)
+        return gsReference.downloadUrl.result
+    }
+
+    fun uploadFile(drawable: Drawable) {
+
     }
 
 

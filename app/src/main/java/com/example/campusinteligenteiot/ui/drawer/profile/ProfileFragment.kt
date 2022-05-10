@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.ui.drawer.profile
 
 import android.content.Context
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,6 +20,9 @@ import kotlinx.android.synthetic.main.item_collegedegree.view.*
 import kotlinx.android.synthetic.main.item_image.view.*
 import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 import kotlinx.android.synthetic.main.profile_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
@@ -40,10 +44,18 @@ class ProfileFragment : Fragment() {
         val json = sharedPreferences.getString("current_user", "")
         user = gson.fromJson(json, UsersResponse::class.java)
 
-        loadImage(user.profileImage)
+        GlobalScope.launch(Dispatchers.Main) {
+            val uri = viewModel.getImageFromStorage(user.profileImage)
+            setImage(uri!!)
+        }
+
         setUserData(user)
 
         return binding.root
+    }
+
+    private fun setImage(uri: Uri) {
+        Glide.with(this).load(uri).into(binding.itemImage.image2)
     }
 
     private fun setUserData(user: UsersResponse) {
@@ -58,13 +70,10 @@ class ProfileFragment : Fragment() {
         binding.itemEmail.email.text = user.email
     }
 
-    private fun loadImage(media: String?) {
-        val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(media!!)
-        gsReference.downloadUrl.addOnSuccessListener {
-            Glide.with(this).load(it).into(binding.itemImage.image2)
-        }
-    }
+
+        
+
+ 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
