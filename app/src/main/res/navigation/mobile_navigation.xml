@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_profileFragment_to_configFragment"
             app:destination="@id/configFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/configFragment"
@@ -52,4 +55,9 @@
         android:name="com.example.campusinteligenteiot.ui.drawer.chats.ChannelsFragment"
         android:label="channels_fragment"
         tools:layout="@layout/channels_fragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.editprofile.EditProfileFragment"
+        android:label="edit_profile_fragment"
+        tools:layout="@layout/edit_profile_fragment" />
 </navigation>

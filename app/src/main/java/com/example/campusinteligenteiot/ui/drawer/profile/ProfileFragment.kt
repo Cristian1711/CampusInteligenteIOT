@@ -84,6 +84,8 @@ class ProfileFragment : Fragment() {
         val gson = Gson()
         val json = gson.toJson(user)
         args.putString("current_user", json)
+
+        findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment, args)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
