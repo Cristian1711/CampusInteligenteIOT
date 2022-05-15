@@ -1,5 +1,7 @@
 package com.example.campusinteligenteiot.api.network
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.widget.Toast
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
 import com.example.campusinteligenteiot.api.model.UsersResponse
@@ -29,22 +31,14 @@ class UserService {
         }
     }
 
-    suspend fun saveUser(id: String, user: UsersResponse) {
-        val call = retrofit.create(UserApiClient::class.java).saveUser(id, user)
-        call.enqueue(object: Callback<UsersResponse> {
-            override fun onResponse(call: Call<UsersResponse>, response: Response<UsersResponse>) {
-                if(response.isSuccessful){
-                    //
-                }
-                else{
-                    //
-                }
-            }
-
-            override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
-                //
-            }
-
-        })
+    suspend fun saveUser(user: UsersResponse, id: String) : Response<String>{
+        println(id)
+        println(user.friends)
+        println(user.rating)
+        return withContext(Dispatchers.IO){
+            val response = retrofit.create(UserApiClient::class.java).saveUser(user, id)
+            println("he conseguido una respuesta")
+            response
+        }
     }
 }

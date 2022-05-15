@@ -7,5 +7,5 @@ class SaveUserUseCase {
 
     private val repository = UserRepository()
 
-    suspend operator fun invoke(id: String, user: UsersResponse) = repository.saveUser(id, user)
+    suspend operator fun invoke(id: String, user: UsersResponse) = repository.saveUser(user, id)
 }

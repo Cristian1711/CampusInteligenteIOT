@@ -5,7 +5,7 @@ import java.util.*
 
 data class UsersResponse(
     @SerializedName("id") var id: String,
-    @SerializedName("birthdate") var birthdate: Date,
+    @SerializedName("birthdate") var birthdate: String,
     @SerializedName("collegeDegree") var collegeDegree: String,
     @SerializedName("description") var description: String,
     @SerializedName("email") var email: String,

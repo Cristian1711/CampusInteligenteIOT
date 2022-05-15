@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.ui.drawer.editprofile
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.UsersResponse
@@ -19,6 +22,9 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EditProfileFragment : Fragment() {
 
@@ -40,14 +46,29 @@ class EditProfileFragment : Fragment() {
         val json = arguments?.getString("current_user")
         user = gson.fromJson(json, UsersResponse::class.java)
 
+        /*
         GlobalScope.launch(Dispatchers.Main) {
-            val uri = viewModel.getImageFromStorage(user.profileImage)
-            setImage(uri!!)
+            observeUri()
         }
-
+        */
+        loadImage(user.profileImage)
         setUserData(user)
 
         return binding.root
+    }
+
+    private fun loadImage(media: String){
+        val storageReference = FirebaseStorage.getInstance()
+        val gsReference = storageReference.getReferenceFromUrl(media!!)
+        gsReference.downloadUrl.addOnSuccessListener {
+            Glide.with(requireContext()).load(it).into(binding.itemImage.image2)
+        }
+    }
+
+    private suspend fun observeUri() {
+        viewModel.getImageFromStorage(user.profileImage).observe(viewLifecycleOwner, Observer {
+            setImage(it)
+        })
     }
 
     private fun setImage(uri: Uri) {
@@ -63,9 +84,14 @@ class EditProfileFragment : Fragment() {
 
         binding.saveDataButton.setOnClickListener{
             editUser(user)
-            GlobalScope.launch(Dispatchers.Main) {
-                viewModel.saveUser(user.id, user)
-            }
+            findNavController().navigate(
+                R.id.action_editProfileFragment_to_profileFragment
+            )
+        }
+
+        binding.settingsButton.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_editProfileFragment_to_configFragment)
         }
     }
 
@@ -80,6 +106,19 @@ class EditProfileFragment : Fragment() {
         user.userName = binding.itemImage.usernameEdit.text.toString()
         user.description = binding.itemImage.descriptionEdit.text.toString()
         user.name = binding.itemEdit.nameEdit.text.toString()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            val response = viewModel.saveUser(user, user.id)
+            println("YA HE HECHO EL UPDATE SUPUESTAMENTE")
+            println(response.code().toString())
+        }
+
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(user)
+        editor.putString("current_user", json)
+        editor.commit()
     }
 
     private fun setUserData(user: UsersResponse?) {

@@ -65,11 +65,6 @@ class HomeActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
         navViewDrawer.setupWithNavController(navController)
 
-
-        binding.DrawerButton.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
         viewModel.onCreate()
         viewModel.resultUsers.observe(this, Observer {
 
@@ -100,6 +95,21 @@ class HomeActivity : AppCompatActivity() {
 
 
         })
+
+        binding.DrawerButton.setOnClickListener {
+            val sharedPreferences = baseContext.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPreferences.getString("current_user", "")
+            user = gson.fromJson(json, UsersResponse::class.java)
+            val media = user.profileImage
+            val storageReference = FirebaseStorage.getInstance()
+            val gsReference = storageReference.getReferenceFromUrl(media!!)
+            gsReference.downloadUrl.addOnSuccessListener {
+                Glide.with(this@HomeActivity).load(it).into(binding.navigationView.getHeaderView(0).imageView)
+                binding.navigationView.getHeaderView(0).textView2.setText(user.name)
+            }
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
 
 
 

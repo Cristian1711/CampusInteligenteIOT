@@ -3,6 +3,7 @@ package com.example.campusinteligenteiot.ui.drawer.profile
 import android.content.Context
 import android.net.Uri
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
@@ -19,8 +20,12 @@ class ProfileViewModel : ViewModel() {
 
     private var userRepository = UserRepository()
     var getImageUseCase = GetImageUseCase()
+    val uri: MutableLiveData<Uri>? = null
 
-    suspend fun getImageFromStorage(media: String?): Uri? {
-        return getImageUseCase(media)
+    suspend fun getImageFromStorage(media: String?): MutableLiveData<Uri> {
+        getImageUseCase(media).observeForever{
+            uri?.value = it
+        }
+        return uri!!
     }
 }

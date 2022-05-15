@@ -2,26 +2,22 @@ package com.example.campusinteligenteiot.repository
 
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.util.Log
-import androidx.annotation.IntegerRes
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
-import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.UserProvider
 import com.example.campusinteligenteiot.api.model.UsersResponse
 import com.example.campusinteligenteiot.api.network.UserService
 import com.example.campusinteligenteiot.common.Resource
-import com.example.campusinteligenteiot.common.SingleLiveEvent
 import com.example.campusinteligenteiot.model.Image
 import com.example.campusinteligenteiot.model.User
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
+import retrofit2.Call
+import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -30,6 +26,7 @@ class UserRepository {
 
     private val bd = Firebase.firestore
     private val userTable = bd.collection("User")
+    val uri: MutableLiveData<Uri>? = null
 
     private val api = UserService()
 
@@ -174,19 +171,27 @@ class UserRepository {
         return response
     }
 
-    suspend fun saveUser(id: String, user: UsersResponse){
-        api.saveUser(id, user)
+    suspend fun saveUser(user: UsersResponse, id: String) : Response<String> {
+       return api.saveUser(user, id)
     }
 
-    fun getImageFromStorage(media: String?): Uri? {
+    fun getImageFromStorage(media: String?): MutableLiveData<Uri> {
         val storageReference = FirebaseStorage.getInstance()
         val gsReference = storageReference.getReferenceFromUrl(media!!)
-        return gsReference.downloadUrl.result
+        println(media)
+        println(gsReference)
+        gsReference.downloadUrl.addOnSuccessListener {
+             println("TODO BIEN")
+            uri?.value = it
+         }
+        println(uri)
+        return uri!!
     }
 
     fun uploadFile(drawable: Drawable) {
 
     }
+
 
 
 }

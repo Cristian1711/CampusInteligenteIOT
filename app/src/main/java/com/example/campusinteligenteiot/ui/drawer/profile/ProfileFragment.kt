@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
@@ -43,15 +44,32 @@ class ProfileFragment : Fragment() {
         val gson = Gson()
         val json = sharedPreferences.getString("current_user", "")
         user = gson.fromJson(json, UsersResponse::class.java)
-
+        /*
         GlobalScope.launch(Dispatchers.Main) {
-            val uri = viewModel.getImageFromStorage(user.profileImage)
-            setImage(uri!!)
+            println(user.profileImage)
+            observeUri()
         }
+         */
+
+        loadImage(user.profileImage)
 
         setUserData(user)
 
         return binding.root
+    }
+
+    private fun loadImage(media: String){
+        val storageReference = FirebaseStorage.getInstance()
+        val gsReference = storageReference.getReferenceFromUrl(media!!)
+        gsReference.downloadUrl.addOnSuccessListener {
+            Glide.with(requireContext()).load(it).into(binding.itemImage.image2)
+        }
+    }
+
+    private suspend fun observeUri() {
+        viewModel.getImageFromStorage(user.profileImage).observe(viewLifecycleOwner, Observer {
+            setImage(it)
+        })
     }
 
     private fun setImage(uri: Uri) {
