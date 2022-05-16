@@ -7,7 +7,7 @@
         android:title="Perfil"
         android:iconTint="@color/white"/>
     <item
-        android:id="@+id/navigation_calendar"
+        android:id="@+id/calendarFragment"
         android:icon="@drawable/ic_calendar2"
         android:title="Mi horario"
         android:iconTint="@color/white"/>
