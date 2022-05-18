@@ -71,5 +71,18 @@
         android:id="@+id/calendarFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.calendar.CalendarFragment"
         android:label="calendar_fragment"
-        tools:layout="@layout/calendar_fragment" />
+        tools:layout="@layout/calendar_fragment" >
+        <action
+            android:id="@+id/action_calendarFragment_to_editAppointment"
+            app:destination="@id/editAppointment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editAppointment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.calendar.appointments.EditAppointment"
+        android:label="edit_appointment_fragment"
+        tools:layout="@layout/edit_appointment_fragment" >
+        <action
+            android:id="@+id/action_editAppointment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
 </navigation>
