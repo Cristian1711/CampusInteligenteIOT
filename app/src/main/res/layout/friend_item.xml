@@ -17,7 +17,7 @@
         android:fontFamily="@font/montserrat_normal"
         android:text="BORRAR"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="8sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

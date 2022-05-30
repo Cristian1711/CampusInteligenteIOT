@@ -1,12 +1,16 @@
 package com.example.campusinteligenteiot.ui.drawer.friends
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.UsersResponse
 import com.example.campusinteligenteiot.ui.drawer.calendar.appointments.AppointmentViewHolder
+import com.example.campusinteligenteiot.ui.drawer.friends.profile.FriendsProfileActivity
 
 class FriendsAdapter(private val context: Context) :
     RecyclerView.Adapter<FriendsViewHolder>(){
@@ -21,6 +25,11 @@ class FriendsAdapter(private val context: Context) :
     override fun onBindViewHolder(holder: FriendsViewHolder, position: Int) {
         val item = friendsMutableList[position]
         holder.render(item)
+
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context, FriendsProfileActivity::class.java).putExtra("userId", item.id)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int =  friendsMutableList.size

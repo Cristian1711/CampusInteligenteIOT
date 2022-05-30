@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +24,7 @@ class FriendsFragment : Fragment() {
 
     private  var _binding: FriendsFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: FriendsViewModel
+    private val viewModel by viewModels<FriendsViewModel>()
     private lateinit var adapter: FriendsAdapter
     private lateinit var user: UsersResponse
 

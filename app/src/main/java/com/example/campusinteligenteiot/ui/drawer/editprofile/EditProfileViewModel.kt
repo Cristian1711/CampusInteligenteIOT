@@ -11,7 +11,6 @@ import retrofit2.Call
 import retrofit2.Response
 
 class EditProfileViewModel : ViewModel() {
-    private var userRepository = UserRepository()
     var saveUserUseCase = SaveUserUseCase()
     var getImageUseCase = GetImageUseCase()
 
@@ -20,6 +19,6 @@ class EditProfileViewModel : ViewModel() {
     }
 
     suspend fun saveUser(user: UsersResponse, id:String) : Response<String> {
-        return userRepository.saveUser(user, id)
+        return saveUserUseCase(id, user)
     }
 }

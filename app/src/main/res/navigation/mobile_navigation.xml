@@ -85,4 +85,9 @@
             android:id="@+id/action_editAppointment_to_calendarFragment"
             app:destination="@id/calendarFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/friendsFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.friends.FriendsFragment"
+        android:label="friends_fragment"
+        tools:layout="@layout/friends_fragment" />
 </navigation>
