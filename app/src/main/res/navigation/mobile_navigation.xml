@@ -89,5 +89,18 @@
         android:id="@+id/friendsFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.friends.FriendsFragment"
         android:label="friends_fragment"
-        tools:layout="@layout/friends_fragment" />
+        tools:layout="@layout/friends_fragment" >
+        <action
+            android:id="@+id/action_friendsFragment_to_friendsProfileFragment2"
+            app:destination="@id/friendsProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendsProfileFragment2"
+        android:name="com.example.campusinteligenteiot.ui.drawer.friends.profile.FriendsProfileFragment"
+        android:label="friends_profile_fragment"
+        tools:layout="@layout/friends_profile_fragment" >
+        <action
+            android:id="@+id/action_friendsProfileFragment2_to_channelsFragment"
+            app:destination="@id/channelsFragment" />
+    </fragment>
 </navigation>

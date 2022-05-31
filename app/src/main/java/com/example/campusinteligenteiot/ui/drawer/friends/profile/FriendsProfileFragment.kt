@@ -1,42 +1,42 @@
 package com.example.campusinteligenteiot.ui.drawer.friends.profile
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.AttributeSet
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.UsersResponse
-import com.example.campusinteligenteiot.databinding.ActivityFriendsProfileBinding
+import com.example.campusinteligenteiot.databinding.FriendsProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class FriendsProfileActivity : AppCompatActivity() {
-
-    private val viewModel by viewModels<FriendsProfileViewModel>()
-    private lateinit var binding: ActivityFriendsProfileBinding
-    private lateinit var userId: String
+class FriendsProfileFragment : Fragment() {
+    private var userId: String? = null
     private lateinit var user: UsersResponse
+    private val viewModel by viewModels<FriendsProfileViewModel>()
+    private lateinit var binding: FriendsProfileFragmentBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val bundle = intent.extras
-        userId = bundle?.getString("userId").toString()
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        userId = arguments?.getString("userId")
         GlobalScope.launch(Dispatchers.Main) {
-            user = viewModel.getUserFromLocal(userId)!!
+            user = viewModel.getUserFromLocal(userId!!)!!
             setUserData(user)
             loadImage(user.profileImage)
         }
 
-        binding = ActivityFriendsProfileBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = FriendsProfileFragmentBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     private fun loadImage(media: String) {
@@ -47,22 +47,7 @@ class FriendsProfileActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-
-        binding.itemEditFriends.chatButton.setOnClickListener{
-
-        }
-
-        binding.itemEditFriends.deleteButton.setOnClickListener{
-
-        }
-    }
-
-
-
     private fun setUserData(user: UsersResponse) {
-
         binding.profileName.text = user.userName
 
         binding.itemImage.username.text = user.userName
@@ -74,6 +59,18 @@ class FriendsProfileActivity : AppCompatActivity() {
         binding.itemCollegedegree.collegeDegree.text = user.collegeDegree
 
         binding.itemEmail.email.text = user.email
-
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.itemEditFriends.chatButton.setOnClickListener{
+            findNavController().navigate(R.id.action_friendsProfileFragment2_to_channelsFragment)
+        }
+
+        binding.itemEditFriends.deleteButton.setOnClickListener{
+
+        }
+    }
+
 }

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@drawable/background01"
-    tools:context=".ui.drawer.friends.profile.FriendsProfileActivity">
+    tools:context=".ui.drawer.friends.profile.FriendsProfileFragment">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
