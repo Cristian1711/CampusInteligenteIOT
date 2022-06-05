@@ -27,7 +27,14 @@
         android:id="@+id/navigation_schedule"
         android:name="com.example.campusinteligenteiot.ui.home.schedule.ScheduleFragment"
         android:label="schedule_fragment"
-        tools:layout="@layout/schedule_fragment" />
+        tools:layout="@layout/schedule_fragment" >
+        <action
+            android:id="@+id/action_navigation_schedule_to_busScheduleFragment"
+            app:destination="@id/busScheduleFragment" />
+        <action
+            android:id="@+id/action_navigation_schedule_to_trainScheduleFragment"
+            app:destination="@id/trainScheduleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logoutFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.logout.LogoutFragment"
@@ -103,4 +110,14 @@
             android:id="@+id/action_friendsProfileFragment2_to_channelsFragment"
             app:destination="@id/channelsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/busScheduleFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.schedule.BusScheduleFragment"
+        android:label="bus_schedule_fragment"
+        tools:layout="@layout/bus_schedule_fragment" />
+    <fragment
+        android:id="@+id/trainScheduleFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.schedule.TrainScheduleFragment"
+        android:label="train_schedule_fragment"
+        tools:layout="@layout/train_schedule_fragment" />
 </navigation>

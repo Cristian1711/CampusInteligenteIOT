@@ -12,7 +12,9 @@
         android:layout_height="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorBackground"
+        />
 
     <io.getstream.chat.android.ui.channel.list.ChannelListView
         android:id="@+id/channelListView"
@@ -21,6 +23,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/channelListHeaderView" />
+        app:layout_constraintTop_toBottomOf="@+id/channelListHeaderView"
+        android:background="@color/colorBackground"
+        app:streamUiChannelTitleTextColor="@color/white"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
