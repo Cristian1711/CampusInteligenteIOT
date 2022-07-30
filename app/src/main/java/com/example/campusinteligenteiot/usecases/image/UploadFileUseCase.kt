@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.usecases
+package com.example.campusinteligenteiot.usecases.image
 
 import android.graphics.drawable.Drawable
 import android.net.Uri

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.repository.UserRepository
 import com.example.campusinteligenteiot.databinding.FragmentVerifyEmailBinding
-import com.example.campusinteligenteiot.usecases.AuthUserUseCase
+import com.example.campusinteligenteiot.usecases.user.AuthUserUseCase
 import com.example.campusinteligenteiot.ui.authentication.signin.SigninVMFactory
 import com.example.campusinteligenteiot.ui.authentication.signin.SigninViewModel
 

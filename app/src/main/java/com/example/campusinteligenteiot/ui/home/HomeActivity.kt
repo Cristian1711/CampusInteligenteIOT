@@ -2,30 +2,21 @@ package com.example.campusinteligenteiot.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.Gravity
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.UserProvider
-import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.model.user.UserProvider
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ActivityHomeBinding
-import com.example.campusinteligenteiot.ui.home.car.CarFragment
 import com.example.campusinteligenteiot.ui.home.main.MainHomeViewModel
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.storage.FirebaseStorage
@@ -35,7 +26,6 @@ import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.security.AccessController.getContext
 
 class HomeActivity : AppCompatActivity() {
 

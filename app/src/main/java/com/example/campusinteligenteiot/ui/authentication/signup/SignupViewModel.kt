@@ -6,7 +6,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.common.SingleLiveEvent
-import com.example.campusinteligenteiot.usecases.AuthUserUseCase
+import com.example.campusinteligenteiot.usecases.user.AuthUserUseCase
 
 class SignUpViewModel(private val authUserUseCase: AuthUserUseCase) : ViewModel() {
 

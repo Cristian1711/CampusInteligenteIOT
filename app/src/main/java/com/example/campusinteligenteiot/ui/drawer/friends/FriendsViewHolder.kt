@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 

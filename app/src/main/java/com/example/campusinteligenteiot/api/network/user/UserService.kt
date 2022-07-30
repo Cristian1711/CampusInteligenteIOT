@@ -1,21 +1,16 @@
-package com.example.campusinteligenteiot.api.network
+package com.example.campusinteligenteiot.api.network.user
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import android.widget.Toast
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
-import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 class UserService {
 
     private val retrofit = RetrofitBuilder.getRetrofit()
 
-    suspend fun searchUserById(id: String):UsersResponse{
+    suspend fun searchUserById(id: String): UsersResponse {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(UserApiClient::class.java).getUserById(id)
             response.body()!!

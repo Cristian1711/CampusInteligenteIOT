@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.ui.home.schedule
+package com.example.campusinteligenteiot.ui.home.schedule.bus
 
 import androidx.lifecycle.ViewModel
 

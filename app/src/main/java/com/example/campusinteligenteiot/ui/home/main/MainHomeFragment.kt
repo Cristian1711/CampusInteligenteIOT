@@ -19,9 +19,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
@@ -48,20 +46,13 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
 import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.UserProvider
-import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.FragmentMainHomeBinding
-import com.example.campusinteligenteiot.model.User
-import com.example.campusinteligenteiot.ui.authentication.registerdata.RegisterDescriptionViewModel
-import com.example.campusinteligenteiot.ui.drawer.chats.ChannelsViewModel
 import com.google.firebase.storage.FirebaseStorage
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.image
 import io.getstream.chat.android.client.models.name
 import kotlinx.android.synthetic.main.fragment_main_home.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -142,7 +133,7 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
             addDestinationIconSymbolLayer(style)
             mapboxMap.addOnMapClickListener(this)
 
-            btnStart.setOnClickListener { v: View? ->
+            btnNearbyLines.setOnClickListener { v: View? ->
                 val simulateRoute = false
                 val options = NavigationLauncherOptions.builder()
                     .directionsRoute(currentRoute)
@@ -236,8 +227,8 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         source?.setGeoJson(Feature.fromGeometry(destinationPoint))
 
         getRoute(originPoint, destinationPoint)
-        btnStart!!.isEnabled = true
-        btnStart!!.setBackgroundResource(R.drawable.button_1)
+        btnNearbyLines!!.isEnabled = true
+        btnNearbyLines!!.setBackgroundResource(R.drawable.button_1)
         return true
     }
 

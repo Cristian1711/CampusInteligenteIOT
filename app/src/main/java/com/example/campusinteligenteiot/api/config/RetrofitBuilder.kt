@@ -15,7 +15,7 @@ object RetrofitBuilder {
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         return Retrofit.Builder()
-            .baseUrl("http://149.91.99.198:8080/user/api/v1/")
+            .baseUrl("http://149.91.99.198:8080/api/v1/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build()

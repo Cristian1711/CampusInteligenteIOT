@@ -2,7 +2,6 @@ package com.example.campusinteligenteiot.ui.drawer.profile
 
 import android.content.Context
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,17 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.item_collegedegree.view.*
-import kotlinx.android.synthetic.main.item_image.view.*
-import kotlinx.android.synthetic.main.nav_header_drawer.view.*
-import kotlinx.android.synthetic.main.profile_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 

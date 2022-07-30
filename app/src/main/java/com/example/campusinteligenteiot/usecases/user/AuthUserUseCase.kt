@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.usecases
+package com.example.campusinteligenteiot.usecases.user
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseUser

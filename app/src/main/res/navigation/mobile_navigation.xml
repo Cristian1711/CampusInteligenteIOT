@@ -112,12 +112,12 @@
     </fragment>
     <fragment
         android:id="@+id/busScheduleFragment"
-        android:name="com.example.campusinteligenteiot.ui.home.schedule.BusScheduleFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.schedule.bus.BusScheduleFragment"
         android:label="bus_schedule_fragment"
         tools:layout="@layout/bus_schedule_fragment" />
     <fragment
         android:id="@+id/trainScheduleFragment"
-        android:name="com.example.campusinteligenteiot.ui.home.schedule.TrainScheduleFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.schedule.train.TrainScheduleFragment"
         android:label="train_schedule_fragment"
         tools:layout="@layout/train_schedule_fragment" />
 </navigation>

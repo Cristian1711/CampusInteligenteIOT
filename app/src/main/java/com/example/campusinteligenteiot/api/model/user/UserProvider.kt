@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.api.model
+package com.example.campusinteligenteiot.api.model.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -7,7 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.UsersResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 
 class FriendsAdapter(private val context: Context) :
     RecyclerView.Adapter<FriendsViewHolder>(){

@@ -2,22 +2,20 @@ package com.example.campusinteligenteiot.repository
 
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.example.campusinteligenteiot.api.model.UserProvider
-import com.example.campusinteligenteiot.api.model.UsersResponse
-import com.example.campusinteligenteiot.api.network.UserService
+import com.example.campusinteligenteiot.api.model.user.UserProvider
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
+import com.example.campusinteligenteiot.api.network.user.UserService
 import com.example.campusinteligenteiot.common.Resource
 import com.example.campusinteligenteiot.model.Image
 import com.example.campusinteligenteiot.model.User
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
-import retrofit2.Call
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
@@ -161,7 +159,7 @@ class UserRepository {
 
     }
 
-    suspend fun searchUserById(id: String):UsersResponse{
+    suspend fun searchUserById(id: String): UsersResponse {
         val response = api.searchUserById(id)
         return response
     }

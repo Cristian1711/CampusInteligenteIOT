@@ -3,11 +3,9 @@ package com.example.campusinteligenteiot.ui.drawer.editprofile
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.campusinteligenteiot.api.model.UsersResponse
-import com.example.campusinteligenteiot.repository.UserRepository
-import com.example.campusinteligenteiot.usecases.GetImageUseCase
-import com.example.campusinteligenteiot.usecases.SaveUserUseCase
-import retrofit2.Call
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
+import com.example.campusinteligenteiot.usecases.image.GetImageUseCase
+import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
 import retrofit2.Response
 
 class EditProfileViewModel : ViewModel() {

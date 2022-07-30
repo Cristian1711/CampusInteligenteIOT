@@ -1,6 +1,5 @@
 package com.example.campusinteligenteiot.ui.authentication.signup
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,17 +9,10 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.repository.UserRepository
 import com.example.campusinteligenteiot.databinding.FragmentSignupBinding
-import com.example.campusinteligenteiot.usecases.AuthUserUseCase
+import com.example.campusinteligenteiot.usecases.user.AuthUserUseCase
 
 class SignUpFragment : Fragment() {
 

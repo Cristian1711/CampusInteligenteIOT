@@ -1,6 +1,5 @@
 package com.example.campusinteligenteiot.ui.authentication.signin
 
-import android.app.Activity
 import android.content.Context
 import android.view.View
 import androidx.lifecycle.LiveData
@@ -9,12 +8,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.common.SingleLiveEvent
-import com.example.campusinteligenteiot.usecases.AuthUserUseCase
+import com.example.campusinteligenteiot.usecases.user.AuthUserUseCase
 import android.content.Intent
-import android.provider.Settings.Global.getString
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.example.campusinteligenteiot.ui.home.HomeActivity
 
 

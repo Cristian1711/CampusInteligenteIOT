@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.ui.home.schedule
+package com.example.campusinteligenteiot.ui.home.schedule.train
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,11 +10,10 @@ import androidx.viewpager.widget.ViewPager
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.common.adapter.SectionPagerAdapter
 import com.example.campusinteligenteiot.databinding.ScheduleFragmentBinding
-import com.example.campusinteligenteiot.ui.home.schedule.bus.BusScheduleFragment
-import com.example.campusinteligenteiot.ui.home.schedule.train.TrainScheduleFragment
+import com.example.campusinteligenteiot.ui.home.schedule.ScheduleViewModel
 import com.google.android.material.tabs.TabLayout
 
-class ScheduleFragment : Fragment() {
+class TrainScheduleFragment : Fragment() {
 
     private  var _binding: ScheduleFragmentBinding? = null
     private val binding get() = _binding!!
@@ -36,8 +35,8 @@ class ScheduleFragment : Fragment() {
 
     private fun addFragments() {
         val adapter = SectionPagerAdapter(childFragmentManager)
-        adapter.addFragment(BusScheduleFragment(), "Horario Autobús")
-        adapter.addFragment(TrainScheduleFragment(), "Horario Tren")
+        adapter.addFragment(TrainCorRabScheduleFragment(), "Córdoba a Rabanales")
+        adapter.addFragment(TrainRabCorScheduleFragment(), "Rabanales a Córdoba")
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
 

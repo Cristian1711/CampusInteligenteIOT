@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.api.model
+package com.example.campusinteligenteiot.api.model.user
 
 import com.google.gson.annotations.SerializedName
 import java.util.*

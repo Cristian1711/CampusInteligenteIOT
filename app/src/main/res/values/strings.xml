@@ -79,4 +79,9 @@
     <string name="forward"><![CDATA[->]]></string>
     <string name="back"><![CDATA[<-]]></string>
 
+    <!-- Moovit -->
+    <string name="show_nearby_lines">Ver líneas y paradas cercanas</string>
+    <string name="get_directions_cor_rab">Quiero ir hasta el campus de Rabanales</string>
+    <string name="get_directions_rab_cor">Quiero ir hasta Córdoba</string>
+
 </resources>
