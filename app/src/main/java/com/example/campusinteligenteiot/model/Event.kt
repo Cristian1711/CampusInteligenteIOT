@@ -5,7 +5,7 @@ import kotlin.collections.ArrayList
 
 data class Event(val idEvent: String,
                  val assistants: ArrayList<String>,
-                 val attendances: ArrayList<String>,
+                 val attendances: Integer,
                  val eventDate: Date,
                  val description: String,
                  val eventImage: String? = null
