@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.databinding.BusScheduleFragmentBinding
@@ -32,7 +33,7 @@ class BusCorRabScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-ddTHH:mm:ssZ", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-ddHH:mm:ssZ", Locale.getDefault())
         val date = Date()
 
         val fecha: String = dateFormat.format(date)
@@ -43,25 +44,28 @@ class BusCorRabScheduleFragment : Fragment() {
             val pm = requireContext().packageManager
             pm.getPackageInfo("com.tranzmate", PackageManager.GET_ACTIVITIES)
 
-            binding.btnNearbyLines.setOnClickListener{
-                uri = "moovit://nearby?lat=&lon=&partner_id=CampusInteligenteIOT"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(uri)
-                startActivity(intent)
-            }
-            binding.btnGetRoutes.setOnClickListener{
-                uri = "moovit://directions?dest_lat=37.912759&dest_lon=-4.720911&dest_name=Campus%20Rabanales&orig_lat=&orig_lon=&orig_name=Posicion%20Actual&auto_run=true&date=$fecha&partner_id=CampusInteligenteIOT"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(uri)
-                startActivity(intent)
-            }
         } catch (e: PackageManager.NameNotFoundException) {
 
         // Moovit not installed - send to store
+            Toast.makeText(requireContext(), "No tienes descargada la aplicación de Moovit, te redirigimos a ella", Toast.LENGTH_LONG)
+            Thread.sleep(4000)
             val url = "https://moovit.onelink.me/3986059930?pid=Developers&c=CampusInteligenteIOT"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
+        }
+
+        binding.btnNearbyLines.setOnClickListener{
+            uri = "moovit://nearby?lat=&lon=&partner_id=CampusInteligenteIOT"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
+        }
+        binding.btnGetRoutes.setOnClickListener{
+            uri = "moovit://directions?dest_lat=37.912759&dest_lon=-4.720911&dest_name=Campus%20Rabanales&orig_lat=&orig_lon=&orig_name=Posicion%20Actual&auto_run=true&date=$fecha&partner_id=CampusInteligenteIOT"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
         }
 
 

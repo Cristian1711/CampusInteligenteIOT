@@ -9,7 +9,7 @@ class GetUserFromLocalUseCase {
     private val repository = UserRepository()
     private val userProvider = UserProvider()
 
-    suspend operator fun invoke(id : String): UsersResponse? {
+    operator fun invoke(id : String): UsersResponse? {
         val users = UserProvider.users
         var user : UsersResponse
         if(!users.isNullOrEmpty()){

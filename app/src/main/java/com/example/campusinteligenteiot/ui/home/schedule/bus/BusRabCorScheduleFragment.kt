@@ -32,7 +32,7 @@ class BusRabCorScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-ddTHH:mm:ssZ", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("yyyy-MM-ddHH:mm:ssZ", Locale.getDefault())
         val date = Date()
 
         val fecha: String = dateFormat.format(date)
@@ -43,19 +43,6 @@ class BusRabCorScheduleFragment : Fragment() {
             val pm = requireContext().packageManager
             pm.getPackageInfo("com.tranzmate", PackageManager.GET_ACTIVITIES)
 
-            binding.btnNearbyLines.setOnClickListener{
-                uri = "moovit://nearby?lat=&lon=&partner_id=CampusInteligenteIOT"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(uri)
-                startActivity(intent)
-            }
-            binding.btnGetRoutes.setOnClickListener{
-                uri = "moovit://directions?dest_lat=37.894266&dest_lon=-4.782051&dest_name=Cordoba&orig_lat=&orig_lon=&orig_name=Posicion%20Actual&auto_run=true&date=$fecha&partner_id=CampusInteligenteIOT"
-                val intent = Intent(Intent.ACTION_VIEW)
-                intent.data = Uri.parse(uri)
-                startActivity(intent)
-            }
-
         } catch (e: PackageManager.NameNotFoundException) {
 
             // Moovit not installed - send to store
@@ -63,6 +50,19 @@ class BusRabCorScheduleFragment : Fragment() {
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
+        }
+
+        binding.btnNearbyLines.setOnClickListener{
+            uri = "moovit://nearby?lat=&lon=&partner_id=CampusInteligenteIOT"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
+        }
+        binding.btnGetRoutes.setOnClickListener{
+            uri = "moovit://directions?dest_lat=37.894266&dest_lon=-4.782051&dest_name=Cordoba&orig_lat=&orig_lon=&orig_name=Posicion%20Actual&auto_run=true&date=$fecha&partner_id=CampusInteligenteIOT"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(uri)
+            startActivity(intent)
         }
 
 
