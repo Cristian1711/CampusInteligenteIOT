@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.viewpager.widget.ViewPager
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.common.adapter.SectionPagerAdapter
-import com.example.campusinteligenteiot.databinding.ScheduleFragmentBinding
+import com.example.campusinteligenteiot.databinding.TrainScheduleFragmentBinding
 import com.example.campusinteligenteiot.ui.home.schedule.ScheduleViewModel
 import com.google.android.material.tabs.TabLayout
 
 class TrainScheduleFragment : Fragment() {
 
-    private  var _binding: ScheduleFragmentBinding? = null
+    private  var _binding: TrainScheduleFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ScheduleViewModel>()
     private lateinit var myFragment: View
@@ -26,7 +26,7 @@ class TrainScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ScheduleFragmentBinding.inflate(inflater,container,false)
+        _binding = TrainScheduleFragmentBinding.inflate(inflater,container,false)
         viewPager = binding.root.findViewById(R.id.viewPager)
         tabLayout = binding.root.findViewById(R.id.tabLayout)
         addFragments()

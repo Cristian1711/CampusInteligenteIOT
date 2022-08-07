@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:visibility="visible"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.home.schedule.train.TrainCorRabScheduleFragment">
+    android:layout_height="match_parent">
 
+    <RelativeLayout
+        tools:context=".ui.home.schedule.train.TrainRabCorScheduleFragment" android:layout_height="wrap_content" android:layout_width="match_parent">
 
-    <TableLayout
-        android:id="@+id/tlTabla"
-        android:layout_centerHorizontal="true"
-        android:layout_width="368dp"
-        android:layout_height="536dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</RelativeLayout>
+        <TableLayout
+            android:id="@+id/tlTabla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="false"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </RelativeLayout>
+</ScrollView>

@@ -31,7 +31,7 @@ class TrainRabCorScheduleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tlTabla?.removeAllViews()
+        binding.tlTabla.removeAllViews()
 
         GlobalScope.launch(Dispatchers.Main) {
             val schedule = viewModel.getSingleSchedule(SCHEDULE_ID)

@@ -84,4 +84,7 @@
     <string name="get_directions_cor_rab">Quiero ir hasta el campus de Rabanales</string>
     <string name="get_directions_rab_cor">Quiero ir hasta Córdoba</string>
 
+    <string name="departures">Salidas</string>
+    <string name="arrivals">Llegadas</string>
+
 </resources>

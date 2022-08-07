@@ -40,9 +40,18 @@ class TrainCorRabScheduleFragment : Fragment() {
                 schedule?.departures,
                 schedule?.arrivals
             )
-
+            fillTitles()
             fillTableLayout(fullSchedule)
         }
+    }
+
+    private fun fillTitles() {
+        val titles = LayoutInflater.from(context).inflate(R.layout.row_table_edited, null, false)
+        val departures = titles.findViewById<View>(R.id.departures) as TextView
+        val arrivals = titles.findViewById<View>(R.id.arrivals) as TextView
+        departures.text = getString(R.string.departures)
+        arrivals.text = getString(R.string.arrivals)
+        binding.tlTabla.addView(titles)
     }
 
     private fun fillTableLayout(fullSchedule: Array<ArrayList<String>?>){
@@ -52,7 +61,7 @@ class TrainCorRabScheduleFragment : Fragment() {
             val arrivals = registro.findViewById<View>(R.id.arrivals) as TextView
             departures.text = fullSchedule[0]?.get(i) ?: "Datos no disponibles"
             arrivals.text = fullSchedule[1]?.get(i) ?: "Datos no disponibles"
-            binding.tlTabla?.addView(registro)
+            binding.tlTabla.addView(registro)
         }
     }
 
