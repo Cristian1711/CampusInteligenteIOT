@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 
-class ProductAdapter(private val productList: List<ProductResponse>, private val context: Context,
+class ProductAdapter(private val user: UsersResponse, private val productList: List<ProductResponse>, private val context: Context,
 private val onClickListener:(ProductResponse) -> Unit): RecyclerView.Adapter<ProductViewHolder> (){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,7 +18,7 @@ private val onClickListener:(ProductResponse) -> Unit): RecyclerView.Adapter<Pro
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = productList[position]
-        holder.render(item, onClickListener)
+        holder.render(user, item, onClickListener)
     }
 
     override fun getItemCount(): Int = productList.size

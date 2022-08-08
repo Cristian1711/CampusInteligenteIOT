@@ -11,18 +11,26 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ItemProductBinding
 import com.example.campusinteligenteiot.model.Product
 import com.example.campusinteligenteiot.usecases.user.GetUserFromLocalUseCase
+import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProductViewHolder(view: View, private val context: Context): RecyclerView.ViewHolder(view) {
 
     val getUserFromLocalUseCase = GetUserFromLocalUseCase()
+    val saveUserUseCase = SaveUserUseCase()
     val binding = ItemProductBinding.bind(view)
-    var like = false
 
-    fun render(product: ProductResponse, onClickListener:(ProductResponse) -> Unit){
+    fun render(user: UsersResponse, product: ProductResponse, onClickListener:(ProductResponse) -> Unit){
+        var like: Boolean
+        like = user.productLikes.contains(product.id)
+        if(like) binding.likeImageView.setImageResource(R.drawable.ic_twitter_like)
         binding.productTitle.text = product.title
         binding.productPrice.text = product.price.toString() + "€"
         binding.productOwner.text = "by " + getUserFromLocalUseCase(product.idOwner!!)?.userName ?: "Usuario no especificado"
@@ -33,6 +41,17 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
         }
         binding.likeImageView.setOnClickListener{
             like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
+            if(like){
+                user.productLikes.add(product.id)
+                GlobalScope.launch(Dispatchers.Main) {
+                    saveUserUseCase(user.id, user)
+                }
+            } else{
+                user.productLikes.remove(product.id)
+                GlobalScope.launch(Dispatchers.Main) {
+                    saveUserUseCase(user.id, user)
+                }
+            }
         }
     }
 
