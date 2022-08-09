@@ -52,11 +52,7 @@ class ShopFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            arrProducts = viewModel.getAllProducts()!!
-            initProductRecyclerView(user)
-        }
-
+        chargeData()
         showMenu()
 
     }
@@ -83,6 +79,14 @@ class ShopFragment : Fragment() {
 
     }
 
+    private fun chargeData(){
+        GlobalScope.launch(Dispatchers.Main) {
+            user = viewModel.getUser(user.id)!!
+            arrProducts = viewModel.getAllProducts()!!
+            initProductRecyclerView(user, arrProducts)
+        }
+    }
+
     private fun openMenu() {
         menuOpen = !menuOpen
         binding.fabMain.setImageResource(R.drawable.ic_down_arrow)
@@ -101,7 +105,7 @@ class ShopFragment : Fragment() {
         binding.fabProfileProducts.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
     }
 
-    private fun initProductRecyclerView(currentUser: UsersResponse) {
+    private fun initProductRecyclerView(currentUser: UsersResponse, arrProducts: List<ProductResponse>) {
         //val manager = GridLayoutManager(requireContext(), 2)
         //val decoration = DividerItemDecoration(requireContext(), manager.orientation)
         val recyclerView = binding.productRecyclerView

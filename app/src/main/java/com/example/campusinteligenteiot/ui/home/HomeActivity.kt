@@ -72,6 +72,7 @@ class HomeActivity : AppCompatActivity() {
                 val gsReference = storageReference.getReferenceFromUrl(media!!)
                 gsReference.downloadUrl.addOnSuccessListener {
                     Glide.with(this@HomeActivity).load(it).into(binding.navigationView.getHeaderView(0).imageView)
+                    Glide.with(this@HomeActivity).load(it).into(binding.DrawerButton)
                     binding.navigationView.getHeaderView(0).textView2.setText(user.name)
                 }
 

@@ -8,13 +8,44 @@
     android:descendantFocusability="blocksDescendants"
     tools:context=".ui.home.shop.ShopFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:scrollbars="vertical"
-            />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/DrawerButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@android:color/transparent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/titleProductsPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/DrawerButton"
+        android:layout_alignTop="@id/DrawerButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textAlignment="center"
+        android:text="Productos"
+        android:textSize="24sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/DrawerButton"
+        android:layout_marginTop="40dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="wrap_content"

@@ -106,18 +106,7 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         val user_profileImage = sharedPreferences?.getString("user_profileimage", "null")
         println("EL ID DEL USUARIO ACTUAL ES (MAPA)")
         println(user_id)
-        loadProfileImage(user_profileImage!!)
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            showProfileImage()
-        }, 2000)
-
         return binding.root
-    }
-
-    private fun showProfileImage() {
-        binding.profileImageLoading.isVisible = false
-        binding.profileImage.isVisible = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -371,13 +360,6 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         }
     }
 
-    private fun loadProfileImage(profileImage: String) {
-        val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(profileImage!!)
-        gsReference.downloadUrl.addOnSuccessListener {
-            Glide.with(requireContext()).load(it).into(binding.profileImage)
-        }
-    }
 
 
 }

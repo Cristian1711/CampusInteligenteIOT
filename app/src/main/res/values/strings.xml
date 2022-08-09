@@ -87,4 +87,9 @@
     <string name="departures">Salidas</string>
     <string name="arrivals">Llegadas</string>
 
+    <string name="register_images_error">Error al subir la imagen de perfil</string>
+    <string name="register_images_success">Se ha subido la imagen correctamente</string>
+    <string name="firestore_upload_success">Se ha subido la imagen satisfactoriamente</string>
+    <string name="firestore_upload_failure">No se ha podido subir la imagen</string>
+
 </resources>

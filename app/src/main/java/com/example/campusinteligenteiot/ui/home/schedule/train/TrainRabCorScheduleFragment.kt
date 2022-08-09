@@ -109,7 +109,7 @@ class TrainRabCorScheduleFragment : Fragment() {
             println("Segundos actuales: $timeInSeconds")
             println("Tiempo en segundos salida: " + departures[i])
             if(timeInSeconds < departures[i]){
-                remainingTime = departures[i+1] - timeInSeconds
+                remainingTime = departures[i] - timeInSeconds
                 println("Diferencia: $remainingTime")
                 break
             }
