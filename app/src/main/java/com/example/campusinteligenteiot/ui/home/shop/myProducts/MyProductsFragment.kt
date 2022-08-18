@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
@@ -62,6 +64,11 @@ class MyProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initProductsRecyclerView(view)
+
+        binding.fabAddProduct.setOnClickListener{
+            val navController = Navigation.findNavController(view)
+            navController.navigate(R.id.action_myProductsFragment_to_addNewProductFragment)
+        }
     }
 
     private fun initProductsRecyclerView(view: View) {

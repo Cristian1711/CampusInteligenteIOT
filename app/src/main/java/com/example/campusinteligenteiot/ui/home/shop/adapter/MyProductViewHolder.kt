@@ -32,6 +32,7 @@ class MyProductViewHolder(view: View, private val context: Context): RecyclerVie
     val getUserFromLocalUseCase = GetUserFromLocalUseCase()
     val saveUserUseCase = SaveUserUseCase()
     val binding = ItemMyProductBinding.bind(view)
+    val myView = view
 
     fun render(user: UsersResponse, product: ProductResponse){
         println("HE ENTRADO EN MYPRODUCT VIEWHOLDER")
@@ -55,7 +56,16 @@ class MyProductViewHolder(view: View, private val context: Context): RecyclerVie
         }
 
         binding.EditImage.setOnClickListener{
-
+            val bundle = bundleOf(
+                "productId" to product.id,
+                "productTitle" to product.title,
+                "productDescription" to product.description,
+                "productPrice" to product.price,
+                "productImage" to product.productImage,
+                "category" to product.category
+            )
+            val navController = Navigation.findNavController(myView)
+            navController.navigate(R.id.action_myProductsFragment_to_editProductFragment, bundle)
         }
 
         binding.DeleteImage.setOnClickListener{

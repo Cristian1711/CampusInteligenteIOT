@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_navigation_shop_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_shop_to_myProductsFragment"
+            app:destination="@id/myProductsFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_events"
@@ -146,5 +149,38 @@
         <action
             android:id="@+id/action_sellerProfileFragment_to_navigation_shop"
             app:destination="@id/navigation_shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/myProductsFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.shop.myProducts.MyProductsFragment"
+        android:label="my_products_fragment"
+        tools:layout="@layout/my_products_fragment" >
+        <action
+            android:id="@+id/action_myProductsFragment_to_addNewProductFragment"
+            app:destination="@id/addNewProductFragment" />
+        <action
+            android:id="@+id/action_myProductsFragment_to_editProductFragment"
+            app:destination="@id/editProductFragment" />
+        <action
+            android:id="@+id/action_myProductsFragment_to_navigation_shop"
+            app:destination="@id/navigation_shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewProductFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.shop.myProducts.addProduct.AddNewProductFragment"
+        android:label="add_new_product_fragment"
+        tools:layout="@layout/add_new_product_fragment" >
+        <action
+            android:id="@+id/action_addNewProductFragment_to_myProductsFragment"
+            app:destination="@id/myProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.shop.myProducts.editProduct.EditProductFragment"
+        android:label="edit_product_fragment"
+        tools:layout="@layout/edit_product_fragment" >
+        <action
+            android:id="@+id/action_editProductFragment_to_myProductsFragment"
+            app:destination="@id/myProductsFragment" />
     </fragment>
 </navigation>
