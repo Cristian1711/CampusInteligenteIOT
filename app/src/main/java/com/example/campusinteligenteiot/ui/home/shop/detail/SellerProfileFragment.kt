@@ -16,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class FriendsProfileFragment : Fragment() {
+class SellerProfileFragment : Fragment() {
     private var userId: String? = null
     private lateinit var user: UsersResponse
     private val viewModel by viewModels<FriendsProfileViewModel>()
@@ -68,6 +68,10 @@ class FriendsProfileFragment : Fragment() {
 
         binding.itemEditFriends.deleteButton.setOnClickListener{
 
+        }
+
+        binding.backButton.setOnClickListener{
+            findNavController().navigate(R.id.action_sellerProfileFragment_to_navigation_shop)
         }
 
     }

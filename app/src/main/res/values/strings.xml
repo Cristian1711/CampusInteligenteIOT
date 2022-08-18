@@ -92,4 +92,12 @@
     <string name="firestore_upload_success">Se ha subido la imagen satisfactoriamente</string>
     <string name="firestore_upload_failure">No se ha podido subir la imagen</string>
 
+    <string-array name="categories">
+        <item>Ninguna</item>
+        <item>Libros</item>
+        <item>Electrónicos</item>
+        <item>Otros</item>
+        <item>Sin filtro</item>
+    </string-array>
+
 </resources>

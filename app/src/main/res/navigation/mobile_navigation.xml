@@ -17,7 +17,11 @@
         android:id="@+id/navigation_shop"
         android:name="com.example.campusinteligenteiot.ui.home.shop.ShopFragment"
         android:label="shop_fragment"
-        tools:layout="@layout/shop_fragment" />
+        tools:layout="@layout/shop_fragment" >
+        <action
+            android:id="@+id/action_navigation_shop_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_events"
         android:name="com.example.campusinteligenteiot.ui.home.events.EventsFragment"
@@ -120,4 +124,27 @@
         android:name="com.example.campusinteligenteiot.ui.home.schedule.train.TrainScheduleFragment"
         android:label="train_schedule_fragment"
         tools:layout="@layout/train_schedule_fragment" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.shop.detail.ProductDetailFragment"
+        android:label="product_detail_fragment"
+        tools:layout="@layout/product_detail_fragment" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_navigation_shop"
+            app:destination="@id/navigation_shop" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_channelsFragment"
+            app:destination="@id/channelsFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment_to_sellerProfileFragment"
+            app:destination="@id/sellerProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellerProfileFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.friends.profile.SellerProfileFragment"
+        android:label="SellerProfileFragment" >
+        <action
+            android:id="@+id/action_sellerProfileFragment_to_navigation_shop"
+            app:destination="@id/navigation_shop" />
+    </fragment>
 </navigation>

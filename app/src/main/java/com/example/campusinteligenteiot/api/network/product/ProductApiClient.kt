@@ -11,7 +11,7 @@ interface ProductApiClient {
 
     @Headers("Content-Type: application/json")
     @GET("http://149.91.99.198:8080/api/v1/products/allProducts")
-    suspend fun getAllProducts(): Response<List<ProductResponse>>
+    suspend fun getAllProducts(): List<ProductResponse>
 
     @Headers("Content-Type: application/json")
     @POST("http://149.91.99.198:8080/api/v1/products/saveProduct/{id}")

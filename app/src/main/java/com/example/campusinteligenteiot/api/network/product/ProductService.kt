@@ -1,5 +1,7 @@
 package com.example.campusinteligenteiot.api.network.product
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
@@ -20,12 +22,13 @@ class ProductService {
         }
     }
 
-    suspend fun getAllProducts():List<ProductResponse>{
+    suspend fun getAllProducts(): LiveData<MutableList<ProductResponse>> {
+        val mutableData = MutableLiveData<MutableList<ProductResponse>>()
+        var dataList: MutableList<ProductResponse>
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(ProductApiClient::class.java).getAllProducts()
-            println("El body de la respuesta")
-            println(response.body())
-            response.body() ?: emptyList()
+            dataList = (retrofit.create(ProductApiClient::class.java).getAllProducts()) as MutableList<ProductResponse>
+            mutableData.postValue(dataList)
+            mutableData
         }
     }
 

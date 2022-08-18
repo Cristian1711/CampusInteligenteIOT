@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.repository
 
+import androidx.lifecycle.LiveData
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.network.product.ProductService
 import retrofit2.Response
@@ -12,7 +13,7 @@ class ProductRepository {
         return api.getProductById(id)
     }
 
-    suspend fun getAllProducts(): List<ProductResponse> {
+    suspend fun getAllProducts(): LiveData<MutableList<ProductResponse>>? {
         return api.getAllProducts()
     }
 

@@ -29,29 +29,6 @@ class EventViewHolder(view: View, private val context: Context): RecyclerView.Vi
         gsReference.downloadUrl.addOnSuccessListener {
             Glide.with(context).load(it).into(binding.productImage)
         }
-        binding.likeImageView.setOnClickListener{
-            like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
-        }
     }
 
-    private fun likeAnimation(imageView: LottieAnimationView, animation: Int, like: Boolean): Boolean {
-        if(!like){
-            imageView.setAnimation(animation)
-            imageView.playAnimation()
-        }else{
-            imageView.animate()
-                .alpha(0f)
-                .setDuration(200)
-                .setListener(object: AnimatorListenerAdapter(){
-
-                    override fun onAnimationEnd(animation: Animator?) {
-                        imageView.setImageResource(R.drawable.twitter_like)
-                        imageView.alpha = 1f
-                    }
-
-                })
-
-        }
-        return !like
-    }
 }
