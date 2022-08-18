@@ -35,12 +35,19 @@ class MyProductViewHolder(view: View, private val context: Context): RecyclerVie
 
     fun render(user: UsersResponse, product: ProductResponse){
         println("HE ENTRADO EN MYPRODUCT VIEWHOLDER")
-        binding.EditImage.visibility = VISIBLE
-        binding.DeleteImage.visibility = VISIBLE
-        binding.likeImageView.visibility = INVISIBLE
         binding.productTitle.text = product.title
         binding.productPrice.text = product.price.toString() + "€"
-        binding.productOwner.visibility = INVISIBLE
+        if(product.published){
+            binding.IsPublished.text = "Publicado"
+        }
+        else{
+            if(product.archived){
+                binding.IsPublished.text = "Archivado"
+            }
+            else{
+                binding.IsPublished.text = "No publicado"
+            }
+        }
         val storageReference = FirebaseStorage.getInstance()
         val gsReference = storageReference.getReferenceFromUrl(product.productImage)
         gsReference.downloadUrl.addOnSuccessListener {

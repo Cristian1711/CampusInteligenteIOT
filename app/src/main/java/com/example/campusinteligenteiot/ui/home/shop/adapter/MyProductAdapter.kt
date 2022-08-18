@@ -10,22 +10,16 @@ import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 
-class ProductAdapter(private val user: UsersResponse, private val context: Context)
-    : RecyclerView.Adapter<ProductViewHolder> (){
+class MyProductAdapter(private val user: UsersResponse, private val context: Context)
+    : RecyclerView.Adapter<MyProductViewHolder> (){
 
     private var productMutableList = mutableListOf<ProductResponse>()
     private var oldProductMutableList = mutableListOf<ProductResponse>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyProductViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ProductViewHolder(layoutInflater.inflate(R.layout.item_product, parent, false), context)
+        return MyProductViewHolder(layoutInflater.inflate(R.layout.item_my_product, parent, false), context)
     }
-
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val item = productMutableList[position]
-        holder.render(user, item)
-    }
-
 
     override fun getItemCount(): Int = productMutableList.size
 
@@ -52,5 +46,10 @@ class ProductAdapter(private val user: UsersResponse, private val context: Conte
 
     fun filterProductListByOwner(userId: String){
         productMutableList = (oldProductMutableList.filter { it.idOwner == userId}) as MutableList<ProductResponse>
+    }
+
+    override fun onBindViewHolder(holder: MyProductViewHolder, position: Int) {
+        val item = productMutableList[position]
+        holder.render(user, item)
     }
 }

@@ -42,15 +42,12 @@ class ShopFragment : Fragment() {
     private  var _binding: ShopFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ShopViewModel>()
-    private lateinit var arrProducts: List<ProductResponse>
     private lateinit var user: UsersResponse
     private val translationYaxis = 100f
     private var menuOpen = false
     private val interpolator: OvershootInterpolator = OvershootInterpolator()
     private lateinit var adapter: ProductAdapter
-    private lateinit var adapter2: ProductAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerView2: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -100,23 +97,19 @@ class ShopFragment : Fragment() {
     }
 
     private fun showMenu() {
-        binding.fabAddProduct.alpha = 0f
         binding.fabFavouriteProducts.alpha = 0f
         binding.fabFilterProducts.alpha = 0f
         binding.fabProfileProducts.alpha = 0f
         binding.cardView1.alpha = 0f
         binding.cardView2.alpha = 0f
         binding.cardView3.alpha = 0f
-        binding.cardView4.alpha = 0f
 
-        binding.fabAddProduct.translationY = translationYaxis
         binding.fabFavouriteProducts.translationY = translationYaxis
         binding.fabFilterProducts.translationY = translationYaxis
         binding.fabProfileProducts.translationY = translationYaxis
         binding.cardView1.translationY = translationYaxis
         binding.cardView2.translationY = translationYaxis
         binding.cardView3.translationY = translationYaxis
-        binding.cardView4.translationY = translationYaxis
 
         binding.fabMain.setOnClickListener{
             if(menuOpen){
@@ -129,38 +122,29 @@ class ShopFragment : Fragment() {
 
     }
 
-
     private fun initProductsRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.productRecyclerView)
-        recyclerView2 = view.findViewById(R.id.productRecyclerView2)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView2.layoutManager = LinearLayoutManager(requireContext())
-        adapter = ProductAdapter(user, requireContext(), false)
-        adapter2 = ProductAdapter(user, requireContext(), true)
+        adapter = ProductAdapter(user, requireContext())
         recyclerView.adapter = adapter
-        recyclerView2.adapter = adapter2
     }
 
     private fun openMenu() {
         menuOpen = !menuOpen
-        binding.fabAddProduct.visibility = VISIBLE
         binding.fabFavouriteProducts.visibility = VISIBLE
         binding.fabFilterProducts.visibility = VISIBLE
         binding.fabProfileProducts.visibility = VISIBLE
         binding.cardView1.visibility = VISIBLE
         binding.cardView2.visibility = VISIBLE
         binding.cardView3.visibility = VISIBLE
-        binding.cardView4.visibility = VISIBLE
 
         binding.fabMain.setImageResource(R.drawable.ic_down_arrow)
-        binding.fabAddProduct.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
         binding.fabFavouriteProducts.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
         binding.fabFilterProducts.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
         binding.fabProfileProducts.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
         binding.cardView1.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
         binding.cardView2.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
         binding.cardView3.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
-        binding.cardView4.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start()
 
         binding.fabFilterProducts.setOnClickListener{
             binding.comboBox.visibility = VISIBLE
@@ -176,8 +160,6 @@ class ShopFragment : Fragment() {
 
         binding.fabProfileProducts.setOnClickListener{
             binding.titleProductsPage.text = "Mis productos"
-            recyclerView.visibility = GONE
-            recyclerView2.visibility = VISIBLE
             adapter.filterProductListByOwner(user.id)
             adapter.notifyDataSetChanged()
             closeMenu()
@@ -188,24 +170,20 @@ class ShopFragment : Fragment() {
     private fun closeMenu() {
         menuOpen = !menuOpen
         binding.fabMain.setImageResource(R.drawable.ic_arrow_up)
-        binding.fabAddProduct.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
         binding.fabFavouriteProducts.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
         binding.fabFilterProducts.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
         binding.fabProfileProducts.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
         binding.cardView1.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
         binding.cardView2.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
         binding.cardView3.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
-        binding.cardView4.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start()
 
         Handler().postDelayed({
-            binding.fabAddProduct.visibility = INVISIBLE
             binding.fabFavouriteProducts.visibility = INVISIBLE
             binding.fabFilterProducts.visibility = INVISIBLE
             binding.fabProfileProducts.visibility = INVISIBLE
             binding.cardView1.visibility = INVISIBLE
             binding.cardView2.visibility = INVISIBLE
             binding.cardView3.visibility = INVISIBLE
-            binding.cardView4.visibility = INVISIBLE
         }, 400)
     }
 

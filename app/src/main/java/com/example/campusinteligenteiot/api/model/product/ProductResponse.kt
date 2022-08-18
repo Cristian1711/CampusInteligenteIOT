@@ -10,6 +10,7 @@ data class ProductResponse (
     @SerializedName("price") var price: Float,
     @SerializedName("idOwner") var idOwner: String,
     @SerializedName("productImage") var productImage: String,
-    @SerializedName("isPublished") var isPublished: Boolean,
-    @SerializedName("category") var category: String
+    @SerializedName("published") var published: Boolean,
+    @SerializedName("category") var category: String,
+    @SerializedName("archived") var archived: Boolean
 )

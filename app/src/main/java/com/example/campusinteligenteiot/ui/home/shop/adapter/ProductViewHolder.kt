@@ -30,7 +30,7 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
 
     val getUserFromLocalUseCase = GetUserFromLocalUseCase()
     val saveUserUseCase = SaveUserUseCase()
-    val binding = ItemMyProductBinding.bind(view)
+    val binding = ItemProductBinding.bind(view)
 
     fun render(user: UsersResponse, product: ProductResponse){
         println("HE ENTRADO EN PRODUCT VIEWHOLDER")

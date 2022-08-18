@@ -75,16 +75,6 @@
         android:scrollbars="vertical"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productRecyclerView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/comboBox"
-        android:layout_marginTop="60dp"
-        android:scrollbars="vertical"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,32 +164,6 @@
                 android:layout_margin="5dp"
                 android:id="@+id/fab_favourite_products"
                 android:contentDescription="Mis productos favoritos" />
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView4"
-                android:layout_toRightOf="@+id/card"
-                android:layout_marginRight="-5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/colorSecondary"
-                app:cardCornerRadius="10dp">
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Añadir producto"
-                    android:textSize="6sp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:paddingRight="2dp"
-                    android:paddingLeft="2dp"/>
-            </androidx.cardview.widget.CardView>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="mini"
-                android:src="@drawable/ic_add_black"
-                android:layout_margin="5dp"
-                android:id="@+id/fab_add_product"
-                android:contentDescription="Añadir un nuevo producto" />
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
