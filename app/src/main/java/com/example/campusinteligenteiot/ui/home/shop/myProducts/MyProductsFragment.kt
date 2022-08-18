@@ -69,13 +69,28 @@ class MyProductsFragment : Fragment() {
             val navController = Navigation.findNavController(view)
             navController.navigate(R.id.action_myProductsFragment_to_addNewProductFragment)
         }
+
+        binding.backButton.setOnClickListener{
+            findNavController().navigate(R.id.action_myProductsFragment_to_navigation_shop)
+        }
     }
 
     private fun initProductsRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.productRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = MyProductAdapter(user, requireContext())
+        adapter = MyProductAdapter(user, requireContext(),
+            {position -> onDeletedItem(position)}
+        )
         recyclerView.adapter = adapter
+    }
+
+    private fun onDeletedItem(position: Int){
+        if(adapter.getProductList()[position].published){
+
+        }
+        else{
+
+        }
     }
 
 }

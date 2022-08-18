@@ -7,9 +7,11 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -24,6 +26,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -47,14 +50,20 @@ class EditProductFragment : Fragment() {
     ): View? {
         _binding = EditProductFragmentBinding.inflate(inflater,container,false)
 
-        product.id = arguments?.getString("productId")!!
-        product.title = arguments?.getString("productTitle")!!
-        product.description = arguments?.getString("productDescription")!!
-        product.price = arguments?.getFloat("productPrice")!!
-        product.productImage = arguments?.getString("productImage")!!
-        product.category = arguments?.getString("category")!!
+        product = ProductResponse(
+            arguments?.getString("productId")!!,
+            arguments?.getString("productTitle")!!,
+            arguments?.getString("productDescription")!!,
+            arguments?.getFloat("productPrice")!!,
+            arguments?.getString("idOwner")!!,
+            arguments?.getString("productImage")!!,
+            arguments?.getBoolean("published")!!,
+            arguments?.getString("category")!!,
+            arguments?.getBoolean("archived")!!
+            )
 
         setData(product)
+        storage = Firebase.storage
 
         return binding.root
     }
@@ -67,18 +76,20 @@ class EditProductFragment : Fragment() {
         }
 
         binding.ButtonYes.setOnClickListener {
+            binding.cardView1.visibility = VISIBLE
         }
 
         binding.buttonSave.setOnClickListener{
             binding.progressBar.visibility = View.VISIBLE
-            product.title = binding.textTitleProduct.toString()
-            product.description = binding.textDescription.toString()
-            product.category = binding.CategoryText.toString()
-            product.price = binding.
+            product.title = binding.textTitleProduct.text.toString()
+            product.description = binding.textDescription.text.toString()
+            product.category = binding.CategoryText.text.toString()
+            val price = binding.ProductPrice.text.toString()
+            product.price = price.toFloat()
             GlobalScope.launch(Dispatchers.Main) {
-                viewMode
+                viewModel.saveProductUseCase(product.id, product)
+                fileUpload()
             }
-            findNavController().navigate(R.id.action_editProductFragment_to_myProductsFragment)
         }
     }
 
@@ -95,7 +106,6 @@ class EditProductFragment : Fragment() {
         binding.textTitleProduct.setText(product.title)
         binding.ProductPrice.setText(product.price.toString())
         loadImage()
-
     }
 
     private fun loadImage() {
@@ -107,7 +117,6 @@ class EditProductFragment : Fragment() {
     }
 
     private fun fileUpload() {
-
         val storageRef = storage.reference
         val name = Firebase.auth.currentUser?.uid.toString()
         val sdf = SimpleDateFormat("dd/M/yyyy_hh:mm:ss")
@@ -142,11 +151,12 @@ class EditProductFragment : Fragment() {
         val url = "gs://campusinteligenteiot.appspot.com/profiles/$userId/$currentDate.png"
         val db = Firebase.firestore
         db.collection("Product")
-            .document(userId)
+            .document(product.id)
             .update("productImage", url)
             .addOnSuccessListener {
                 Toast.makeText(context, R.string.firestore_upload_success, Toast.LENGTH_SHORT)
                     .show()
+                findNavController().navigate(R.id.action_editProductFragment_to_myProductsFragment)
 
             }.addOnFailureListener {
 

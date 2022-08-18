@@ -1,16 +1,15 @@
 package com.example.campusinteligenteiot.ui.home.shop.adapter
 
 import android.content.Context
-import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 
-class MyProductAdapter(private val user: UsersResponse, private val context: Context)
+class MyProductAdapter(private val user: UsersResponse, private val context: Context,
+        private val onClickDelete:(Int) -> Unit)
     : RecyclerView.Adapter<MyProductViewHolder> (){
 
     private var productMutableList = mutableListOf<ProductResponse>()
@@ -22,6 +21,10 @@ class MyProductAdapter(private val user: UsersResponse, private val context: Con
     }
 
     override fun getItemCount(): Int = productMutableList.size
+
+    fun getProductList(): MutableList<ProductResponse>{
+        return productMutableList
+    }
 
     fun setProductList(data: MutableList<ProductResponse>) {
         productMutableList = data
@@ -50,6 +53,6 @@ class MyProductAdapter(private val user: UsersResponse, private val context: Con
 
     override fun onBindViewHolder(holder: MyProductViewHolder, position: Int) {
         val item = productMutableList[position]
-        holder.render(user, item)
+        holder.render(user, item, onClickDelete)
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.compose.material.FloatingActionButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -159,10 +160,7 @@ class ShopFragment : Fragment() {
         }
 
         binding.fabProfileProducts.setOnClickListener{
-            binding.titleProductsPage.text = "Mis productos"
-            adapter.filterProductListByOwner(user.id)
-            adapter.notifyDataSetChanged()
-            closeMenu()
+            findNavController().navigate(R.id.action_navigation_shop_to_myProductsFragment)
         }
 
     }
