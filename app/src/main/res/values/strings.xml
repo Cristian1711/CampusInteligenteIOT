@@ -91,6 +91,9 @@
     <string name="register_images_success">Se ha subido la imagen correctamente</string>
     <string name="firestore_upload_success">Se ha subido la imagen satisfactoriamente</string>
     <string name="firestore_upload_failure">No se ha podido subir la imagen</string>
+    <string name="quieres_publicar_el_producto">¿Quieres publicar el producto?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
@@ -98,6 +101,13 @@
         <item>Electrónicos</item>
         <item>Otros</item>
         <item>Sin filtro</item>
+    </string-array>
+
+    <string-array name="categories_new_product">
+        <item>Ninguna</item>
+        <item>Libros</item>
+        <item>Electrónicos</item>
+        <item>Otros</item>
     </string-array>
 
 </resources>

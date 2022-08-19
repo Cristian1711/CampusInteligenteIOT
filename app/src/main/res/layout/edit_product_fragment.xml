@@ -17,14 +17,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/backButton"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="30dp"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/DrawerButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="30dp"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toEndOf="@+id/DrawerButton"
+                app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24_white" />
 
             <Button
@@ -46,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:text="Editar producto"
                 android:textColor="@color/white"
                 android:textSize="20sp"

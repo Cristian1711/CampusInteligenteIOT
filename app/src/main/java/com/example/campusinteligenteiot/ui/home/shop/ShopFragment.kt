@@ -154,6 +154,7 @@ class ShopFragment : Fragment() {
 
         binding.fabFavouriteProducts.setOnClickListener{
             binding.titleProductsPage.text = "Lista productos favoritos"
+            binding.comboBox.visibility = INVISIBLE
             adapter.filterProductListByLikes(user)
             adapter.notifyDataSetChanged()
             closeMenu()

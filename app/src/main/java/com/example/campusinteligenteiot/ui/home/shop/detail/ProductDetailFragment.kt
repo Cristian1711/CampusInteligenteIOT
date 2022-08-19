@@ -48,7 +48,7 @@ class ProductDetailFragment : Fragment() {
             product = viewModel.getSingleProduct(productId!!)!!
             user = viewModel.getSingleUser(product.idOwner)!!
             setProductData(product)
-            loadImage(product.productImage)
+            loadImage(product.productImage!!)
             prepareLikeButton()
         }
 
@@ -103,7 +103,7 @@ class ProductDetailFragment : Fragment() {
             println(like)
             like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
             if(like){
-                currentUser.productLikes.add(product.id)
+                currentUser.productLikes.add(product.id!!)
                 GlobalScope.launch(Dispatchers.Main) {
                     viewModel.saveUser(currentUser, currentUser.id)
                     val sharedPreferences = context?.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)

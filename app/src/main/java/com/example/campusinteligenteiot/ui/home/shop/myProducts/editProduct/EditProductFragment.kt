@@ -5,12 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
@@ -20,8 +20,6 @@ import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.databinding.EditProductFragmentBinding
-import com.example.campusinteligenteiot.databinding.MyProductsFragmentBinding
-import com.example.campusinteligenteiot.ui.home.shop.myProducts.MyProductsViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -79,6 +77,14 @@ class EditProductFragment : Fragment() {
             binding.cardView1.visibility = VISIBLE
         }
 
+        binding.ButtonNo.setOnClickListener {
+            binding.cardView1.visibility = INVISIBLE
+        }
+
+        binding.backButton.setOnClickListener{
+            findNavController().navigate(R.id.action_editProductFragment_to_myProductsFragment)
+        }
+
         binding.buttonSave.setOnClickListener{
             binding.progressBar.visibility = View.VISIBLE
             product.title = binding.textTitleProduct.text.toString()
@@ -87,7 +93,7 @@ class EditProductFragment : Fragment() {
             val price = binding.ProductPrice.text.toString()
             product.price = price.toFloat()
             GlobalScope.launch(Dispatchers.Main) {
-                viewModel.saveProductUseCase(product.id, product)
+                viewModel.saveProductUseCase(product.id!!, product)
                 fileUpload()
             }
         }
@@ -110,7 +116,7 @@ class EditProductFragment : Fragment() {
 
     private fun loadImage() {
         val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(product.productImage)
+        val gsReference = storageReference.getReferenceFromUrl(product.productImage!!)
         gsReference.downloadUrl.addOnSuccessListener {
             Glide.with(requireContext()).load(it).into(binding.productImage)
         }
@@ -149,14 +155,17 @@ class EditProductFragment : Fragment() {
     private fun uploadDataFirestore(currentDate: String ) {
         val userId = Firebase.auth.currentUser?.uid.toString()
         val url = "gs://campusinteligenteiot.appspot.com/profiles/$userId/$currentDate.png"
+        product.productImage = url
         val db = Firebase.firestore
         db.collection("Product")
-            .document(product.id)
+            .document(product.id!!)
             .update("productImage", url)
             .addOnSuccessListener {
                 Toast.makeText(context, R.string.firestore_upload_success, Toast.LENGTH_SHORT)
                     .show()
-                findNavController().navigate(R.id.action_editProductFragment_to_myProductsFragment)
+                Handler().postDelayed({
+                    findNavController().navigate(R.id.action_editProductFragment_to_myProductsFragment)
+                }, 3000)
 
             }.addOnFailureListener {
 
