@@ -75,11 +75,11 @@ class ShopFragment : Fragment() {
                 parent, _, position, _ ->
             val selectedItem = parent.getItemAtPosition(position).toString()
             if(selectedItem == "Sin filtro"){
-                binding.titleProductsPage.text = "Productos"
+                binding.titleProductsPage.text = getString(R.string.productos_text)
                 binding.comboBox.visibility = INVISIBLE
             }
             else {
-                binding.titleProductsPage.text = "Productos" + " - $selectedItem"
+                binding.titleProductsPage.text = getString(R.string.productos_text) + " - $selectedItem"
             }
             adapter.filterProductList(selectedItem)
             adapter.notifyDataSetChanged()
@@ -153,7 +153,7 @@ class ShopFragment : Fragment() {
         }
 
         binding.fabFavouriteProducts.setOnClickListener{
-            binding.titleProductsPage.text = "Lista productos favoritos"
+            binding.titleProductsPage.text = getString(R.string.fav_products_list)
             binding.comboBox.visibility = INVISIBLE
             adapter.filterProductListByLikes(user)
             adapter.notifyDataSetChanged()
@@ -189,7 +189,7 @@ class ShopFragment : Fragment() {
     private suspend fun observeData(){
         viewModel.getAllPublishedProducts().observe(viewLifecycleOwner, Observer{
             adapter.setProductList(it)
-            adapter.notifyDataSetChanged()
+            adapter.notifyItemInserted(it.size-1)
         })
     }
 

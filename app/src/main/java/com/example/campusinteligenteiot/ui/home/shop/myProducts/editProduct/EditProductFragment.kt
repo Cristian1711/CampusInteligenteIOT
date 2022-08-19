@@ -18,6 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.product.ProductCall
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.databinding.EditProductFragmentBinding
 import com.google.firebase.auth.ktx.auth
@@ -92,8 +93,10 @@ class EditProductFragment : Fragment() {
             product.category = binding.CategoryText.text.toString()
             val price = binding.ProductPrice.text.toString()
             product.price = price.toFloat()
+            val editedProduct = ProductCall(product.title, product.description, product.price, product.idOwner,
+            product.productImage, product.published, product.category, product.archived)
             GlobalScope.launch(Dispatchers.Main) {
-                viewModel.saveProductUseCase(product.id!!, product)
+                viewModel.saveProduct(product.id!!, editedProduct)
                 fileUpload()
             }
         }

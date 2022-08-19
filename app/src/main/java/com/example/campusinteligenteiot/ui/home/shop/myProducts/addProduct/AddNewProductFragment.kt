@@ -19,9 +19,11 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.product.ProductCall
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.AddNewProductFragmentBinding
+import com.example.campusinteligenteiot.model.Product
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -42,7 +44,7 @@ class AddNewProductFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<AddNewProductViewModel>()
     private lateinit var user: UsersResponse
-    private lateinit var product: ProductResponse
+    private lateinit var product: ProductCall
     private val IMAGE_CHOOSE = 1000
     private var imageUri: Uri? = null
     private lateinit var storage: FirebaseStorage
@@ -87,7 +89,7 @@ class AddNewProductFragment : Fragment() {
 
         binding.buttonSave.setOnClickListener{
 
-            product = ProductResponse(null, binding.textTitleProduct.text.toString(),
+            product = ProductCall(binding.textTitleProduct.text.toString(),
             binding.textDescription.text.toString(), binding.textProductPrice.text.toString().toFloat(),
             user.id, null, false, selectedItem, false)
 
@@ -102,22 +104,24 @@ class AddNewProductFragment : Fragment() {
             myView.buttonYes.setOnClickListener {
                 product.published = true
                 GlobalScope.launch(Dispatchers.Main) {
-                    viewModel.saveProduct(null, product)
-                    fileUpload()
+                    val response = viewModel.saveProduct("null", product)
+                    fileUpload(response.body()!!)
+                    dialog.cancel()
                 }
             }
 
             myView.buttonNo.setOnClickListener {
                 product.published = false
                 GlobalScope.launch(Dispatchers.Main) {
-                    viewModel.saveProduct(null, product)
-                    fileUpload()
+                    val response = viewModel.saveProduct("null", product)
+                    fileUpload(response.body()!!)
+                    dialog.cancel()
                 }
             }
         }
     }
 
-    private fun fileUpload() {
+    private fun fileUpload(id: String) {
         val storageRef = storage.reference
         val name = Firebase.auth.currentUser?.uid.toString()
         val sdf = SimpleDateFormat("dd/M/yyyy_hh:mm:ss")
@@ -143,16 +147,16 @@ class AddNewProductFragment : Fragment() {
 
 
         val url = pathImage.downloadUrl.toString()
-        uploadDataFirestore(currentDate)
+        uploadDataFirestore(currentDate, id)
     }
 
-    private fun uploadDataFirestore(currentDate: String) {
+    private fun uploadDataFirestore(currentDate: String, id: String) {
         val userId = Firebase.auth.currentUser?.uid.toString()
         val url = "gs://campusinteligenteiot.appspot.com/profiles/$userId/$currentDate.png"
         product.productImage = url
         val db = Firebase.firestore
         db.collection("Product")
-            .document(product.id!!)
+            .document(id)
             .update("productImage", url)
             .addOnSuccessListener {
                 Toast.makeText(context, R.string.firestore_upload_success, Toast.LENGTH_SHORT)

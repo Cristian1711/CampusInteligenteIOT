@@ -1,5 +1,7 @@
 package com.example.campusinteligenteiot.api.network.event
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
@@ -19,12 +21,13 @@ class EventService {
         }
     }
 
-    suspend fun getAllEvents():List<EventResponse>{
+    suspend fun getAllEvents(): LiveData<MutableList<EventResponse>>?{
+        val mutableData = MutableLiveData<MutableList<EventResponse>>()
+        var dataList: MutableList<EventResponse>
         return withContext(Dispatchers.IO){
-            val response = retrofit.create(EventApiClient::class.java).getAllEvents()
-            println("El body de la respuesta")
-            println(response.body())
-            response.body() ?: emptyList()
+            dataList = (retrofit.create(EventApiClient::class.java).getAllEvents()) as MutableList<EventResponse>
+            mutableData.postValue(dataList)
+            mutableData
         }
     }
 

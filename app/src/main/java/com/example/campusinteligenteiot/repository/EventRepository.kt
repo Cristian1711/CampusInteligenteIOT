@@ -1,6 +1,8 @@
 package com.example.campusinteligenteiot.repository
 
+import androidx.lifecycle.LiveData
 import com.example.campusinteligenteiot.api.model.event.EventResponse
+import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.network.event.EventService
 import retrofit2.Response
 
@@ -12,7 +14,7 @@ class EventRepository {
         return api.getEventById(id)
     }
 
-    suspend fun getAllEvents(): List<EventResponse> {
+    suspend fun getAllEvents(): LiveData<MutableList<EventResponse>>? {
         return api.getAllEvents()
     }
 

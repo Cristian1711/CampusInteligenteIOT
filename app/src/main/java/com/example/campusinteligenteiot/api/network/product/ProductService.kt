@@ -3,6 +3,7 @@ package com.example.campusinteligenteiot.api.network.product
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
+import com.example.campusinteligenteiot.api.model.product.ProductCall
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.api.network.user.UserApiClient
@@ -32,7 +33,7 @@ class ProductService {
         }
     }
 
-    suspend fun saveProduct(product: ProductResponse, id: String) : Response<String> {
+    suspend fun saveProduct(product: ProductCall, id: String?) : Response<String> {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(ProductApiClient::class.java).saveProduct(product, id)
             println("he conseguido una respuesta")
@@ -40,11 +41,10 @@ class ProductService {
         }
     }
 
-    suspend fun deleteProduct(id: String) : ProductResponse {
+    suspend fun deleteProduct(id: String) : Response<ProductResponse>{
         return withContext(Dispatchers.IO){
             val response = retrofit.create(ProductApiClient::class.java).deleteProduct(id)
-            println("el producto eliminado")
-            response.body()!!
+            response
         }
     }
 }

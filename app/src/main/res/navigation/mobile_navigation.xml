@@ -29,7 +29,17 @@
         android:id="@+id/navigation_events"
         android:name="com.example.campusinteligenteiot.ui.home.events.EventsFragment"
         android:label="events_fragment"
-        tools:layout="@layout/events_fragment" />
+        tools:layout="@layout/events_fragment" >
+        <action
+            android:id="@+id/action_navigation_events_to_homeIOTFragment"
+            app:destination="@id/homeIOTFragment" />
+        <action
+            android:id="@+id/action_navigation_events_to_newEventSuggestFragment"
+            app:destination="@id/newEventSuggestFragment" />
+        <action
+            android:id="@+id/action_navigation_events_to_eventDetail"
+            app:destination="@id/eventDetail" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_schedule"
         android:name="com.example.campusinteligenteiot.ui.home.schedule.ScheduleFragment"
@@ -183,4 +193,36 @@
             android:id="@+id/action_editProductFragment_to_myProductsFragment"
             app:destination="@id/myProductsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/homeIOTFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.events.manageIOT.HomeIOTFragment"
+        android:label="home_i_o_t_fragment"
+        tools:layout="@layout/home_i_o_t_fragment" >
+        <action
+            android:id="@+id/action_homeIOTFragment_to_navigation_events"
+            app:destination="@id/navigation_events" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEventSuggestFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.events.suggests.NewEventSuggestFragment"
+        android:label="new_event_suggest_fragment"
+        tools:layout="@layout/new_event_suggest_fragment" >
+        <action
+            android:id="@+id/action_newEventSuggestFragment_to_navigation_events"
+            app:destination="@id/navigation_events" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetail"
+        android:name="com.example.campusinteligenteiot.ui.home.events.detail.EventDetail"
+        android:label="event_detail_fragment"
+        tools:layout="@layout/event_detail_fragment" >
+        <action
+            android:id="@+id/action_eventDetail_to_navigation_events"
+            app:destination="@id/navigation_events" />
+    </fragment>
+    <fragment
+        android:id="@+id/generateQRFragment"
+        android:name="com.example.campusinteligenteiot.ui.drawer.qr.GenerateQRFragment"
+        android:label="fragment_generate_q_r"
+        tools:layout="@layout/fragment_generate_q_r" />
 </navigation>

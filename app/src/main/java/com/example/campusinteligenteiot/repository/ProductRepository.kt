@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.repository
 
 import androidx.lifecycle.LiveData
+import com.example.campusinteligenteiot.api.model.product.ProductCall
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.network.product.ProductService
 import retrofit2.Response
@@ -17,12 +18,12 @@ class ProductRepository {
         return api.getAllProducts()
     }
 
-    suspend fun saveProduct(product: ProductResponse, id: String) : Response<String> {
+    suspend fun saveProduct(product: ProductCall, id: String?) : Response<String> {
         return api.saveProduct(product, id)
     }
 
-    suspend fun deleteProduct(id: String) : ProductResponse {
-        return api.deleteProduct(id)
+    suspend fun deleteProduct(id: String) : Response<ProductResponse> {
+       return api.deleteProduct(id)
     }
 
 }

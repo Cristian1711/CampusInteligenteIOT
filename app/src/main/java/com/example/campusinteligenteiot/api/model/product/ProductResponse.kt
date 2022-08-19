@@ -3,7 +3,7 @@ package com.example.campusinteligenteiot.api.model.product
 import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(
-    @SerializedName("id") var id: String?,
+    @SerializedName("id") var id: String,
     @SerializedName("title") var title: String,
     @SerializedName("description") var description: String,
     @SerializedName("price") var price: Float,

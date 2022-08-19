@@ -4,32 +4,37 @@
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_home_icon_icons_com_73532"
-        android:title="Perfil"
+        android:title="@string/profile"
         android:iconTint="@color/white"/>
     <item
         android:id="@+id/calendarFragment"
         android:icon="@drawable/ic_calendar2"
-        android:title="Mi horario"
+        android:title="@string/my_schedule"
         android:iconTint="@color/white"/>
     <item
         android:id="@+id/friendsFragment"
         android:icon="@drawable/ic_user_friends"
-        android:title="Amigos"
+        android:title="@string/friends"
         android:iconTint="@color/white"/>
     <item
         android:id="@+id/channelsFragment"
         android:icon="@drawable/ic_chat_talk"
-        android:title="Chats"
+        android:title="@string/chats"
+        android:iconTint="@color/white"/>
+    <item
+        android:id="@+id/generateQRFragment"
+        android:icon="@drawable/stream_ui_ic_icon_download"
+        android:title="@string/generate_qr"
         android:iconTint="@color/white"/>
     <item
         android:id="@+id/configFragment"
         android:icon="@drawable/ic_settings"
-        android:title="Configuración"
+        android:title="@string/config"
         android:iconTint="@color/white"/>
     <item
         android:id="@+id/logoutFragment"
         android:icon="@drawable/ic__exit_logout"
-        android:title="Cerrar sesión"
+        android:title="@string/logout"
         android:iconTint="@color/white"/>
 
 </menu>

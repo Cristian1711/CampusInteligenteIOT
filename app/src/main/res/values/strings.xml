@@ -94,6 +94,32 @@
     <string name="quieres_publicar_el_producto">¿Quieres publicar el producto?</string>
     <string name="si">Si</string>
     <string name="no">No</string>
+    <string name="pregunta_dejar_de_publicar">¿Quieres que el producto deje de estar publicado?</string>
+    <string name="delete_question_2">¿Quieres archivar el producto o borrarlo definitivamente?</string>
+    <string name="archive_text">Archivar</string>
+    <string name="delete_text">Borrar</string>
+    <string name="delete_success">Producto eliminado con éxito</string>
+    <string name="productos">Productos</string>
+    <string name="productos_text">Productos</string>
+    <string name="fav_products_list">Lista productos favoritos</string>
+    <string name="categories">Categorías</string>
+    <string name="without_filter">Sin filtro</string>
+    <string name="my_products">Mis productos</string>
+    <string name="filter">Filtrar</string>
+    <string name="filter_products">Filtrar productos</string>
+    <string name="my_favs">Mis favoritos</string>
+    <string name="my_fav_prods">Mis productos favoritos</string>
+    <string name="display_menu">Desplegar menú de opciones</string>
+    <string name="this_week_events">Eventos de esta semana</string>
+    <string name="entry_event">Acceder a evento</string>
+    <string name="suggest_event">Sugerir un evento</string>
+    <string name="chats">Chats</string>
+    <string name="friends">Amigos</string>
+    <string name="my_schedule">Mi horario</string>
+    <string name="profile">Perfil</string>
+    <string name="generate_qr">Generar QR</string>
+    <string name="config">Configuración</string>
+    <string name="logout">Cerrar sesión</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -11,7 +11,7 @@ interface EventApiClient {
 
     @Headers("Content-Type: application/json")
     @GET("http://149.91.99.198:8080/api/v1/events/allEvents")
-    suspend fun getAllEvents(): Response<List<EventResponse>>
+    suspend fun getAllEvents(): List<EventResponse>
 
     @Headers("Content-Type: application/json")
     @POST("http://149.91.99.198:8080/api/v1/events/saveEvent/{id}")

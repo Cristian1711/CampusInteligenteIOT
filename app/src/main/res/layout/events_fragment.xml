@@ -8,11 +8,42 @@
     android:descendantFocusability="blocksDescendants"
     tools:context=".ui.home.events.EventsFragment">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/DrawerButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/titleProductsPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/DrawerButton"
+        android:layout_alignTop="@id/DrawerButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/this_week_events"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productRecyclerView"
+        android:id="@+id/eventRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="85dp"
         android:scrollbars="vertical"
         />
 
@@ -28,39 +59,58 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true">
 
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_toRightOf="@+id/card"
+            android:layout_marginRight="-5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            app:fabSize="mini"
-            android:src="@drawable/ic_profile_products"
-            android:id="@+id/fab_profile_products"
-            android:contentDescription="Ver mis productos" />
+            app:cardBackgroundColor="@color/colorSecondary"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/entry_event"
+                android:textSize="6sp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="2dp"
+                android:paddingLeft="2dp"/>
+        </androidx.cardview.widget.CardView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fabSize="mini"
             android:src="@drawable/ic_filter"
             android:layout_margin="5dp"
-            android:id="@+id/fab_filter_products"
-            android:contentDescription="Filtrar productos" />
+            android:id="@+id/fab_entry_event"
+            android:contentDescription="@string/entry_event" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_toRightOf="@+id/card"
+            android:layout_marginRight="-5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorSecondary"
+            app:cardCornerRadius="10dp">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/suggest_event"
+                android:textSize="6sp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="2dp"
+                android:paddingLeft="2dp"/>
+        </androidx.cardview.widget.CardView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fabSize="mini"
             android:src="@drawable/ic_favourite_products"
             android:layout_margin="5dp"
-            android:id="@+id/fab_favourite_products"
-            android:contentDescription="Mis productos favoritos" />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fabSize="mini"
-            android:src="@drawable/ic_add_black"
-            android:layout_margin="5dp"
-            android:id="@+id/fab_add_product"
-            android:contentDescription="Añadir un nuevo producto" />
+            android:id="@+id/fab_suggest_event"
+            android:contentDescription="@string/suggest_event" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

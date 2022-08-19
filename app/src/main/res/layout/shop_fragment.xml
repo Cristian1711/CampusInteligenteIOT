@@ -34,7 +34,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="60dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Productos"
+        android:text="@string/productos"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/DrawerButton"
         android:layout_alignTop="@+id/titleProductsPage"
-        android:hint="Categorías"
+        android:hint="@string/categories"
         app:startIconDrawable="@drawable/ic_filter24dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="60dp"
@@ -62,7 +62,7 @@
             android:paddingTop="4dp"
             android:textSize="12sp"
             android:paddingBottom="4dp"
-            android:text="Sin filtro"/>
+            android:text="@string/without_filter"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +98,7 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Mis productos"
+                    android:text="@string/my_products"
                     android:textSize="6sp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
@@ -123,7 +123,7 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Filtrar"
+                    android:text="@string/filter"
                     android:textSize="6sp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
@@ -137,7 +137,7 @@
                 android:src="@drawable/ic_filter"
                 android:layout_margin="5dp"
                 android:id="@+id/fab_filter_products"
-                android:contentDescription="Filtrar productos" />
+                android:contentDescription="@string/filter_products" />
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
                 android:layout_toRightOf="@+id/card"
@@ -149,7 +149,7 @@
                 <TextView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:text="Mis favoritos"
+                    android:text="@string/my_favs"
                     android:textSize="6sp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
@@ -163,14 +163,14 @@
                 android:src="@drawable/ic_favourite_products"
                 android:layout_margin="5dp"
                 android:id="@+id/fab_favourite_products"
-                android:contentDescription="Mis productos favoritos" />
+                android:contentDescription="@string/my_fav_prods" />
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fabSize="normal"
                 android:src="@drawable/ic_arrow_up"
                 android:id="@+id/fab_main"
-                android:contentDescription="Desplegar menú de opciones" />
+                android:contentDescription="@string/display_menu" />
 
         </LinearLayout>
 

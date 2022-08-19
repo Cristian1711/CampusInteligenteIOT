@@ -55,4 +55,9 @@ class MyProductAdapter(private val user: UsersResponse, private val context: Con
         val item = productMutableList[position]
         holder.render(user, item, onClickDelete)
     }
+
+    fun removeItem(position: Int){
+        productMutableList.removeAt(position)
+        oldProductMutableList = productMutableList
+    }
 }

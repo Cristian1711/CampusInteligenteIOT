@@ -6,18 +6,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.event.EventResponse
+import com.example.campusinteligenteiot.api.model.product.ProductResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 
-class EventAdapter(private val eventList: List<EventResponse>, private val context: Context,
-                   private val onClickListener:(EventResponse) -> Unit): RecyclerView.Adapter<EventViewHolder> (){
+class EventAdapter(private val user: UsersResponse, private val context: Context): RecyclerView.Adapter<EventViewHolder> (){
+
+    private var eventMutableList = mutableListOf<EventResponse>()
+    private var oldEventMutableList = mutableListOf<EventResponse>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return EventViewHolder(layoutInflater.inflate(R.layout.item_product, parent, false), context)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
-        val item = eventList[position]
-        holder.render(item, onClickListener)
+        val item = eventMutableList[position]
+        holder.render(item, user)
     }
 
-    override fun getItemCount(): Int = eventList.size
+    override fun getItemCount(): Int = eventMutableList.size
+
+    fun setEventList(data: MutableList<EventResponse>) {
+        eventMutableList = data
+        oldEventMutableList = eventMutableList
+    }
 }

@@ -8,7 +8,7 @@
         android:id="@+id/Question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/quieres_publicar_el_producto"
+        android:text="@string/pregunta_dejar_de_publicar"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:textAlignment="center"/>
