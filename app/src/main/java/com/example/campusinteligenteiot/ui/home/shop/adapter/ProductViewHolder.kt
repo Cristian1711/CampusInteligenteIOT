@@ -41,7 +41,7 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
         binding.productPrice.text = product.price.toString() + "€"
         binding.productOwner.text = "by " + getUserFromLocalUseCase(product.idOwner)?.userName ?: "Usuario no especificado"
         val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(product.productImage)
+        val gsReference = storageReference.getReferenceFromUrl(product.productImage!!)
         gsReference.downloadUrl.addOnSuccessListener {
             Glide.with(context).load(it).into(binding.productImage)
         }
@@ -59,7 +59,7 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
             println(like)
             like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
             if(like){
-                user.productLikes.add(product.id)
+                user.productLikes.add(product.id!!)
                 GlobalScope.launch(Dispatchers.Main) {
                     saveUserUseCase(user.id, user)
                     val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)

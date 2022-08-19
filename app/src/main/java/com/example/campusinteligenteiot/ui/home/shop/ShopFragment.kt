@@ -187,7 +187,7 @@ class ShopFragment : Fragment() {
     }
 
     private suspend fun observeData(){
-        viewModel.getAllProducts().observe(viewLifecycleOwner, Observer{
+        viewModel.getAllPublishedProducts().observe(viewLifecycleOwner, Observer{
             adapter.setProductList(it)
             adapter.notifyDataSetChanged()
         })

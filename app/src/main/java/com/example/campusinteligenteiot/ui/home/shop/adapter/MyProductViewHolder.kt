@@ -42,7 +42,7 @@ class MyProductViewHolder(view: View, private val context: Context): RecyclerVie
         }
         val storageReference = FirebaseStorage.getInstance()
         println("LA IMAGEN QUE HAY ES ${product.productImage}")
-        val gsReference = storageReference.getReferenceFromUrl(product.productImage)
+        val gsReference = storageReference.getReferenceFromUrl(product.productImage!!)
         gsReference.downloadUrl.addOnSuccessListener {
             Glide.with(context).load(it).into(binding.productImage)
         }
