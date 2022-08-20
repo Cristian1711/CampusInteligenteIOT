@@ -23,9 +23,6 @@
         android:theme="@style/Theme.CampusInteligenteIOT"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.drawer.friends.profile.FriendsProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.drawer.chats.ChatActivity"
             android:exported="false" />
         <activity
@@ -33,6 +30,10 @@
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.CampusInteligenteIOT.NoActionBar" />
+        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="screenOrientation"
+            />
         <activity
             android:name=".ui.authentication.AuthenticationActivity"
             android:exported="true">

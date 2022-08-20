@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.drawer.qr
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,28 +12,18 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.FragmentGenerateQRBinding
-import com.example.campusinteligenteiot.databinding.ProfileFragmentBinding
-import com.example.campusinteligenteiot.ui.drawer.profile.ProfileViewModel
 import com.google.gson.Gson
+import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
+import com.journeyapps.barcodescanner.BarcodeEncoder
+import kotlinx.android.synthetic.main.dialog_qr.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [GenerateQRFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GenerateQRFragment : Fragment() {
 
     private  var _binding: FragmentGenerateQRBinding? = null
@@ -59,7 +50,16 @@ class GenerateQRFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.GenerateQRButton.setOnClickListener {
+            val barcodeEncoder = BarcodeEncoder()
+            val bitMap = barcodeEncoder.encodeBitmap(user.id, BarcodeFormat.QR_CODE, 750, 750)
+            val builder = AlertDialog.Builder(requireContext())
+            val myView = layoutInflater.inflate(R.layout.dialog_qr, null)
+            builder.setView(myView)
+            val dialog = builder.create()
 
+            myView.QRTitleText.text = myView.QRTitleText.text.toString() + " ${user.userName}"
+            myView.QRcode.setImageBitmap(bitMap)
+            dialog.show()
         }
 
         binding.ReadQRButton.setOnClickListener {
