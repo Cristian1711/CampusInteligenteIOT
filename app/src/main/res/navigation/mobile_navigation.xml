@@ -224,5 +224,9 @@
         android:id="@+id/generateQRFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.qr.GenerateQRFragment"
         android:label="fragment_generate_q_r"
-        tools:layout="@layout/fragment_generate_q_r" />
+        tools:layout="@layout/fragment_generate_q_r" >
+        <action
+            android:id="@+id/action_generateQRFragment_to_friendsProfileFragment2"
+            app:destination="@id/friendsProfileFragment2" />
+    </fragment>
 </navigation>

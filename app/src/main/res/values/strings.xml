@@ -117,9 +117,15 @@
     <string name="friends">Amigos</string>
     <string name="my_schedule">Mi horario</string>
     <string name="profile">Perfil</string>
-    <string name="generate_qr">Generar QR</string>
+    <string name="generate_qr">Generar/Leer QR</string>
     <string name="config">Configuración</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="generate_or_read_qr">¿Quieres generar o leer un QR de usuario?</string>
+    <string name="generate_qr_1">Generar QR</string>
+    <string name="read_qr_1">Leer QR</string>
+    <string name="scan_qr">Escanea el código QR</string>
+    <string name="canceled">Cancelado</string>
+    <string name="already_friend">Ya tienes a este amigo agregado</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

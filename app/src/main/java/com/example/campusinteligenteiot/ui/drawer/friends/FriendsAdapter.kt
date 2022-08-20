@@ -28,7 +28,7 @@ class FriendsAdapter(private val context: Context) :
                 "userId" to item.id
             )
             val navController = Navigation.findNavController(holder.itemView)
-            navController!!.navigate(R.id.action_friendsFragment_to_friendsProfileFragment2, bundle)
+            navController.navigate(R.id.action_friendsFragment_to_friendsProfileFragment2, bundle)
         }
     }
 
