@@ -22,6 +22,8 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EventViewHolder(view: View, private val context: Context): RecyclerView.ViewHolder(view) {
 
@@ -34,7 +36,9 @@ class EventViewHolder(view: View, private val context: Context): RecyclerView.Vi
         if(willAssist) binding.starImage.setImageResource(R.drawable.ic_star_yellow)
         binding.eventTitle.text = event.eventTitle
         binding.eventPlace.text = event.eventPlace
-        binding.eventDatePlaceHolder.text = binding.eventDatePlaceHolder.text.toString() + ": ${event.eventDate.day}/${event.eventDate.month}/${event.eventDate.year}"
+        println("LA FECHA DEL EVENTO ES : ${event.eventDate}")
+        val dateString = toSimpleString(event.eventDate)
+        binding.eventDatePlaceHolder.text = binding.eventDatePlaceHolder.text.toString() + ": $dateString"
         val storageReference = FirebaseStorage.getInstance()
         val gsReference = storageReference.getReferenceFromUrl(event.eventImage)
         gsReference.downloadUrl.addOnSuccessListener {
@@ -84,6 +88,10 @@ class EventViewHolder(view: View, private val context: Context): RecyclerView.Vi
 
         }
         return !willAssist
+    }
+
+    fun toSimpleString(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd/MM/yyyy").format(this)
     }
 
 }

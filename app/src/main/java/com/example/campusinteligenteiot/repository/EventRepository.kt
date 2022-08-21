@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.repository
 
 import androidx.lifecycle.LiveData
+import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.network.event.EventService
@@ -18,7 +19,7 @@ class EventRepository {
         return api.getAllEvents()
     }
 
-    suspend fun saveEvent(event: EventResponse, id: String) : Response<String> {
+    suspend fun saveEvent(event: EventCall, id: String) : Response<String> {
         return api.saveEvent(event, id)
     }
 

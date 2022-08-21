@@ -9,11 +9,13 @@ import com.example.campusinteligenteiot.usecases.event.GetAllEventsUseCase
 
 class EventsViewModel : ViewModel() {
     val getAllEventsUseCase = GetAllEventsUseCase()
+    lateinit var eventListFiltered: MutableList<EventResponse>
 
     suspend fun getAllEvents(): LiveData<MutableList<EventResponse>> {
         val mutableData = MutableLiveData<MutableList<EventResponse>>()
         getAllEventsUseCase()?.observeForever{ eventList ->
-            mutableData.value = eventList
+            eventListFiltered = (eventList.filter { !it.suggested }) as MutableList<EventResponse>
+            mutableData.value = eventListFiltered
         }
         return mutableData
     }
