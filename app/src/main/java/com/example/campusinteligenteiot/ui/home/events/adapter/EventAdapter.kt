@@ -16,7 +16,7 @@ class EventAdapter(private val user: UsersResponse, private val context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return EventViewHolder(layoutInflater.inflate(R.layout.item_product, parent, false), context)
+        return EventViewHolder(layoutInflater.inflate(R.layout.item_event, parent, false), context)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {

@@ -12,6 +12,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/button_1.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/button_2.xml" value="0.14270833333333333" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/button_3.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/grey_star.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/ic_add.xml" value="0.10885416666666667" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/ic_add_black.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.10885416666666667" />
@@ -39,6 +40,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/ic_twitter_like.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/ic_user_friends.xml" value="0.15833333333333333" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/input.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/linear_layout_borders.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/nav_drawer_selector.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/nav_menu_selector.xml" value="0.16875" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/drawable/rounded_edit_text.xml" value="0.14270833333333333" />
@@ -101,6 +103,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_edit_editing.xml" value="0.152" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_edit_friends.xml" value="0.2" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_email.xml" value="0.2" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_event.xml" value="0.4" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_image.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_image_edit.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/item_image_loading.xml" value="0.1" />

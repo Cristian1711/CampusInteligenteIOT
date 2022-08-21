@@ -128,6 +128,8 @@
     <string name="already_friend">Ya tienes a este amigo agregado</string>
     <string name="user_qr">QR del usuario</string>
     <string name="show_text">¡Muéstralo y obtén nuevos amigos!</string>
+    <string name="date_event">Fecha de celebración</string>
+    <string name="place_event">Explanada principal</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
