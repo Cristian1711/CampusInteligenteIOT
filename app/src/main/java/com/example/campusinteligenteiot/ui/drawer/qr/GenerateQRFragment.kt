@@ -90,6 +90,15 @@ class GenerateQRFragment : Fragment() {
                     if(!user.friends.contains(idUser)){
                         user.friends.add(idUser)
                         viewModel.updateFriendList(user)
+                        val newFriend = viewModel.getUser(idUser)
+                        if(!newFriend.friends.contains(user.id)){
+                            Toast.makeText(context,
+                                getString(R.string.first_part_warning) + newFriend.userName + getString(
+                                                                    R.string.second_part_warning), Toast.LENGTH_SHORT).show()
+                        }
+                        else{
+                            //crear chat
+                        }
                     }
                     else{
                         Toast.makeText(context, getString(R.string.already_friend), Toast.LENGTH_SHORT).show()

@@ -150,6 +150,18 @@
     <string name="personal_data">Datos Personales</string>
     <string name="birthdate">Fecha de nacimiento</string>
     <string name="send_suggestion">Enviar sugerencia</string>
+    <string name="friend_request">Solicitud de amistad</string>
+    <string name="user">\"El usuario \"</string>
+    <string name="second_part_question">\" quiere ser tu amigo. ¿Aceptas?\"</string>
+    <string name="first_part_new_friend">\"¡Perfecto! ¡Ahora tú y \"</string>
+    <string name="second_part_new_friend">\" sois amigos!\"</string>
+    <string name="warning_chat">Para poder chatear con un usuario debéis ser amigos</string>
+    <string name="are_u_sure">¿Estás seguro?</string>
+    <string name="first_part_delete_friend">\"¿Estás seguro de que quieres eliminar a \"</string>
+    <string name="second_part_delete_friend">\" como amigo \"</string>
+    <string name="delete_friend_success">Amigo eliminado satisfactoriamente</string>
+    <string name="first_part_warning">\"¡Genera tu QR y avisa a \"</string>
+    <string name="second_part_warning">\" para que lo lea también!\"</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -7,13 +7,19 @@ import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.repository.UserRepository
 import com.example.campusinteligenteiot.usecases.image.GetImageUseCase
 import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
+import com.example.campusinteligenteiot.usecases.user.SearchUserUseCase
 
 class GenerateQRViewModel : ViewModel() {
 
     val saveUserUseCase = SaveUserUseCase()
+    val searchUserUseCase = SearchUserUseCase()
 
     suspend fun updateFriendList(user: UsersResponse){
         saveUserUseCase(user.id, user)
+    }
+
+    suspend fun getUser(id: String): UsersResponse{
+        return searchUserUseCase(id)!!
     }
 
 }
