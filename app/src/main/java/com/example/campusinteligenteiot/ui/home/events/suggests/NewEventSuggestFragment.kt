@@ -1,6 +1,8 @@
 package com.example.campusinteligenteiot.ui.home.events.suggests
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -40,9 +42,12 @@ class NewEventSuggestFragment : Fragment() {
     private  var _binding: NewEventSuggestFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<NewEventSuggestViewModel>()
+    private var YEAR = 0
     private var DAY = 0
     private var MONTH = 0
-    private var YEAR = 0
+    private lateinit var monthString:String
+    private lateinit var dayString:String
+    private lateinit var yearString:String
     private lateinit var event: EventCall
     private val IMAGE_CHOOSE = 1000
     private var imageUri: Uri? = null
@@ -53,6 +58,7 @@ class NewEventSuggestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = NewEventSuggestFragmentBinding.inflate(inflater,container,false)
+        storage = Firebase.storage
 
         return binding.root
     }
@@ -68,6 +74,10 @@ class NewEventSuggestFragment : Fragment() {
             showDatePickerDialog()
         }
 
+        binding.buttonGallery.setOnClickListener {
+            chooseImageGallery()
+        }
+
         binding.buttonSave.setOnClickListener {
             if (DAY != 0 && MONTH != 0 && YEAR != 0) {
                 val eventDate = Calendar.getInstance()
@@ -80,7 +90,7 @@ class NewEventSuggestFragment : Fragment() {
                 event = EventCall(
                     null,
                     null,
-                    Timestamp(eventDate.timeInMillis/1000,0),
+                    "$yearString-$monthString-$dayString",
                     binding.textDescription.text.toString(),
                     null,
                     binding.textTitleEvent.text.toString(),
@@ -98,6 +108,12 @@ class NewEventSuggestFragment : Fragment() {
         }
     }
 
+    private fun chooseImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_CHOOSE)
+    }
+
     private fun fileUpload(id: String) {
         val storageRef = storage.reference
         val name = Firebase.auth.currentUser?.uid.toString()
@@ -108,7 +124,7 @@ class NewEventSuggestFragment : Fragment() {
         // Get the data from an ImageView as bytes
         //binding.imageView1.isDrawingCacheEnabled = true
         //binding.imageView1.buildDrawingCache()
-        val bitmap = (binding.productImage.drawable as BitmapDrawable).bitmap
+        val bitmap = (binding.eventImage.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 20, baos)
         val data = baos.toByteArray()
@@ -132,9 +148,9 @@ class NewEventSuggestFragment : Fragment() {
         val url = "gs://campusinteligenteiot.appspot.com/profiles/$userId/$currentDate.png"
         event.eventImage = url
         val db = Firebase.firestore
-        db.collection("Product")
+        db.collection("Event")
             .document(id)
-            .update("productImage", url)
+            .update("eventImage", url)
             .addOnSuccessListener {
                 Toast.makeText(context, R.string.firestore_upload_success, Toast.LENGTH_SHORT)
                     .show()
@@ -163,8 +179,28 @@ class NewEventSuggestFragment : Fragment() {
         binding.datePicker.setText("$day / $selectedMonth / $year")
 
         DAY = day
-        MONTH = selectedMonth
+        MONTH = month
         YEAR = year
+
+        monthString = (month+1).toString()
+        if (monthString.length == 1) {
+            monthString = "0" + monthString
+        }
+        dayString = day.toString()
+        if(dayString.length == 1){
+            dayString = "0" + dayString
+        }
+
+        yearString = year.toString()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_CHOOSE && resultCode == Activity.RESULT_OK) {
+            imageUri = data?.data
+            binding.eventImage.setImageURI(imageUri)
+        }
     }
 
 }

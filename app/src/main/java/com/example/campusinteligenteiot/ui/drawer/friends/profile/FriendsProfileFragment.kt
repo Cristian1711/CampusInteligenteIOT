@@ -39,6 +39,9 @@ class FriendsProfileFragment : Fragment() {
             user = viewModel.getUserFromLocal(userId!!)!!
             setUserData(user)
             loadImage(user.profileImage)
+            if(user.friends.contains(currentUser.id) && !currentUser.friends.contains(user.id)){
+                showAlertDialog()
+            }
         }
 
         val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
@@ -74,10 +77,6 @@ class FriendsProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        if(user.friends.contains(currentUser.id) && !currentUser.friends.contains(user.id)){
-            showAlertDialog()
-        }
 
         binding.itemEditFriends.chatButton.setOnClickListener{
             if(user.friends.contains(currentUser.id) && currentUser.friends.contains(user.id)){

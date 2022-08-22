@@ -6,7 +6,7 @@ import java.util.*
 class EventCall(
     var assistants: ArrayList<String>? = null,
     var attendances: ArrayList<String>? = null,
-    var eventDate: Timestamp,
+    var eventDate: String,
     var description: String,
     var eventImage: String? = null,
     var eventTitle: String,

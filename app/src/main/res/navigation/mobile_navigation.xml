@@ -213,7 +213,7 @@
     </fragment>
     <fragment
         android:id="@+id/eventDetail"
-        android:name="com.example.campusinteligenteiot.ui.home.events.detail.EventDetail"
+        android:name="com.example.campusinteligenteiot.ui.home.events.detail.EventDetailFragment"
         android:label="event_detail_fragment"
         tools:layout="@layout/event_detail_fragment" >
         <action

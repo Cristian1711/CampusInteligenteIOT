@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
@@ -17,6 +18,7 @@ import com.example.campusinteligenteiot.databinding.ItemEventBinding
 import com.example.campusinteligenteiot.databinding.ItemProductBinding
 import com.example.campusinteligenteiot.usecases.event.SaveEventUseCase
 import com.example.campusinteligenteiot.usecases.user.GetUserFromLocalUseCase
+import com.google.firebase.Timestamp
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -36,7 +38,6 @@ class EventViewHolder(view: View, private val context: Context): RecyclerView.Vi
         if(willAssist) binding.starImage.setImageResource(R.drawable.ic_star_yellow)
         binding.eventTitle.text = event.eventTitle
         binding.eventPlace.text = event.eventPlace
-        println("LA FECHA DEL EVENTO ES : ${event.eventDate}")
         val dateString = toSimpleString(event.eventDate)
         binding.eventDatePlaceHolder.text = binding.eventDatePlaceHolder.text.toString() + ": $dateString"
         val storageReference = FirebaseStorage.getInstance()
@@ -47,23 +48,34 @@ class EventViewHolder(view: View, private val context: Context): RecyclerView.Vi
 
         binding.showDetailButton.setOnClickListener{
             val bundle = bundleOf(
-                "eventId" to event.id
+                "eventId" to event.id,
+                "willAssist" to willAssist
             )
             val navController = Navigation.findNavController(this.itemView)
             navController.navigate(R.id.action_navigation_events_to_eventDetail, bundle)
         }
 
         binding.starImage.setOnClickListener{
-            willAssist = starAnimation(binding.starImage, R.raw.bandai_dokkan, willAssist)
+            val eventCall = EventCall(
+                event.assistants,
+                event.attendances,
+                toSimpleString(event.eventDate),
+                event.description,
+                event.eventImage,
+                event.eventTitle,
+                event.eventPlace,
+                event.suggested
+            )
+            willAssist = starAnimation(binding.starImage, R.raw.star_animation, willAssist)
             if(willAssist){
-                event.attendances.add(user.id)
+                eventCall.attendances?.add(user.id)
                 GlobalScope.launch(Dispatchers.Main) {
-                    saveEventUseCase(event.id, event)
+                    saveEventUseCase(event.id, eventCall)
                 }
             } else{
-                event.attendances.remove(user.id)
+                eventCall.attendances?.remove(user.id)
                 GlobalScope.launch(Dispatchers.Main) {
-                    saveEventUseCase(event.id, event)
+                    saveEventUseCase(event.id, eventCall)
                 }
             }
         }
@@ -91,7 +103,7 @@ class EventViewHolder(view: View, private val context: Context): RecyclerView.Vi
     }
 
     fun toSimpleString(date: Date?) = with(date ?: Date()) {
-        SimpleDateFormat("dd/MM/yyyy").format(this)
+        SimpleDateFormat("yyyy-MM-dd").format(this)
     }
 
 }

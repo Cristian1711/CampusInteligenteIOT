@@ -55,7 +55,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/productImage" />
+                app:layout_constraintTop_toBottomOf="@+id/eventImage" />
 
             <TextView
                 android:id="@+id/titleEdit"
@@ -149,7 +149,8 @@
                 android:gravity="start|top"
                 android:hint="@string/date_event"
                 android:drawableStart="@drawable/ic_text"
-                android:inputType="text"
+                android:clickable="false"
+                android:focusable="false"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorHint"
                 app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +161,7 @@
                 android:minWidth="260dp"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/productImage"
+                android:id="@+id/eventImage"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="100dp"

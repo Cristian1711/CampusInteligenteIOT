@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -92,9 +93,6 @@ class EditProfileFragment : Fragment() {
 
         binding.saveDataButton.setOnClickListener{
             editUser(user)
-            findNavController().navigate(
-                R.id.action_editProfileFragment_to_profileFragment
-            )
         }
 
         binding.settingsButton.setOnClickListener{
@@ -192,6 +190,11 @@ class EditProfileFragment : Fragment() {
             .addOnSuccessListener {
                 Toast.makeText(context, R.string.firestore_upload_success, Toast.LENGTH_SHORT)
                     .show()
+                Handler().postDelayed({
+                    findNavController().navigate(
+                        R.id.action_editProfileFragment_to_profileFragment
+                    )
+                }, 3000)
 
             }.addOnFailureListener {
 

@@ -137,7 +137,6 @@
     <string name="success_nfc">Acerca el teléfono al tag NFC</string>
     <string name="add_photo">Añadir foto</string>
     <string name="add_new_product">Añadir nuevo producto</string>
-    <string name="suggest_event">Sugerir un evento</string>
     <string name="description">Descripción</string>
     <string name="product_title">Título del producto</string>
     <string name="product_price">Precio del producto</string>
@@ -162,6 +161,11 @@
     <string name="delete_friend_success">Amigo eliminado satisfactoriamente</string>
     <string name="first_part_warning">\"¡Genera tu QR y avisa a \"</string>
     <string name="second_part_warning">\" para que lo lea también!\"</string>
+    <string name="event_image_access">imagen del evento</string>
+    <string name="star_text_1">¡Recuerda que puedes confirmar tu asistencia pulsando la estrellita!</string>
+    <string name="person_text">\" personas!\"</string>
+    <string name="assist_text">\"¡Van a asistir \"</string>
+    <string name="star_text_2">\"Vemos que has confirmado tu asistencia. ¡Te esperamos el día \"</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
