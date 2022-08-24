@@ -9,6 +9,8 @@ import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -19,6 +21,7 @@ import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.FriendsProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
+import io.getstream.chat.android.client.ChatClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,6 +32,7 @@ class FriendsProfileFragment : Fragment() {
     private lateinit var currentUser: UsersResponse
     private val viewModel by viewModels<FriendsProfileViewModel>()
     private lateinit var binding: FriendsProfileFragmentBinding
+    private val client = ChatClient.instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +40,25 @@ class FriendsProfileFragment : Fragment() {
     ): View? {
         userId = arguments?.getString("userId")
         GlobalScope.launch(Dispatchers.Main) {
+            val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPreferences.getString("current_user", "")
+            currentUser = gson.fromJson(json, UsersResponse::class.java)
             user = viewModel.getUserFromLocal(userId!!)!!
             setUserData(user)
             loadImage(user.profileImage)
+
             if(user.friends.contains(currentUser.id) && !currentUser.friends.contains(user.id)){
                 showAlertDialog()
             }
-        }
 
-        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("current_user", "")
-        currentUser = gson.fromJson(json, UsersResponse::class.java)
+            if(user.friends.contains(currentUser.id) && currentUser.friends.contains(user.id)){
+                binding.itemEditFriends.deleteButton.visibility = VISIBLE
+            }
+            else{
+                binding.itemEditFriends.deleteButton.visibility = INVISIBLE
+            }
+        }
 
         binding = FriendsProfileFragmentBinding.inflate(inflater,container,false)
         return binding.root
@@ -124,6 +135,7 @@ class FriendsProfileFragment : Fragment() {
                 currentUser.friends.add(user.id)
                 GlobalScope.launch(Dispatchers.Main){
                     viewModel.updateUserFriends(currentUser)
+                    createChat(currentUser.userName, user.userName)
                     Toast.makeText(requireContext(), getString(R.string.first_part_new_friend) + user.userName + getString(
                         R.string.second_part_new_friend), Toast.LENGTH_LONG).show()
                     dialog.dismiss()
@@ -133,6 +145,20 @@ class FriendsProfileFragment : Fragment() {
                 dialog.dismiss()
             }
         }.create().show()
+    }
+
+    fun createChat(currentUserUserName: String, sellerUserName: String) {
+        client.createChannel(
+            channelType = "messaging",
+            members = listOf(currentUserUserName,sellerUserName)
+        ).enqueue { result ->
+            if (result.isSuccess) {
+                val channel = result.data()
+            } else {
+                println("NO HE PODIDO CREAR EL CHAT")
+                // Handle result.error()
+            }
+        }
     }
 
 }

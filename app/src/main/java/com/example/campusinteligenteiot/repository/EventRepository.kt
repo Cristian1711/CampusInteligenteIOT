@@ -15,6 +15,10 @@ class EventRepository {
         return api.getEventById(id)
     }
 
+    suspend fun getEventByIdLive(id: String): LiveData<EventResponse> {
+        return api.getEventByIdLive(id)
+    }
+
     suspend fun getAllEvents(): LiveData<MutableList<EventResponse>>? {
         return api.getAllEvents()
     }

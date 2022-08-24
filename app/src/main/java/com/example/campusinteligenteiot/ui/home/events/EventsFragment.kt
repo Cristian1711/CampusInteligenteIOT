@@ -1,7 +1,6 @@
 package com.example.campusinteligenteiot.ui.home.events
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -17,10 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.EventsFragmentBinding
-import com.example.campusinteligenteiot.databinding.ShopFragmentBinding
-import com.example.campusinteligenteiot.ui.home.events.adapter.EventAdapter
-import com.example.campusinteligenteiot.ui.home.shop.ShopViewModel
-import com.example.campusinteligenteiot.ui.home.shop.adapter.ProductAdapter
+import com.example.campusinteligenteiot.ui.home.events.adapter.events.EventAdapter
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.ui.home.events.adapter
+package com.example.campusinteligenteiot.ui.home.events.adapter.events
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.event.EventResponse
-import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 
 class EventAdapter(private val user: UsersResponse, private val context: Context): RecyclerView.Adapter<EventViewHolder> (){

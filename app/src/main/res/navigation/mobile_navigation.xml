@@ -159,6 +159,9 @@
         <action
             android:id="@+id/action_sellerProfileFragment_to_navigation_shop"
             app:destination="@id/navigation_shop" />
+        <action
+            android:id="@+id/action_sellerProfileFragment_to_channelsFragment"
+            app:destination="@id/channelsFragment" />
     </fragment>
     <fragment
         android:id="@+id/myProductsFragment"
@@ -219,6 +222,9 @@
         <action
             android:id="@+id/action_eventDetail_to_navigation_events"
             app:destination="@id/navigation_events" />
+        <action
+            android:id="@+id/action_eventDetail_to_eventInformationFragment"
+            app:destination="@id/eventInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/generateQRFragment"
@@ -228,5 +234,20 @@
         <action
             android:id="@+id/action_generateQRFragment_to_friendsProfileFragment2"
             app:destination="@id/friendsProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventInformationFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.events.eventInfo.EventInformationFragment"
+        android:label="event_information_fragment"
+        tools:layout="@layout/event_information_fragment" >
+        <action
+            android:id="@+id/action_eventInformationFragment_to_navigation_events"
+            app:destination="@id/navigation_events" />
+        <action
+            android:id="@+id/action_eventInformationFragment_to_friendsProfileFragment2"
+            app:destination="@id/friendsProfileFragment2" />
+        <action
+            android:id="@+id/action_eventInformationFragment_to_channelsFragment"
+            app:destination="@id/channelsFragment" />
     </fragment>
 </navigation>

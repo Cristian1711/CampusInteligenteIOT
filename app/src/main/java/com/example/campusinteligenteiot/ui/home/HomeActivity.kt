@@ -1,10 +1,17 @@
 package com.example.campusinteligenteiot.ui.home
 
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.nfc.NdefMessage
+import android.nfc.NfcAdapter
 import android.os.Bundle
+import android.text.Html
+import android.text.Spanned
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -14,6 +21,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.event.EventCall
+import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.user.UserProvider
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ActivityHomeBinding
@@ -26,6 +35,8 @@ import kotlinx.android.synthetic.main.nav_header_drawer.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -33,6 +44,18 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var user: UsersResponse
     private val viewModel by viewModels<MainHomeViewModel>()
+    private var nfcAdapter : NfcAdapter? = null
+    private lateinit var event: EventResponse
+    private lateinit var eventCall: EventCall
+
+    // Pending intent for NFC intent foreground dispatch.
+    // Used to read all NDEF tags while the app is running in the foreground.
+    private var nfcPendingIntent: PendingIntent? = null
+    // Optional: filter NDEF tags this app receives through the pending intent.
+    //private var nfcIntentFilters: Array<IntentFilter>? = null
+
+
+    private val KEY_LOG_TEXT = "logText"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,17 +125,151 @@ class HomeActivity : AppCompatActivity() {
             drawerLayout.openDrawer(GravityCompat.START)
         }
 
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this)
 
+        // Read all tags when app is running and in the foreground
+        // Create a generic PendingIntent that will be deliver to this activity. The NFC stack
+        // will fill in the intent with the details of the discovered tag before delivering to
+        // this activity.
+        nfcPendingIntent = PendingIntent.getActivity(this, 0,
+            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
 
+        // Optional: Setup an intent filter from code for a specific NDEF intent
+        // Use this code if you are only interested in a specific intent and don't want to
+        // interfere with other NFC tags.
+        // In this example, the code is commented out so that we get all NDEF messages,
+        // in order to analyze different NDEF-formatted NFC tag contents.
+        //val ndef = IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED)
+        //ndef.addCategory(Intent.CATEGORY_DEFAULT)
+        //ndef.addDataScheme("https")
+        //ndef.addDataAuthority("*.andreasjakl.com", null)
+        //ndef.addDataPath("/", PatternMatcher.PATTERN_PREFIX)
+        // More information: https://stackoverflow.com/questions/30642465/nfc-tag-is-not-discovered-for-action-ndef-discovered-action-even-if-it-contains
+        //nfcIntentFilters = arrayOf(ndef)
 
-
+        if (intent != null) {
+            processIntent(intent)
+        }
         //setupActionBarWithNavController(navController, appBarConfiguration)
 
 
     }
 
+    private fun processIntent(checkIntent: Intent) {
+        // Check if intent has the action of a discovered NFC tag
+        // with NDEF formatted contents
+        if (checkIntent.action == NfcAdapter.ACTION_NDEF_DISCOVERED) {
 
+            // Retrieve the raw NDEF message from the tag
+            val rawMessages = checkIntent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
 
+            // Complete variant: parse NDEF messages
+            if (rawMessages != null) {
+                val messages = arrayOfNulls<NdefMessage?>(rawMessages.size)// Array<NdefMessage>(rawMessages.size, {})
+                for (i in rawMessages.indices) {
+                    messages[i] = rawMessages[i] as NdefMessage;
+                }
+                // Process the messages array.
+                processNdefMessages(messages)
+            }
+
+            // Simple variant: assume we have 1x URI record
+            //if (rawMessages != null && rawMessages.isNotEmpty()) {
+            //    val ndefMsg = rawMessages[0] as NdefMessage
+            //    if (ndefMsg.records != null && ndefMsg.records.isNotEmpty()) {
+            //        val ndefRecord = ndefMsg.records[0]
+            //        if (ndefRecord.toUri() != null) {
+            //            logMessage("URI detected", ndefRecord.toUri().toString())
+            //        } else {
+            //            // Other NFC Tags
+            //            logMessage("Payload", ndefRecord.payload.contentToString())
+            //        }
+            //    }
+            //}
+
+        }
+    }
+
+    private fun processNdefMessages(ndefMessages: Array<NdefMessage?>) {
+        // Go through all NDEF messages found on the NFC tag
+        for (curMsg in ndefMessages) {
+            if (curMsg != null) {
+                val msg = String(curMsg.records[0].payload)
+                // Loop through all the records contained in the message
+                        // URI NDEF Tag
+                        val eventId = msg.substring(3,msg.length)
+                        if (eventId != null){
+                            GlobalScope.launch(Dispatchers.Main) {
+                                event = viewModel.getEvent(eventId)
+                                event.assistants.add(user.id)
+
+                                eventCall = EventCall(
+                                    event.assistants,
+                                    event.attendances,
+                                    toSimpleString(event.eventDate),
+                                    event.description,
+                                    event.eventImage,
+                                    event.eventTitle,
+                                    event.eventPlace,
+                                    event.suggested
+                                )
+
+                                viewModel.saveEvent(event.id, eventCall)
+
+                                val bundle = bundleOf(
+                                    "eventId" to eventId
+                                )
+                                println("HE RECOGIDO EL ID $eventId")
+
+                                navController.navigate(R.id.eventInformationFragment, bundle)
+                            }
+                        }
+
+            }
+        }
+    }
+
+    fun toSimpleString(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("yyyy-MM-dd").format(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Get all NDEF discovered intents
+        // Makes sure the app gets all discovered NDEF messages as long as it's in the foreground.
+        nfcAdapter?.enableForegroundDispatch(this, nfcPendingIntent, null, null);
+        // Alternative: only get specific HTTP NDEF intent
+        //nfcAdapter?.enableForegroundDispatch(this, nfcPendingIntent, nfcIntentFilters, null);
+    }
+
+    override fun onPause() {
+        super.onPause()
+        // Disable foreground dispatch, as this activity is no longer in the foreground
+        nfcAdapter?.disableForegroundDispatch(this);
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        // If we got an intent while the app is running, also check if it's a new NDEF message
+        // that was discovered
+        if (intent != null) processIntent(intent)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        //outState?.putCharSequence(KEY_LOG_TEXT, tv_messages.text)
+        if (outState != null) {
+            super.onSaveInstanceState(outState)
+        }
+    }
+
+    private fun fromHtml(html: String): Spanned {
+        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            @Suppress("DEPRECATION")
+            Html.fromHtml(html)
+        }
+    }
 
 
 }

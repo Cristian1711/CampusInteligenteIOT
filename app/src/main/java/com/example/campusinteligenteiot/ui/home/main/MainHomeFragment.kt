@@ -53,6 +53,9 @@ import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.image
 import io.getstream.chat.android.client.models.name
 import kotlinx.android.synthetic.main.fragment_main_home.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -103,9 +106,11 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         _binding = FragmentMainHomeBinding.inflate(inflater,container,false)
         val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
         val user_id = sharedPreferences?.getString("user_id", "null")
-        val user_profileImage = sharedPreferences?.getString("user_profileimage", "null")
-        println("EL ID DEL USUARIO ACTUAL ES (MAPA)")
-        println(user_id)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            user = viewModel.getSingleUser(user_id!!)
+            createUserGetStream(user)
+        }
         return binding.root
     }
 
@@ -340,9 +345,8 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     }
 
     private fun createUserGetStream(firebaseUser: UsersResponse){
-        val user = io.getstream.chat.android.client.models.User(id = firebaseUser.userName!!).apply {
+        val user = io.getstream.chat.android.client.models.User(id = firebaseUser.userName).apply {
             name = firebaseUser.userName
-            image = firebaseUser.profileImage!!
         }
         val token = client.devToken(user.id)
         println("id = ${firebaseUser.name}\n token = $token")

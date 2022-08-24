@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.api.network.event
 
+import android.media.metrics.Event
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
@@ -19,6 +20,14 @@ class EventService {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(EventApiClient::class.java).getEventById(id)
             response.body()!!
+        }
+    }
+
+    suspend fun getEventByIdLive(id: String): LiveData<EventResponse> {
+        var mutableData = MutableLiveData<EventResponse>()
+        return withContext(Dispatchers.IO){
+            mutableData = (retrofit.create(EventApiClient::class.java).getEventById(id)) as MutableLiveData<EventResponse>
+            mutableData
         }
     }
 

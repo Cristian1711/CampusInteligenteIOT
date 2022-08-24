@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
@@ -19,6 +21,7 @@ import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ProductDetailFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
+import io.getstream.chat.android.client.ChatClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -30,6 +33,7 @@ class ProductDetailFragment : Fragment() {
     private lateinit var product: ProductResponse
     private lateinit var user: UsersResponse
     private lateinit var currentUser: UsersResponse
+    private val client = ChatClient.instance()
     private val viewModel by viewModels<ProductDetailViewModel>()
 
     override fun onCreateView(
@@ -76,7 +80,10 @@ class ProductDetailFragment : Fragment() {
 
         binding.ContactButton.setOnClickListener{
             val navController = Navigation.findNavController(view)
-            navController.navigate(R.id.action_productDetailFragment_to_channelsFragment)
+            createChat(currentUser.userName, user.userName)
+            Handler().postDelayed({
+                navController.navigate(R.id.action_productDetailFragment_to_channelsFragment)
+            }, 1500)
         }
 
         binding.ViewProfileButton.setOnClickListener{
@@ -93,6 +100,20 @@ class ProductDetailFragment : Fragment() {
         }
 
 
+    }
+
+    fun createChat(currentUserUserName: String, sellerUserName: String) {
+        client.createChannel(
+            channelType = "messaging",
+            members = listOf(currentUserUserName,sellerUserName)
+        ).enqueue { result ->
+            if (result.isSuccess) {
+                val channel = result.data()
+            } else {
+                println("NO HE PODIDO CREAR EL CHAT")
+                // Handle result.error()
+            }
+        }
     }
 
     private fun prepareLikeButton() {

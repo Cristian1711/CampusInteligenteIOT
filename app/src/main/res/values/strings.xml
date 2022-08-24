@@ -166,6 +166,20 @@
     <string name="person_text">\" personas!\"</string>
     <string name="assist_text">\"¡Van a asistir \"</string>
     <string name="star_text_2">\"Vemos que has confirmado tu asistencia. ¡Te esperamos el día \"</string>
+    <string name="cant_enter">Aún no ha comenzado el evento, debes eperar aún.</string>
+    <string name="cant_enter_2">Lo sentimos mucho.</string>
+    <string name="user_list_text">Lista de usuarios que se encuentran en el evento actualmente</string>
+    <string name="college_degree">Carrera Universitaria</string>
+    <string name="error_chat">NO HE PODIDO CREAR EL CHAT</string>
+    <string name="question_2">\"¿Quieres enviar una solicitud de amistad a \"</string>
+    <string name="friend_request_2">Solicitud de amistad enviada con éxito</string>
+    <string name="out_event">Salir del evento</string>
+    <string name="out_event_question">¿Estás seguro de que quieres salir del evento?</string>
+    <string name="sorry_text">Sentimos que no te haya gustado el evento...</string>
+    <string name="sorry_text_2">Lo sentimos, esperamos que la próxima vez sea de tu agrado</string>
+    <string name="thank_you">¡No está mal! ¡Gracias por la valoración!</string>
+    <string name="awesome">¡Espectacular!</string>
+    <string name="thank_you_2">¡Ole! ¡Esperamos que el próximo evento te guste lo mismo o más!</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

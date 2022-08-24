@@ -19,6 +19,7 @@ import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import io.getstream.chat.android.client.ChatClient
 import kotlinx.android.synthetic.main.dialog_qr.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -31,6 +32,7 @@ class GenerateQRFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<GenerateQRViewModel>()
     private lateinit var user: UsersResponse
+    private val client = ChatClient.instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -98,6 +100,7 @@ class GenerateQRFragment : Fragment() {
                         }
                         else{
                             //crear chat
+                            createChat(user.userName, newFriend.userName)
                         }
                     }
                     else{
@@ -113,6 +116,20 @@ class GenerateQRFragment : Fragment() {
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    fun createChat(currentUserUserName: String, sellerUserName: String) {
+        client.createChannel(
+            channelType = "messaging",
+            members = listOf(currentUserUserName,sellerUserName)
+        ).enqueue { result ->
+            if (result.isSuccess) {
+                val channel = result.data()
+            } else {
+                println("NO HE PODIDO CREAR EL CHAT")
+                // Handle result.error()
+            }
         }
     }
 }

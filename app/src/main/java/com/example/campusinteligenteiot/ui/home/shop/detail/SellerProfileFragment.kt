@@ -1,10 +1,14 @@
 package com.example.campusinteligenteiot.ui.drawer.friends.profile
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -12,6 +16,8 @@ import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.FriendsProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.Gson
+import io.getstream.chat.android.client.ChatClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,8 +25,10 @@ import kotlinx.coroutines.launch
 class SellerProfileFragment : Fragment() {
     private var userId: String? = null
     private lateinit var user: UsersResponse
+    private lateinit var currentUser: UsersResponse
     private val viewModel by viewModels<FriendsProfileViewModel>()
     private lateinit var binding: FriendsProfileFragmentBinding
+    private val client = ChatClient.instance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,13 +36,64 @@ class SellerProfileFragment : Fragment() {
     ): View? {
         userId = arguments?.getString("userId")
         GlobalScope.launch(Dispatchers.Main) {
+            val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+            val gson = Gson()
+            val json = sharedPreferences.getString("current_user", "")
+            currentUser = gson.fromJson(json, UsersResponse::class.java)
             user = viewModel.getUserFromLocal(userId!!)!!
             setUserData(user)
             loadImage(user.profileImage)
+
+            if(user.friends.contains(currentUser.id) && !currentUser.friends.contains(user.id)){
+                showAlertDialog()
+            }
+
+            if(user.friends.contains(currentUser.id) && currentUser.friends.contains(user.id)){
+                binding.itemEditFriends.deleteButton.visibility = View.VISIBLE
+            }
+            else{
+                binding.itemEditFriends.deleteButton.visibility = View.INVISIBLE
+            }
         }
 
         binding = FriendsProfileFragmentBinding.inflate(inflater,container,false)
         return binding.root
+    }
+
+    private fun showAlertDialog() {
+        val alertDialog = AlertDialog.Builder(context)
+
+        alertDialog.apply {
+            setTitle(getString(R.string.friend_request))
+            setMessage(getString(R.string.user) + user.userName + getString(R.string.second_part_question))
+            setPositiveButton("Sí") { dialog: DialogInterface, _: Int ->
+                currentUser.friends.add(user.id)
+                GlobalScope.launch(Dispatchers.Main){
+                    viewModel.updateUserFriends(currentUser)
+                    createChat(currentUser.userName, user.userName)
+                    Toast.makeText(requireContext(), getString(R.string.first_part_new_friend) + user.userName + getString(
+                        R.string.second_part_new_friend), Toast.LENGTH_LONG).show()
+                    dialog.dismiss()
+                }
+            }
+            setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+                dialog.dismiss()
+            }
+        }.create().show()
+    }
+
+    fun createChat(currentUserUserName: String, sellerUserName: String) {
+        client.createChannel(
+            channelType = "messaging",
+            members = listOf(currentUserUserName,sellerUserName)
+        ).enqueue { result ->
+            if (result.isSuccess) {
+                val channel = result.data()
+            } else {
+                println("NO HE PODIDO CREAR EL CHAT")
+                // Handle result.error()
+            }
+        }
     }
 
     private fun loadImage(media: String) {
@@ -63,7 +122,12 @@ class SellerProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.itemEditFriends.chatButton.setOnClickListener{
-            findNavController().navigate(R.id.action_friendsProfileFragment2_to_channelsFragment)
+            if(user.friends.contains(currentUser.id) && currentUser.friends.contains(user.id)){
+                findNavController().navigate(R.id.action_sellerProfileFragment_to_channelsFragment)
+            }
+            else{
+                Toast.makeText(requireContext(), getString(R.string.warning_chat), Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.itemEditFriends.deleteButton.setOnClickListener{
