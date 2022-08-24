@@ -265,6 +265,9 @@
         <action
             android:id="@+id/action_carDriverFragment_to_carPassengerFragment"
             app:destination="@id/carPassengerFragment" />
+        <action
+            android:id="@+id/action_carDriverFragment_to_addTripFragment"
+            app:destination="@id/addTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/carPassengerFragment"
@@ -273,6 +276,15 @@
         tools:layout="@layout/car_passenger_fragment" >
         <action
             android:id="@+id/action_carPassengerFragment_to_carDriverFragment"
+            app:destination="@id/carDriverFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTripFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.car.driver.add.AddTripFragment"
+        android:label="add_trip_fragment"
+        tools:layout="@layout/add_trip_fragment" >
+        <action
+            android:id="@+id/action_addTripFragment_to_carDriverFragment"
             app:destination="@id/carDriverFragment" />
     </fragment>
 </navigation>

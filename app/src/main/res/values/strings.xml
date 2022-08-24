@@ -180,6 +180,9 @@
     <string name="thank_you">¡No está mal! ¡Gracias por la valoración!</string>
     <string name="awesome">¡Espectacular!</string>
     <string name="thank_you_2">¡Ole! ¡Esperamos que el próximo evento te guste lo mismo o más!</string>
+    <string name="my_trips">Mis viajes</string>
+    <string name="new_trip_text">Programar un viaje</string>
+    <string name="trip_of">Viaje de</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
