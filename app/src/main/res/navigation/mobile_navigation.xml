@@ -12,7 +12,14 @@
         android:id="@+id/navigation_car"
         android:name="com.example.campusinteligenteiot.ui.home.car.CarFragment"
         android:label="car_fragment"
-        tools:layout="@layout/car_fragment" />
+        tools:layout="@layout/car_fragment" >
+        <action
+            android:id="@+id/action_navigation_car_to_carPassengerFragment"
+            app:destination="@id/carPassengerFragment" />
+        <action
+            android:id="@+id/action_navigation_car_to_carDriverFragment"
+            app:destination="@id/carDriverFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_shop"
         android:name="com.example.campusinteligenteiot.ui.home.shop.ShopFragment"
@@ -249,5 +256,23 @@
         <action
             android:id="@+id/action_eventInformationFragment_to_channelsFragment"
             app:destination="@id/channelsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carDriverFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.car.driver.CarDriverFragment"
+        android:label="car_driver_fragment"
+        tools:layout="@layout/car_driver_fragment" >
+        <action
+            android:id="@+id/action_carDriverFragment_to_carPassengerFragment"
+            app:destination="@id/carPassengerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carPassengerFragment"
+        android:name="com.example.campusinteligenteiot.ui.home.car.passenger.CarPassengerFragment"
+        android:label="car_passenger_fragment"
+        tools:layout="@layout/car_passenger_fragment" >
+        <action
+            android:id="@+id/action_carPassengerFragment_to_carDriverFragment"
+            app:destination="@id/carDriverFragment" />
     </fragment>
 </navigation>
