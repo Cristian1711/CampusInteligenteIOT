@@ -41,6 +41,8 @@ class CarFragment : Fragment() {
             val gson = Gson()
             val json = sharedPreferences.getString("current_user", "")
             currentUser = gson.fromJson(json, UsersResponse::class.java)
+            currentUser = viewModel.getUser(currentUser.id)
+            val prueba = currentUser
             viewModel.setUser(currentUser)
             viewModel.finishLD.observe(viewLifecycleOwner) { isDriver->
                 if (isDriver) {

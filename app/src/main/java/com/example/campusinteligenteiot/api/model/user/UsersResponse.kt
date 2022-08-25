@@ -15,6 +15,6 @@ data class UsersResponse(
     @SerializedName("rating") var rating: HashMap<String, Integer>,
     @SerializedName("surname") var surname: String,
     @SerializedName("userName") var userName: String,
-    @SerializedName("driver") var driver: Boolean,
+    @SerializedName("isDriver") var driver: Boolean,
     @SerializedName("productLikes") var productLikes: ArrayList<String>
 )

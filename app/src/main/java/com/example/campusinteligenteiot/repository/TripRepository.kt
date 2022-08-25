@@ -3,8 +3,8 @@ package com.example.campusinteligenteiot.repository
 import androidx.lifecycle.LiveData
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
-import com.example.campusinteligenteiot.api.model.event.TripCall
-import com.example.campusinteligenteiot.api.model.event.TripResponse
+import com.example.campusinteligenteiot.api.model.trip.TripCall
+import com.example.campusinteligenteiot.api.model.trip.TripResponse
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.network.event.EventService
 import com.example.campusinteligenteiot.api.network.trip.TripService
@@ -26,7 +26,7 @@ class TripRepository {
         return api.saveTrip(trip, id)
     }
 
-    suspend fun deleteTrip(id: String) : TripResponse {
+    suspend fun deleteTrip(id: String) : TripResponse{
         return api.deleteTrip(id)
     }
 }

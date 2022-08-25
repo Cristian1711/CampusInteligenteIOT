@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.event.EventResponse
+import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.model.trip.TripResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.ui.home.events.adapter.events.EventViewHolder
@@ -32,4 +33,13 @@ class TripAdapter(private val user: UsersResponse, private val context: Context,
         tripMutableList = data
         oldTripMutableList = tripMutableList
     }
+
+    fun getTripList(): MutableList<TripResponse>{
+        return tripMutableList
+    }
+
+    fun filterTripListByDriver(userId: String){
+        tripMutableList = (oldTripMutableList.filter { it.driver == userId && !it.deleted && it.available}) as MutableList<TripResponse>
+    }
+
 }

@@ -11,5 +11,6 @@ data class TripResponse (
     @SerializedName("departureDate") var departureDate: Date,
     @SerializedName("seats") var seats:Int,
     @SerializedName("deleted") var deleted:Boolean,
-    @SerializedName("driver") var driver: String
+    @SerializedName("driver") var driver: String,
+    @SerializedName("available") var available:Boolean
 )

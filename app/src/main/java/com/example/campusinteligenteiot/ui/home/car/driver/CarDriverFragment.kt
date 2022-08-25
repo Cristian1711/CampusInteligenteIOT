@@ -10,11 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.product.ProductCall
+import com.example.campusinteligenteiot.api.model.trip.TripCall
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.CarDriverFragmentBinding
 import com.example.campusinteligenteiot.ui.home.car.adapter.TripAdapter
@@ -26,6 +28,8 @@ import kotlinx.android.synthetic.main.delete_dialog_2.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CarDriverFragment : Fragment() {
 
@@ -54,8 +58,12 @@ class CarDriverFragment : Fragment() {
         return binding.root
     }
 
-    private fun observeData() {
-        TODO("Not yet implemented")
+    private suspend fun observeData() {
+        viewModel.getAllTrips().observe(viewLifecycleOwner, Observer{
+            adapter.setTripList(it)
+            adapter.filterTripListByDriver(user.id)
+            adapter.notifyItemInserted(it.size-1)
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,10 +90,9 @@ class CarDriverFragment : Fragment() {
     }
 
     private fun onDeletedItem(position: Int){
-        var product = adapter.getProductList()[position]
+        var trip = adapter.getTripList()[position]
         val builder = AlertDialog.Builder(requireContext())
 
-        if(adapter.getProductList()[position].published){
             val myView = layoutInflater.inflate(R.layout.delete_dialog_1, null)
 
             builder.setView(myView)
@@ -93,13 +100,23 @@ class CarDriverFragment : Fragment() {
             val dialog = builder.create()
             dialog.show()
 
+            myView.Question_text.text = getString(R.string.question_delete_trip)
+
             myView.buttonYes.setOnClickListener {
-                product.published = false
-                val editedProduct = ProductCall(product.title, product.description,
-                    product.price, product.idOwner, product.productImage, product.published, product.category, product.archived)
                 GlobalScope.launch(Dispatchers.Main) {
-                    viewModel.saveProduct(adapter.getProductList()[position].id, editedProduct)
-                    adapter.notifyItemChanged(position)
+                    val tripCall = TripCall(
+                        trip.finalPoint,
+                        trip.originPoint,
+                        trip.passengers,
+                        toStringWithTime(trip.departureDate),
+                        trip.seats,
+                        trip.deleted,
+                        trip.driver,
+                        trip.available
+                    )
+
+                    viewModel.saveTrip(trip.id, tripCall)
+                    adapter.notifyItemRemoved(position)
                     dialog.cancel()
                 }
             }
@@ -107,40 +124,17 @@ class CarDriverFragment : Fragment() {
             myView.buttonNo.setOnClickListener {
                 dialog.cancel()
             }
-        }
-        else{
-            val myView = layoutInflater.inflate(R.layout.delete_dialog_2, null)
 
-            builder.setView(myView)
 
-            val dialog = builder.create()
-            dialog.show()
-
-            myView.buttonYes.setOnClickListener {
-                product.archived = true
-                val editedProduct = ProductCall(product.title, product.description,
-                    product.price, product.idOwner, product.productImage, product.published, product.category, product.archived)
-                GlobalScope.launch(Dispatchers.Main) {
-                    viewModel.saveProduct(adapter.getProductList()[position].id, editedProduct)
-                    adapter.notifyItemChanged(position)
-                    dialog.cancel()
-                }
-            }
-
-            myView.buttonDelete.setOnClickListener {
-                GlobalScope.launch(Dispatchers.Main) {
-                    val response = viewModel.deleteProduct(product.id)
-                    println("RESPUESTA OBTENIDA AL BORRAR $response")
-                    adapter.removeItem(position)
-                    adapter.notifyItemRemoved(position)
-                    Toast.makeText(context, getString(R.string.delete_success), Toast.LENGTH_SHORT).show()
-                    dialog.cancel()
-                }
-            }
 
         }
 
+    fun toSimpleString(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("yyyy-MM-dd").format(this)
+    }
 
+    fun toStringWithTime(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this)
     }
 
 }

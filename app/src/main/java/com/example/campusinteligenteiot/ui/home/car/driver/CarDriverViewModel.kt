@@ -35,7 +35,7 @@ class CarDriverViewModel : ViewModel() {
         return searchUserUseCase(id)
     }
 
-    suspend fun deleteTrip(id: String) : Response<TripResponse> {
+    suspend fun deleteTrip(id: String) : TripResponse {
         return deleteTripUseCase(id)
     }
 

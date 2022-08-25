@@ -2,8 +2,8 @@ package com.example.campusinteligenteiot.api.network.trip
 
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
-import com.example.campusinteligenteiot.api.model.event.TripCall
-import com.example.campusinteligenteiot.api.model.event.TripResponse
+import com.example.campusinteligenteiot.api.model.trip.TripCall
+import com.example.campusinteligenteiot.api.model.trip.TripResponse
 import retrofit2.Response
 import retrofit2.http.*
 

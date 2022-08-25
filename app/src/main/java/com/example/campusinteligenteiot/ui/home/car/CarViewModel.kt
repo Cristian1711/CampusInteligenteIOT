@@ -12,11 +12,13 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.campusinteligenteiot.common.SingleLiveEvent
 import com.example.campusinteligenteiot.ui.home.HomeActivity
+import com.example.campusinteligenteiot.usecases.user.SearchUserUseCase
 
 
 class CarViewModel() : ViewModel() {
 
     private val finishSLE = SingleLiveEvent<Boolean>()
+    val searchUserUseCase = SearchUserUseCase()
     val finishLD: LiveData<Boolean> = finishSLE
     lateinit var currentUser: UsersResponse
     fun resume() {
@@ -29,6 +31,10 @@ class CarViewModel() : ViewModel() {
 
     fun setUser(user: UsersResponse){
         currentUser = user
+    }
+
+    suspend fun getUser(id: String): UsersResponse{
+        return searchUserUseCase(id)!!
     }
 
 }

@@ -8,8 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
-import com.example.campusinteligenteiot.api.model.event.TripCall
-import com.example.campusinteligenteiot.api.model.event.TripResponse
+import com.example.campusinteligenteiot.api.model.trip.TripCall
+import com.example.campusinteligenteiot.api.model.trip.TripResponse
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
 import com.example.campusinteligenteiot.api.network.product.ProductApiClient
 import kotlinx.coroutines.Dispatchers
