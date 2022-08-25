@@ -2,6 +2,7 @@ package com.example.campusinteligenteiot.ui.home.car.driver.add
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,9 +24,11 @@ import android.widget.DatePicker
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog.OnTimeSetListener
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.os.Handler
 import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Toast
@@ -63,8 +66,19 @@ import retrofit2.Response
 import java.util.*
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
+import android.view.View.VISIBLE
+import com.example.campusinteligenteiot.api.model.trip.TripCall
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.GeoPoint
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.add_trip_fragment.*
 import kotlinx.android.synthetic.main.fragment_main_home.mapView
+import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 
 
 class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickListener {
@@ -83,6 +97,8 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
     private val symbolIconId = "SymbolIconId"
     private var firstPoint: Point? = null
     private var secondPoint: Point? = null
+    private var source: GeoJsonSource? = null
+    private lateinit var user: UsersResponse
     var permsRequestCode = 100
     var permissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -98,6 +114,12 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
         savedInstanceState: Bundle?
     ): View? {
         _binding = AddTripFragmentBinding.inflate(inflater,container,false)
+
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("current_user", "")
+        user = gson.fromJson(json, UsersResponse::class.java)
+
         return binding.root
     }
 
@@ -113,14 +135,74 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
 
         binding.etDate.setOnClickListener {
             showDateTimePicker()
-            customScrollView.isEnableScrolling = true
+        }
+
+        binding.buttonResetPoints.setOnClickListener {
+            navigationMapRoute!!.removeRoute()
+            firstPoint = null
+        }
+
+        binding.buttonSave.setOnClickListener {
+            if(firstPoint == null || secondPoint == null){
+                val builder = AlertDialog.Builder(requireContext())
+                val myView = layoutInflater.inflate(R.layout.generic_dialog_1_button, null)
+                builder.setView(myView)
+                val dialog = builder.create()
+
+                myView.Question.text = getString(R.string.must_have_points)
+                myView.Question2.text = getString(R.string.touch_map)
+
+                dialog.show()
+
+                myView.cancelButton.setOnClickListener{
+                    dialog.cancel()
+                }
+            }
+            else{
+                if(date == null){
+                    val builder = AlertDialog.Builder(requireContext())
+                    val myView = layoutInflater.inflate(R.layout.generic_dialog_1_button, null)
+                    builder.setView(myView)
+                    val dialog = builder.create()
+
+                    myView.Question.text = getString(R.string.no_date)
+                    myView.Question2.text = getString(R.string.using_calendar)
+
+                    dialog.show()
+
+                    myView.cancelButton.setOnClickListener{
+                        dialog.cancel()
+                    }
+
+                }
+                else{
+                    GlobalScope.launch(Dispatchers.Main) {
+                        val tripCall = TripCall(
+                            arrayListOf(secondPoint!!.latitude(), secondPoint!!.longitude()),
+                            arrayListOf(firstPoint!!.latitude(), firstPoint!!.longitude()),
+                            null,
+                            toStringWithTime(date!!.time),
+                            binding.textSeats.text.toString().toInt(),
+                            false,
+                            user.id,
+                            true
+                        )
+
+                        viewModel.addNewTrip("null", tripCall)
+                        binding.progressBar.visibility = VISIBLE
+                        Handler().postDelayed({
+                            findNavController().navigate(R.id.action_addTripFragment_to_carDriverFragment)
+                        }, 1500)
+                    }
+                }
+            }
         }
 
         binding.mapView.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action) {
                     MotionEvent.ACTION_DOWN -> customScrollView.isEnableScrolling = false
-                    MotionEvent.ACTION_UP -> customScrollView.isEnableScrolling = false
+                    MotionEvent.ACTION_UP -> customScrollView.isEnableScrolling = true
                     MotionEvent.ACTION_MOVE -> customScrollView.isEnableScrolling = false
                     MotionEvent.ACTION_CANCEL -> customScrollView.isEnableScrolling = true//Do Something
                 }
@@ -128,6 +210,10 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
                 return v?.onTouchEvent(event) ?: true
             }
         })
+    }
+
+    fun toStringWithTime(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(this)
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -249,12 +335,12 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
     override fun onMapClick(point: LatLng): Boolean {
         if(firstPoint == null){
             firstPoint = Point.fromLngLat(point.longitude, point.latitude)
-            val source = mapboxMap!!.style!!.getSourceAs<GeoJsonSource>("destination-source-id")
+            source = mapboxMap!!.style!!.getSourceAs<GeoJsonSource>("destination-source-id")
             source?.setGeoJson(Feature.fromGeometry(firstPoint))
         }
         else{
             secondPoint = Point.fromLngLat(point.longitude, point.latitude)
-            val source = mapboxMap!!.style!!.getSourceAs<GeoJsonSource>("destination-source-id")
+            source = mapboxMap!!.style!!.getSourceAs<GeoJsonSource>("destination-source-id")
             source?.setGeoJson(Feature.fromGeometry(secondPoint))
             getRoute(firstPoint!!, secondPoint!!)
         }

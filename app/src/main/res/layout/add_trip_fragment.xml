@@ -179,6 +179,39 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
+            <ImageView
+                android:id="@+id/buttonResetPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="50dp"
+                android:src="@drawable/mapbox_ic_offline"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mapView"
+                app:layout_constraintVertical_bias="0.0"
+                android:contentDescription="@string/reset_button" />
+
+            <TextView
+                android:id="@+id/textResetPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonResetPoints"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_normal"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="@string/reset_initial_point"
+                />
+
             <Button
                 android:id="@+id/buttonSave"
                 android:layout_width="match_parent"
@@ -193,7 +226,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapView"
+                app:layout_constraintTop_toBottomOf="@+id/textResetPoint"
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.airbnb.lottie.LottieAnimationView

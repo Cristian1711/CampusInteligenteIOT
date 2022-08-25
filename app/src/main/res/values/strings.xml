@@ -190,6 +190,12 @@
     <string name="question_date">¿A qué hora planeas salir?</string>
     <string name="departure_date">Fecha de salida</string>
     <string name="route">Ahora marca la ruta de tu viaje</string>
+    <string name="reset_initial_point">Resetear punto inicial</string>
+    <string name="reset_button">reset button</string>
+    <string name="must_have_points">Debes marcar la ruta del viaje</string>
+    <string name="touch_map">Pulsa en el mapa y genera puntos</string>
+    <string name="no_date">Debes seleccionar una fecha y hora de salida</string>
+    <string name="using_calendar">Puedes hacerlo con el calendario</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

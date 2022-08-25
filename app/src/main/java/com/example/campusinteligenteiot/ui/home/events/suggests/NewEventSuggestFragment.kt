@@ -12,6 +12,7 @@ import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -100,6 +101,7 @@ class NewEventSuggestFragment : Fragment() {
 
                 GlobalScope.launch(Dispatchers.Main) {
                     val response = viewModel.saveSuggestion("null", event)
+                    binding.progressBar.visibility = VISIBLE
                     fileUpload(response.body()!!)
                 }
             }else {

@@ -11,4 +11,6 @@ class AddTripViewModel : ViewModel() {
     suspend fun addNewTrip(id: String, trip: TripCall): Response<String> {
         return saveTripUseCase(id, trip)
     }
+
+
 }
