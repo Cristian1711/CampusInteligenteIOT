@@ -31,6 +31,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/addToTripButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:src="@drawable/ic_add"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@id/deleteTripButton"
+        app:layout_constraintStart_toEndOf="@id/showTripButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:id="@+id/deleteTripButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -39,7 +39,11 @@ class TripAdapter(private val user: UsersResponse, private val context: Context,
     }
 
     fun filterTripListByDriver(userId: String){
-        tripMutableList = (oldTripMutableList.filter { it.driver == userId && !it.deleted && it.available}) as MutableList<TripResponse>
+        tripMutableList = (oldTripMutableList.filter { it.driver == userId && !it.deleted}) as MutableList<TripResponse>
+    }
+
+    fun filterTripListVisible(){
+        tripMutableList = (oldTripMutableList.filter { !it.deleted && it.available}) as MutableList<TripResponse>
     }
 
 }

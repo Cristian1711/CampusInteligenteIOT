@@ -182,7 +182,7 @@
     <string name="thank_you_2">¡Ole! ¡Esperamos que el próximo evento te guste lo mismo o más!</string>
     <string name="my_trips">Mis viajes</string>
     <string name="new_trip_text">Programar un viaje</string>
-    <string name="trip_of">Viaje de</string>
+    <string name="trip_of">Viaje de </string>
     <string name="question_delete_trip">¿Quieres eliminar el viaje publicado? Dejará de ser visible para los demás.</string>
     <string name="add_trip">Añadir un nuevo viaje</string>
     <string name="how_many_seats">¿Cuántos asientos disponibles tiene tu coche?</string>
@@ -196,6 +196,7 @@
     <string name="touch_map">Pulsa en el mapa y genera puntos</string>
     <string name="no_date">Debes seleccionar una fecha y hora de salida</string>
     <string name="using_calendar">Puedes hacerlo con el calendario</string>
+    <string name="available_trips">Viajes disponibles</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

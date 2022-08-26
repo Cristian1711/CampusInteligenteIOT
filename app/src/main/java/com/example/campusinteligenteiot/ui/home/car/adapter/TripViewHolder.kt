@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
@@ -21,7 +22,9 @@ import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ItemEventBinding
 import com.example.campusinteligenteiot.databinding.TripItemBinding
 import com.example.campusinteligenteiot.usecases.event.SaveEventUseCase
+import com.example.campusinteligenteiot.usecases.trip.SaveTripUseCase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.delete_dialog_1.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,11 +36,19 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
 
     val saveEventUseCase = SaveEventUseCase()
     val binding = TripItemBinding.bind(view)
+    val saveTripUseCase = SaveTripUseCase()
+    private lateinit var current_user: UsersResponse
 
     fun render(trip: TripResponse, user: UsersResponse,onClickDelete: (Int) -> Unit){
-        if(!trip.driver.equals(user.id)){
+        val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("current_user", "")
+        current_user = gson.fromJson(json, UsersResponse::class.java)
+
+        if(!trip.driver.equals(current_user.id)){
             binding.deleteTripButton.visibility = GONE
             binding.checkButton.visibility = GONE
+            binding.addToTripButton.visibility = VISIBLE
         }
         else{
             if(!trip.available){
@@ -58,11 +69,35 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
                 "tripId" to trip.id
             )
             val navController = Navigation.findNavController(this.itemView)
-            navController.navigate(R.id.action_navigation_events_to_eventDetail, bundle)
+            navController.navigate(R.id.action_carDriverFragment_to_tripDetailsFragment, bundle)
         }
 
         binding.deleteTripButton.setOnClickListener {
             onClickDelete(adapterPosition)
+        }
+
+        binding.addToTripButton.setOnClickListener{
+            GlobalScope.launch(Dispatchers.Main) {
+                if(trip.passengers.size < trip.seats){
+                    trip.passengers.add(current_user.id)
+                    val tripCall = TripCall(
+                        trip.finalPoint,
+                        trip.originPoint,
+                        trip.passengers,
+                        toStringWithTime(trip.departureDate),
+                        trip.seats,
+                        trip.deleted,
+                        trip.driver,
+                        trip.available
+                    )
+
+                    saveTripUseCase(trip.id, tripCall)
+                }
+                else{
+
+                }
+
+            }
         }
 
     }
