@@ -207,6 +207,8 @@
     <string name="trip_route">Esta es la ruta del viaje</string>
     <string name="date_trip">El viaje sale el</string>
     <string name="passengers">Pasajeros</string>
+    <string name="add_to_trip">¡Te has añadido al viaje correctamente!</string>
+    <string name="contact_driver">¡Ponte en contacto con el conductor!</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface TripApiClient {
     @Headers("Content-Type: application/json")
     @GET("http://149.91.99.198:8080/api/v1/trips/getTrip/{id}")
-    suspend fun getTripById(@Path("id") id:String): Response<TripResponse>
+    suspend fun getTripById(@Path("id") id:String): TripResponse
 
     @Headers("Content-Type: application/json")
     @GET("http://149.91.99.198:8080/api/v1/trips/allTrips")

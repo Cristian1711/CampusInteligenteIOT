@@ -86,6 +86,7 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
     private var firstPoint: Point? = null
     private var secondPoint: Point? = null
     private var source: GeoJsonSource? = null
+    private var passengersList = ArrayList<UsersResponse>()
     var permsRequestCode = 100
     var permissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -110,9 +111,11 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
 
         GlobalScope.launch(Dispatchers.Main){
             trip = viewModel.getSingleTrip(tripId!!)
-            driver = viewModel.getUser(trip.driver)
-            observeData(tripId!!)
-            setTripData(trip)
+            for (id in trip.passengers) {
+                passengersList.add(viewModel.getUser(id))
+            }
+            adapter.setAssistantsList(passengersList)
+            adapter.notifyItemInserted(passengersList.size - 1)
         }
 
         return binding.root
@@ -147,6 +150,24 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
                 return v?.onTouchEvent(event) ?: true
             }
         })
+
+        binding.customScrollView.setOnScrollChangeListener { v: View, scrollX: Int, scrollY: Int, _: Int, _: Int ->
+            binding.swipeRefresh.isEnabled = scrollY == 0
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            GlobalScope.launch(Dispatchers.Main){
+                trip = viewModel.getSingleTrip(tripId!!)
+                val passengersList = ArrayList<UsersResponse>()
+                for (id in trip.passengers) {
+                    passengersList.add(viewModel.getUser(id))
+                }
+                adapter.setAssistantsList(passengersList)
+                adapter.notifyDataSetChanged()
+            }
+
+        }
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
@@ -160,8 +181,6 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
             setUpSource(style!!)
 
             setUpLayer(style!!)
-
-            setPointsAndRoute(trip)
 
             val drawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_location_on_red_24dp, null)
             val bitmapUtils = BitmapUtils.getBitmapFromDrawable(drawable)
@@ -295,20 +314,9 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
         recyclerView = view.findViewById(R.id.passengersRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         adapter = UsersAdapter(currentUser, requireContext(), false)
+        adapter.setAssistantsList(passengersList)
         recyclerView.adapter = adapter
-    }
 
-    private suspend fun observeData(id: String) {
-        viewModel.getTrip(id).observe(viewLifecycleOwner, Observer{
-            val passengersList = ArrayList<UsersResponse>()
-            for(id in it.passengers){
-                GlobalScope.launch(Dispatchers.Main){
-                    passengersList.add(viewModel.getUser(id))
-                }
-            }
-            adapter.setAssistantsList(passengersList)
-            adapter.notifyItemInserted(passengersList.size-1)
-        })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

@@ -188,7 +188,7 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
                         val tripCall = TripCall(
                             arrayListOf(secondPoint!!.latitude(), secondPoint!!.longitude()),
                             arrayListOf(firstPoint!!.latitude(), firstPoint!!.longitude()),
-                            null,
+                            arrayListOf(user.id),
                             toStringWithTime(date!!.time),
                             binding.textSeats.text.toString().toInt(),
                             false,

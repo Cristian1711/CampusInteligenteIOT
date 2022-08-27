@@ -16,19 +16,7 @@
         android:src="@drawable/ic_magnifying_glass"
         app:layout_constraintStart_toEndOf="@id/tripText"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/checkButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/checkButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
-        android:visibility="visible"
-        android:src="@drawable/stream_ui_ic_check_single"
-        app:layout_constraintEnd_toStartOf="@id/deleteTripButton"
-        app:layout_constraintStart_toEndOf="@id/showTripButton"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/addToTripButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -37,32 +25,21 @@
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
         android:src="@drawable/ic_add"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@id/deleteTripButton"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@id/rateTripButton"
         app:layout_constraintStart_toEndOf="@id/showTripButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/deleteTripButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
-        android:src="@drawable/stream_ui_ic_delete"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/checkButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <ImageButton
         android:id="@+id/rateTripButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
         android:src="@drawable/ic_star"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/checkButton"
+        app:layout_constraintStart_toEndOf="@id/addToTripButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

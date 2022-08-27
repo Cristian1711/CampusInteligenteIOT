@@ -9,21 +9,22 @@ import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.usecases.trip.GetSingleTripLiveUseCase
 import com.example.campusinteligenteiot.usecases.trip.GetSingleTripUseCase
 import com.example.campusinteligenteiot.usecases.user.SearchUserUseCase
+import retrofit2.Response
 
 class TripDetailsViewModel : ViewModel() {
     val getSingleTripLiveUseCase = GetSingleTripLiveUseCase()
     val getSingleTripUseCase = GetSingleTripUseCase()
     val searchUserUseCase = SearchUserUseCase()
 
-    suspend fun getTrip(id: String): LiveData<TripResponse> {
+    suspend fun getTrip(id: String): MutableLiveData<TripResponse> {
         val mutableData = MutableLiveData<TripResponse>()
         getSingleTripLiveUseCase(id).observeForever { trip ->
-            mutableData.value = trip
+            mutableData.postValue(trip)
         }
         return mutableData
     }
 
-    suspend fun getSingleTrip(id: String) : TripResponse{
+    suspend fun getSingleTrip(id: String) : TripResponse {
         return getSingleTripUseCase(id)!!
     }
 

@@ -72,7 +72,7 @@ class CarPassengerFragment : Fragment() {
     private fun initTripRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.tripRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = TripAdapter(user, requireContext(),
+        adapter = TripAdapter(currentUser, requireContext(),
             {position -> onDeletedItem(position)}
         )
         recyclerView.adapter = adapter

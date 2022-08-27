@@ -23,14 +23,15 @@ class TripService {
     suspend fun getTripById(id: String): TripResponse {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(TripApiClient::class.java).getTripById(id)
-            response.body()!!
+            response
         }
     }
 
-    suspend fun getTripByIdLive(id: String): LiveData<TripResponse> {
+    suspend fun getTripByIdLive(id: String): MutableLiveData<TripResponse> {
         var mutableData = MutableLiveData<TripResponse>()
         return withContext(Dispatchers.IO){
-            mutableData = (retrofit.create(TripApiClient::class.java).getTripById(id)) as MutableLiveData<TripResponse>
+            val response = (retrofit.create(TripApiClient::class.java).getTripById(id))
+            mutableData.postValue(response)
             mutableData
         }
     }

@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.trip.TripCall
@@ -18,7 +19,7 @@ class TripRepository {
         return api.getTripById(id)
     }
 
-    suspend fun getTripByIdLive(id: String): LiveData<TripResponse> {
+    suspend fun getTripByIdLive(id: String): MutableLiveData<TripResponse> {
         return api.getTripByIdLive(id)
     }
 

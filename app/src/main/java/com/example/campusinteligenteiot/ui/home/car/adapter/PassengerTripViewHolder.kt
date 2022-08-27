@@ -1,35 +1,25 @@
 package com.example.campusinteligenteiot.ui.home.car.adapter
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.RatingBar
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.event.EventCall
-import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.trip.TripCall
 import com.example.campusinteligenteiot.api.model.trip.TripResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
-import com.example.campusinteligenteiot.databinding.ItemEventBinding
+import com.example.campusinteligenteiot.databinding.PassengerTripItemBinding
 import com.example.campusinteligenteiot.databinding.TripItemBinding
 import com.example.campusinteligenteiot.usecases.event.SaveEventUseCase
 import com.example.campusinteligenteiot.usecases.trip.SaveTripUseCase
 import com.example.campusinteligenteiot.usecases.user.SearchUserUseCase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.delete_dialog_1.view.*
 import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
 import kotlinx.android.synthetic.main.star_dialog.*
 import kotlinx.coroutines.Dispatchers
@@ -38,28 +28,17 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TripViewHolder(view: View, private val context: Context): RecyclerView.ViewHolder(view) {
+class PassengerTripViewHolder(view: View, private val context: Context): RecyclerView.ViewHolder(view) {
 
     val saveEventUseCase = SaveEventUseCase()
-    val binding = TripItemBinding.bind(view)
+    val binding = PassengerTripItemBinding.bind(view)
     val searchUserUseCase = SearchUserUseCase()
     val saveTripUseCase = SaveTripUseCase()
     var currentDate = Date()
     private lateinit var driverUser: UsersResponse
 
-    fun render(trip: TripResponse, user: UsersResponse,onClickDelete: (Int) -> Unit){
+    fun render(trip: TripResponse, user: UsersResponse, onClickDelete: (Int) -> Unit){
 
-        if(!trip.driver.equals(user.id)){
-            binding.deleteTripButton.visibility = GONE
-            binding.checkButton.visibility = GONE
-            binding.addToTripButton.visibility = VISIBLE
-            binding.rateTripButton.visibility = VISIBLE
-        }
-        else{
-            if(!trip.available){
-                binding.checkButton.visibility = GONE
-            }
-        }
         val dateString = toStringWithTime(trip.departureDate)
         binding.tripDate.text = dateString
 
@@ -78,70 +57,14 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
                 "tripId" to trip.id
             )
             val navController = Navigation.findNavController(this.itemView)
-            if(trip.driver.equals(user.id)){
-                navController.navigate(R.id.action_carDriverFragment_to_tripDetailsFragment, bundle)
-            }
-            else{
-                navController.navigate(R.id.action_carPassengerFragment_to_tripDetailsFragment, bundle)
-            }
+            navController.navigate(R.id.action_carPassengerFragment_to_tripDetailsFragment, bundle)
         }
 
-        binding.deleteTripButton.setOnClickListener {
-            onClickDelete(adapterPosition)
-        }
+
 
         binding.rateTripButton.setOnClickListener{
             if(trip.passengers.contains(user.id) && !trip.available){
                 rateDriver()
-            }
-        }
-
-        binding.checkButton.setOnClickListener{
-            if(getZeroTimeDate(trip.departureDate).compareTo(getZeroTimeDate(currentDate)) > 0){
-                val builder = AlertDialog.Builder(context)
-                val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
-                builder.setView(myView)
-                val dialog = builder.create()
-
-                myView.Question.text = context.getString(R.string.cant_close_trip)
-                myView.Question2.text = context.getString(R.string.condition)
-
-                dialog.show()
-
-                myView.cancelButton.setOnClickListener{
-                    dialog.cancel()
-                }
-            }
-            else{
-                GlobalScope.launch(Dispatchers.Main){
-                    trip.available = false
-                    val tripCall = TripCall(
-                        trip.finalPoint,
-                        trip.originPoint,
-                        trip.passengers,
-                        toStringWithTime(trip.departureDate),
-                        trip.seats,
-                        trip.deleted,
-                        trip.driver,
-                        trip.available
-                    )
-
-                    saveTripUseCase(trip.id, tripCall)
-                    val builder = AlertDialog.Builder(context)
-                    val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
-                    builder.setView(myView)
-                    val dialog = builder.create()
-
-                    myView.Question.text = context.getString(R.string.closed_trip)
-                    myView.Question2.text = context.getString(R.string.question2_dialog1_generic)
-
-                    dialog.show()
-
-                    myView.cancelButton.setOnClickListener {
-                        dialog.cancel()
-                    }
-
-                }
             }
         }
 
@@ -161,6 +84,20 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
                     )
 
                     saveTripUseCase(trip.id, tripCall)
+
+                    val builder = AlertDialog.Builder(context)
+                    val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+                    builder.setView(myView)
+                    val dialog = builder.create()
+
+                    myView.Question.text = context.getString(R.string.add_to_trip)
+                    myView.Question2.text = context.getString(R.string.contact_driver)
+
+                    dialog.show()
+
+                    myView.cancelButton.setOnClickListener {
+                        dialog.cancel()
+                    }
                 }
                 else{
                     val builder = AlertDialog.Builder(context)
@@ -183,7 +120,7 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
 
     }
 
-    fun getZeroTimeDate(date:Date): Date {
+    fun getZeroTimeDate(date: Date): Date {
         var res: Date = date
         val calendar = Calendar.getInstance()
 
