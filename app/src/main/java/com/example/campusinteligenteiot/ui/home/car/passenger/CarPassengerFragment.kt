@@ -16,6 +16,7 @@ import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.CarDriverFragmentBinding
 import com.example.campusinteligenteiot.databinding.CarPassengerFragmentBinding
+import com.example.campusinteligenteiot.ui.home.car.adapter.PassengerTripAdapter
 import com.example.campusinteligenteiot.ui.home.car.adapter.TripAdapter
 import com.example.campusinteligenteiot.ui.home.car.driver.CarDriverViewModel
 import com.google.gson.Gson
@@ -30,7 +31,7 @@ class CarPassengerFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var currentUser: UsersResponse
     private lateinit var user: UsersResponse
-    private lateinit var adapter: TripAdapter
+    private lateinit var adapter: PassengerTripAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -72,7 +73,7 @@ class CarPassengerFragment : Fragment() {
     private fun initTripRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.tripRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = TripAdapter(currentUser, requireContext(),
+        adapter = PassengerTripAdapter(currentUser, requireContext(),
             {position -> onDeletedItem(position)}
         )
         recyclerView.adapter = adapter

@@ -66,54 +66,104 @@ class PassengerTripViewHolder(view: View, private val context: Context): Recycle
             if(trip.passengers.contains(user.id) && !trip.available){
                 rateDriver()
             }
+            else if (!trip.passengers.contains(user.id)){
+                val builder = AlertDialog.Builder(context)
+                val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+                builder.setView(myView)
+                val dialog = builder.create()
+
+                myView.Question.text = context.getString(R.string.not_passenger)
+                myView.Question2.text = context.getString(R.string.rate_condition)
+
+                dialog.show()
+
+                myView.cancelButton.setOnClickListener {
+                    dialog.cancel()
+                }
+            }
+            else if (trip.passengers.contains(user.id) && trip.available){
+                val builder = AlertDialog.Builder(context)
+                val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+                builder.setView(myView)
+                val dialog = builder.create()
+
+                myView.Question.text = context.getString(R.string.cant_rate)
+                myView.Question2.text = context.getString(R.string.condition_rating_trip)
+
+                dialog.show()
+
+                myView.cancelButton.setOnClickListener {
+                    dialog.cancel()
+                }
+            }
         }
 
         binding.addToTripButton.setOnClickListener{
             GlobalScope.launch(Dispatchers.Main) {
-                if(trip.passengers.size < trip.seats){
-                    trip.passengers.add(user.id)
-                    val tripCall = TripCall(
-                        trip.finalPoint,
-                        trip.originPoint,
-                        trip.passengers,
-                        toStringWithTime(trip.departureDate),
-                        trip.seats,
-                        trip.deleted,
-                        trip.driver,
-                        trip.available
-                    )
+                if(trip.passengers.size < trip.seats) {
+                    if (!trip.passengers.contains(user.id)) {
+                        trip.passengers.add(user.id)
+                        val tripCall = TripCall(
+                            trip.finalPoint,
+                            trip.originPoint,
+                            trip.passengers,
+                            toStringWithTime(trip.departureDate),
+                            trip.seats,
+                            trip.deleted,
+                            trip.driver,
+                            trip.available
+                        )
 
-                    saveTripUseCase(trip.id, tripCall)
+                        saveTripUseCase(trip.id, tripCall)
 
-                    val builder = AlertDialog.Builder(context)
-                    val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
-                    builder.setView(myView)
-                    val dialog = builder.create()
+                        val builder = AlertDialog.Builder(context)
+                        val myView = LayoutInflater.from(context)
+                            .inflate(R.layout.generic_dialog_1_button, null)
+                        builder.setView(myView)
+                        val dialog = builder.create()
 
-                    myView.Question.text = context.getString(R.string.add_to_trip)
-                    myView.Question2.text = context.getString(R.string.contact_driver)
+                        myView.Question.text = context.getString(R.string.add_to_trip)
+                        myView.Question2.text = context.getString(R.string.contact_driver)
 
-                    dialog.show()
+                        dialog.show()
 
-                    myView.cancelButton.setOnClickListener {
-                        dialog.cancel()
+                        myView.cancelButton.setOnClickListener {
+                            dialog.cancel()
+                        }
+
+                    } else{
+                        val builder = AlertDialog.Builder(context)
+                        val myView = LayoutInflater.from(context)
+                            .inflate(R.layout.generic_dialog_1_button, null)
+                        builder.setView(myView)
+                        val dialog = builder.create()
+
+                        myView.Question.text = context.getString(R.string.already_passenger)
+                        myView.Question2.text = context.getString(R.string.contact_driver)
+
+                        dialog.show()
+
+                        myView.cancelButton.setOnClickListener {
+                            dialog.cancel()
+                        }
+
                     }
-                }
-                else{
-                    val builder = AlertDialog.Builder(context)
-                    val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
-                    builder.setView(myView)
-                    val dialog = builder.create()
+                    } else {
+                        val builder = AlertDialog.Builder(context)
+                        val myView = LayoutInflater.from(context)
+                            .inflate(R.layout.generic_dialog_1_button, null)
+                        builder.setView(myView)
+                        val dialog = builder.create()
 
-                    myView.Question.text = context.getString(R.string.not_more_seats)
-                    myView.Question2.text = context.getString(R.string.search_trip)
+                        myView.Question.text = context.getString(R.string.not_more_seats)
+                        myView.Question2.text = context.getString(R.string.search_trip)
 
-                    dialog.show()
+                        dialog.show()
 
-                    myView.cancelButton.setOnClickListener{
-                        dialog.cancel()
+                        myView.cancelButton.setOnClickListener {
+                            dialog.cancel()
+                        }
                     }
-                }
 
             }
         }
@@ -140,7 +190,7 @@ class PassengerTripViewHolder(view: View, private val context: Context): Recycle
     }
 
     fun toStringWithTime(date: Date?) = with(date ?: Date()) {
-        SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this)
+        SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(this)
     }
 
     fun rateDriver() {

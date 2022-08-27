@@ -111,6 +111,8 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
 
         GlobalScope.launch(Dispatchers.Main){
             trip = viewModel.getSingleTrip(tripId!!)
+            setPointsAndRoute(trip)
+            setTripData(trip)
             for (id in trip.passengers) {
                 passengersList.add(viewModel.getUser(id))
             }
@@ -296,17 +298,24 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
     }
 
     private fun setTripData(trip: TripResponse) {
-        binding.titleFragment.text = getString(R.string.trip_of) + " ${driver.userName}"
-        val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(driver.profileImage)
-        gsReference.downloadUrl.addOnSuccessListener {
-            Glide.with(requireContext()).load(it).into(binding.userImage)
+        GlobalScope.launch(Dispatchers.Main){
+            driver = viewModel.getUser(trip.driver)
+            binding.titleFragment.text = getString(R.string.trip_of) + " ${driver.userName}"
+            val storageReference = FirebaseStorage.getInstance()
+            val gsReference = storageReference.getReferenceFromUrl(driver.profileImage)
+            gsReference.downloadUrl.addOnSuccessListener {
+                Glide.with(requireContext()).load(it).into(binding.userImage)
+            }
         }
-        binding.dateTrip.text = getString(R.string.date_trip) + toStringWithTime(trip.departureDate)
+        binding.dateTrip.text = getString(R.string.date_trip) + " ${toStringWithTimeText(trip.departureDate)}"
     }
 
     fun toStringWithTime(date: Date?) = with(date ?: Date()) {
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(this)
+    }
+
+    fun toStringWithTimeText(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd-MM-yyyy HH:mm").format(this)
     }
 
 

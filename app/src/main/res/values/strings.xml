@@ -209,6 +209,11 @@
     <string name="passengers">Pasajeros</string>
     <string name="add_to_trip">¡Te has añadido al viaje correctamente!</string>
     <string name="contact_driver">¡Ponte en contacto con el conductor!</string>
+    <string name="not_passenger">¡No formas parte de este viaje!</string>
+    <string name="rate_condition">Para poder valorarlo has de ser uno de los pasajeros y que el viaje haya acabado</string>
+    <string name="cant_rate">Aún no se puede valorar el viaje</string>
+    <string name="condition_rating_trip">Para poder valorar un viaje, éste debe haber acabado</string>
+    <string name="already_passenger">¡Ya formas parte de este viaje!</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

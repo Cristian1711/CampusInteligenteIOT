@@ -16,7 +16,7 @@ class PassengerTripAdapter(private val user: UsersResponse, private val context:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PassengerTripViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return PassengerTripViewHolder(layoutInflater.inflate(R.layout.trip_item, parent, false), context)
+        return PassengerTripViewHolder(layoutInflater.inflate(R.layout.passenger_trip_item, parent, false), context)
     }
 
     override fun onBindViewHolder(holder: PassengerTripViewHolder, position: Int) {
