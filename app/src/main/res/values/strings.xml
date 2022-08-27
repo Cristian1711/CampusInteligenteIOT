@@ -214,6 +214,8 @@
     <string name="cant_rate">Aún no se puede valorar el viaje</string>
     <string name="condition_rating_trip">Para poder valorar un viaje, éste debe haber acabado</string>
     <string name="already_passenger">¡Ya formas parte de este viaje!</string>
+    <string name="sorry_text_driver">Sentimos que la experiencia de tu viaje haya sido mala...</string>
+    <string name="ole_text">¡Nos alegramos de que haya sido una gran experiencia!</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -224,6 +224,10 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(this)
     }
 
+    fun toStringWithTimeText(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd-MM-yyyy HH:mm").format(this)
+    }
+
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.mapboxMap = mapboxMap
         mapboxMap.setStyle(getString(R.string.map_style)) {
@@ -328,7 +332,7 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
                     { view, hourOfDay, minute ->
                         date?.set(Calendar.HOUR_OF_DAY, hourOfDay)
                         date?.set(Calendar.MINUTE, minute)
-                        binding.etDate.setText(toStringWithTime(date!!.time))
+                        binding.etDate.setText(toStringWithTimeText(date!!.time))
                     },
                     currentDate.get(Calendar.HOUR_OF_DAY),
                     currentDate.get(Calendar.MINUTE),

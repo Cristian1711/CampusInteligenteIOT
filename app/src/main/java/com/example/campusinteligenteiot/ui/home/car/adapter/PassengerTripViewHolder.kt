@@ -39,7 +39,7 @@ class PassengerTripViewHolder(view: View, private val context: Context): Recycle
 
     fun render(trip: TripResponse, user: UsersResponse, onClickDelete: (Int) -> Unit){
 
-        val dateString = toStringWithTime(trip.departureDate)
+        val dateString = toStringWithTimeText(trip.departureDate)
         binding.tripDate.text = dateString
 
         GlobalScope.launch(Dispatchers.Main){
@@ -225,7 +225,7 @@ class PassengerTripViewHolder(view: View, private val context: Context): Recycle
 
         when (int) {
             1 -> {
-                message = context.getString(R.string.sorry_text)
+                message = context.getString(R.string.sorry_text_driver)
             }
             2 -> {
                 message = context.getString(R.string.sorry_text_2)
@@ -237,11 +237,15 @@ class PassengerTripViewHolder(view: View, private val context: Context): Recycle
                 message = context.getString(R.string.awesome)
             }
             else -> {
-                message = context.getString(R.string.thank_you_2)
+                message = context.getString(R.string.ole_text)
             }
         }
 
         return message
+    }
+
+    fun toStringWithTimeText(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd-MM-yyyy HH:mm").format(this)
     }
 
 }

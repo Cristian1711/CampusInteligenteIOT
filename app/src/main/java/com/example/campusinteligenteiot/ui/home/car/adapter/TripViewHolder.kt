@@ -60,7 +60,7 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
                 binding.checkButton.visibility = GONE
             }
         }
-        val dateString = toStringWithTime(trip.departureDate)
+        val dateString = toStringWithTimeText(trip.departureDate)
         binding.tripDate.text = dateString
 
         GlobalScope.launch(Dispatchers.Main){
@@ -255,6 +255,10 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
         }
 
         return message
+    }
+
+    fun toStringWithTimeText(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd-MM-yyyy HH:mm").format(this)
     }
 
 }
