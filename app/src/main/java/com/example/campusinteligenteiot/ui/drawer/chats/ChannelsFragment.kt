@@ -79,11 +79,9 @@ class ChannelsFragment : Fragment() {
             )
             val viewModelFactory = ChannelListViewModelFactory(filter, ChannelListViewModel.DEFAULT_SORT)
             val viewModel: ChannelListViewModel by viewModels { viewModelFactory }
-            val listHeaderViewModel: ChannelListHeaderViewModel by viewModels()
 
             // Step 4 - Connect the ChannelListViewModel to the ChannelListView, loose
             //          coupling makes it easy to customize
-            listHeaderViewModel.bindView(binding.channelListHeaderView, viewLifecycleOwner)
             viewModel.bindView(binding.channelListView, viewLifecycleOwner)
             binding.channelListView.setChannelItemClickListener { channel ->
                 startActivity(ChatActivity.newIntent(requireContext(), channel))

@@ -201,20 +201,21 @@ class HomeActivity : AppCompatActivity() {
                         if (eventId != null){
                             GlobalScope.launch(Dispatchers.Main) {
                                 event = viewModel.getEvent(eventId)
-                                event.assistants.add(user.id)
+                                if(!event.assistants.contains(user.id)){
+                                    event.assistants.add(user.id)
+                                    eventCall = EventCall(
+                                        event.assistants,
+                                        event.attendances,
+                                        toSimpleString(event.eventDate),
+                                        event.description,
+                                        event.eventImage,
+                                        event.eventTitle,
+                                        event.eventPlace,
+                                        event.suggested
+                                    )
 
-                                eventCall = EventCall(
-                                    event.assistants,
-                                    event.attendances,
-                                    toSimpleString(event.eventDate),
-                                    event.description,
-                                    event.eventImage,
-                                    event.eventTitle,
-                                    event.eventPlace,
-                                    event.suggested
-                                )
-
-                                viewModel.saveEvent(event.id, eventCall)
+                                    viewModel.saveEvent(event.id, eventCall)
+                                }
 
                                 val bundle = bundleOf(
                                     "eventId" to eventId

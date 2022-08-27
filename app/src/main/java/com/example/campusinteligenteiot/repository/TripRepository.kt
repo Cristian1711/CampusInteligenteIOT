@@ -18,6 +18,10 @@ class TripRepository {
         return api.getTripById(id)
     }
 
+    suspend fun getTripByIdLive(id: String): LiveData<TripResponse> {
+        return api.getTripByIdLive(id)
+    }
+
     suspend fun getAllTrips(): LiveData<MutableList<TripResponse>>? {
         return api.getAllTrips()
     }

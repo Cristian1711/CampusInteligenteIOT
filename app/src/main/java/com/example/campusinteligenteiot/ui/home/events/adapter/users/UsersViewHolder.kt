@@ -35,7 +35,7 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
     lateinit var currentUser: UsersResponse
     val updateUserFriends = SaveUserUseCase()
 
-    fun render(friend : UsersResponse, user: UsersResponse){
+    fun render(friend : UsersResponse, user: UsersResponse, isEvent: Boolean){
         friendUser = friend
         currentUser = user
         val storageReference = FirebaseStorage.getInstance()
@@ -59,14 +59,25 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
                 "userId" to friend.id
             )
             val navController = Navigation.findNavController(myView)
-            navController.navigate(R.id.action_eventInformationFragment_to_friendsProfileFragment2, bundle)
+            if(isEvent){
+                navController.navigate(R.id.action_eventInformationFragment_to_friendsProfileFragment2, bundle)
+            }
+            else{
+                navController.navigate(R.id.action_tripDetailsFragment_to_friendsProfileFragment2, bundle)
+            }
+
         }
 
         binding.chatButton.setOnClickListener{
             createChat(user.userName, friend.userName)
             val navController = Navigation.findNavController(myView)
             Handler().postDelayed({
-                navController.navigate(R.id.action_eventInformationFragment_to_channelsFragment)
+                if(isEvent){
+                    navController.navigate(R.id.action_eventInformationFragment_to_channelsFragment)
+                }
+                else{
+                    navController.navigate(R.id.action_tripDetailsFragment_to_channelsFragment)
+                }
             }, 1500)
         }
 

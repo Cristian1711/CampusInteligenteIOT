@@ -151,5 +151,8 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation "com.google.android.material:material:1.1.0-alpha02"
 
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+
 
 }

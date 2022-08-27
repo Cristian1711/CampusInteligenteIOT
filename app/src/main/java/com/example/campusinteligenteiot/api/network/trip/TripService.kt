@@ -27,6 +27,14 @@ class TripService {
         }
     }
 
+    suspend fun getTripByIdLive(id: String): LiveData<TripResponse> {
+        var mutableData = MutableLiveData<TripResponse>()
+        return withContext(Dispatchers.IO){
+            mutableData = (retrofit.create(TripApiClient::class.java).getTripById(id)) as MutableLiveData<TripResponse>
+            mutableData
+        }
+    }
+
     suspend fun getAllTrips(): LiveData<MutableList<TripResponse>>?{
         val mutableData = MutableLiveData<MutableList<TripResponse>>()
         var dataList: MutableList<TripResponse>

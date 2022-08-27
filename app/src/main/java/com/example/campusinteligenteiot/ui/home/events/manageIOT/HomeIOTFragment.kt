@@ -2,6 +2,7 @@ package com.example.campusinteligenteiot.ui.home.events.manageIOT
 
 import android.app.AlertDialog
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.nfc.NdefMessage
@@ -34,12 +35,21 @@ import kotlin.experimental.and
 import android.nfc.NdefRecord
 
 import android.nfc.tech.Ndef
+import com.example.campusinteligenteiot.api.model.event.EventCall
+import com.example.campusinteligenteiot.api.model.event.EventResponse
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
+import com.google.gson.Gson
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class HomeIOTFragment : Fragment() {
     private  var _binding: HomeIOTFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var event: EventResponse
+    private lateinit var eventCall: EventCall
+    private lateinit var user: UsersResponse
     private val viewModel by viewModels<HomeIOTViewModel>()
     private val nfcAdapter: NfcAdapter? by lazy {
         NfcAdapter.getDefaultAdapter(context)
@@ -50,6 +60,11 @@ class HomeIOTFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = HomeIOTFragmentBinding.inflate(inflater,container,false)
+
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("current_user", "")
+        user = gson.fromJson(json, UsersResponse::class.java)
 
         return binding.root
     }
@@ -105,15 +120,37 @@ class HomeIOTFragment : Fragment() {
             } else {
                     val idEvent = result.contents.toString()
 
+                    GlobalScope.launch(Dispatchers.Main) {
+                        event = viewModel.getEvent(idEvent)
+                        if(!event.assistants.contains(user.id)){
+                            event.assistants.add(user.id)
+                            eventCall = EventCall(
+                                event.assistants,
+                                event.attendances,
+                                toSimpleString(event.eventDate),
+                                event.description,
+                                event.eventImage,
+                                event.eventTitle,
+                                event.eventPlace,
+                                event.suggested
+                            )
+
+                            viewModel.saveEvent(event.id, eventCall)
+                        }
+                    }
                     val bundle = bundleOf(
                         "eventId" to idEvent
                     )
                     val navController = Navigation.findNavController(requireView())
-                    navController.navigate(R.id.action_generateQRFragment_to_friendsProfileFragment2, bundle)
+                    navController.navigate(R.id.action_homeIOTFragment_to_eventInformationFragment, bundle)
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
             }
+    }
+
+    fun toSimpleString(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("yyyy-MM-dd").format(this)
     }
 
 }

@@ -197,6 +197,16 @@
     <string name="no_date">Debes seleccionar una fecha y hora de salida</string>
     <string name="using_calendar">Puedes hacerlo con el calendario</string>
     <string name="available_trips">Viajes disponibles</string>
+    <string name="not_more_seats">No hay asientos disponibles</string>
+    <string name="search_trip">Busca otro viaje</string>
+    <string name="cant_close_trip">Aún no puedes cerrar el viaje, puesto que no se ha realizado</string>
+    <string name="condition">Solo puedes cerrarlo una vez se ha hecho</string>
+    <string name="closed_trip">Has cerrado correctamente el viaje</string>
+    <string name="question2_dialog1_generic">¡Esperamos que haya ido bien!</string>
+    <string name="rating_driver">Valoración media:</string>
+    <string name="trip_route">Esta es la ruta del viaje</string>
+    <string name="date_trip">El viaje sale el</string>
+    <string name="passengers">Pasajeros</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -19,14 +19,15 @@ class EventService {
     suspend fun getEventById(id: String): EventResponse {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(EventApiClient::class.java).getEventById(id)
-            response.body()!!
+            response
         }
     }
 
-    suspend fun getEventByIdLive(id: String): LiveData<EventResponse> {
+    suspend fun getEventByIdLive(id: String): MutableLiveData<EventResponse> {
         var mutableData = MutableLiveData<EventResponse>()
         return withContext(Dispatchers.IO){
-            mutableData = (retrofit.create(EventApiClient::class.java).getEventById(id)) as MutableLiveData<EventResponse>
+            val response = (retrofit.create(EventApiClient::class.java).getEventById(id))
+            mutableData.postValue(response)
             mutableData
         }
     }

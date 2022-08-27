@@ -19,10 +19,10 @@ class EventInformationViewModel : ViewModel() {
     val searchUserUseCase = SearchUserUseCase()
     val saveEventUseCase = SaveEventUseCase()
 
-    suspend fun getEvent(id: String): LiveData<EventResponse>{
+    suspend fun getEvent(id: String): MutableLiveData<EventResponse>{
         val mutableData = MutableLiveData<EventResponse>()
         getSingleEventLiveUseCase(id).observeForever { event ->
-            mutableData.value = event
+            mutableData.postValue(event)
         }
         return mutableData
     }

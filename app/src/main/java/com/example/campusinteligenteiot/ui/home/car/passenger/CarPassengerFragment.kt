@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
@@ -62,6 +63,10 @@ class CarPassengerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initTripRecyclerView(view)
+
+        binding.changeButton.setOnClickListener{
+            findNavController().navigate(R.id.action_carPassengerFragment_to_carDriverFragment)
+        }
     }
 
     private fun initTripRecyclerView(view: View) {

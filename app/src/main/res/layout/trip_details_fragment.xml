@@ -1,13 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.car.details.TripDetailsFragment">
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.car.details.TripDetailsFragment"
+    android:background="@color/md_grey_800">
 
-    <TextView
+    <com.example.campusinteligenteiot.common.CustomScrollView
+        android:id="@+id/customScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-16dp">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/DrawerButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:color/transparent"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toEndOf="@+id/DrawerButton"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24_white" />
+
+            <TextView
+                android:id="@+id/titleFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/trip_of"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/driverRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/userImage"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat_normal"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="@string/rating_driver"
+                />
+
+            <TextView
+                android:id="@+id/ratingHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/driverRating"
+                android:layout_marginTop="10dp"
+                android:paddingStart="50dp"
+                android:paddingEnd="50dp"
+                android:fontFamily="@font/montserrat_light_italic"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="Puedes realizar tu valoración pulsando la estrella en la anterior ventana"
+                />
+
+            <TextView
+                android:id="@+id/dateTrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ratingHelp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/montserrat_normal"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="@string/date_trip"
+                />
+
+            <TextView
+                android:id="@+id/routeQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dateTrip"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/montserrat_normal"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="@string/trip_route"
+                />
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/routeQuestion"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                mapbox:mapbox_cameraBearing="500"
+                mapbox:mapbox_cameraTilt="1000"
+                mapbox:mapbox_cameraZoom="16">
+
+            </com.mapbox.mapboxsdk.maps.MapView>
+
+            <TextView
+                android:id="@+id/passengersText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mapView"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/montserrat_normal"
+                android:layout_marginEnd="80dp"
+                android:layout_marginStart="80dp"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:text="@string/passengers"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/passengersRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passengersText">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userImage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.example.campusinteligenteiot.common.CustomScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

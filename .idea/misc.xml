@@ -66,7 +66,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_fragment.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_passenger_fragment.xml" value="0.128" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_splash_fragment.xml" value="0.1" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/channels_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/channels_fragment.xml" value="0.16" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/config_fragment.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/content_auxiliary.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/content_home.xml" value="0.13020833333333334" />
@@ -133,6 +133,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/star_dialog.xml" value="0.2" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/train_cor_rab_schedule_fragment.xml" value="0.536" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/train_schedule_fragment.xml" value="0.2" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/trip_details_fragment.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/trip_item.xml" value="0.4" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/twitter_like.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/user_item.xml" value="0.4" />

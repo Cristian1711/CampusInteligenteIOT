@@ -67,10 +67,12 @@ import java.util.*
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.view.View.VISIBLE
+import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.api.model.trip.TripCall
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.GeoPoint
+import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.add_trip_fragment.*
 import kotlinx.android.synthetic.main.fragment_main_home.mapView
@@ -128,6 +130,12 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
         binding.customScrollView.isEnableScrolling = true
         super.onViewCreated(view, savedInstanceState)
         binding.mapView.getMapAsync(this)
+
+        val storageReference = FirebaseStorage.getInstance()
+        val gsReference = storageReference.getReferenceFromUrl(user.profileImage)
+        gsReference.downloadUrl.addOnSuccessListener {
+            Glide.with(requireContext()).load(it).into(binding.userImage)
+        }
 
         binding.backButton.setOnClickListener {
             findNavController().navigate(R.id.action_addTripFragment_to_carDriverFragment)
@@ -320,6 +328,7 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
                     { view, hourOfDay, minute ->
                         date?.set(Calendar.HOUR_OF_DAY, hourOfDay)
                         date?.set(Calendar.MINUTE, minute)
+                        binding.etDate.setText(toStringWithTime(date!!.time))
                     },
                     currentDate.get(Calendar.HOUR_OF_DAY),
                     currentDate.get(Calendar.MINUTE),

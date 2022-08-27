@@ -69,13 +69,14 @@ class EventInformationFragment : Fragment() {
     private suspend fun observeData(id: String) {
         viewModel.getEvent(id).observe(viewLifecycleOwner, Observer{
             val assistantsList = ArrayList<UsersResponse>()
-            for(id in it.assistants){
-                GlobalScope.launch(Dispatchers.Main){
+            GlobalScope.launch(Dispatchers.Main) {
+                for (id in it.assistants) {
                     assistantsList.add(viewModel.getUser(id))
                 }
+                adapter.setAssistantsList(assistantsList)
+                adapter.filterAssistantsList(user.id)
+                adapter.notifyDataSetChanged()
             }
-            adapter.setAssistantsList(assistantsList)
-            adapter.notifyItemInserted(assistantsList.size-1)
         })
     }
 
@@ -90,6 +91,14 @@ class EventInformationFragment : Fragment() {
 
         binding.starImage.setOnClickListener{
             rateEvent()
+        }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            GlobalScope.launch(Dispatchers.Main){
+                observeData(eventId!!)
+            }
+
         }
     }
 
@@ -182,7 +191,7 @@ class EventInformationFragment : Fragment() {
     private fun initUsersRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.userRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = UsersAdapter(user, requireContext())
+        adapter = UsersAdapter(user, requireContext(), true)
         recyclerView.adapter = adapter
     }
 

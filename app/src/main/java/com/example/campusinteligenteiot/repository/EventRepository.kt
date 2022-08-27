@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.product.ProductResponse
@@ -15,7 +16,7 @@ class EventRepository {
         return api.getEventById(id)
     }
 
-    suspend fun getEventByIdLive(id: String): LiveData<EventResponse> {
+    suspend fun getEventByIdLive(id: String): MutableLiveData<EventResponse> {
         return api.getEventByIdLive(id)
     }
 

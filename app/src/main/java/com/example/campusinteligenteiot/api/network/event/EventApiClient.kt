@@ -8,7 +8,7 @@ import retrofit2.http.*
 interface EventApiClient {
     @Headers("Content-Type: application/json")
     @GET("http://149.91.99.198:8080/api/v1/events/getEvent/{id}")
-    suspend fun getEventById(@Path("id") id:String): Response<EventResponse>
+    suspend fun getEventById(@Path("id") id:String): EventResponse
 
     @Headers("Content-Type: application/json")
     @GET("http://149.91.99.198:8080/api/v1/events/allEvents")
