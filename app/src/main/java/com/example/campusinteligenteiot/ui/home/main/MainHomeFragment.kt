@@ -7,22 +7,25 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.*
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
+import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
+import com.example.campusinteligenteiot.databinding.FragmentMainHomeBinding
+import com.google.gson.JsonObject
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
+import com.mapbox.api.geocoding.v5.models.CarmenFeature
 import com.mapbox.geojson.Feature
 import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.Point
@@ -45,12 +48,7 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher
 import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
-import com.example.campusinteligenteiot.R
-import com.example.campusinteligenteiot.api.model.user.UsersResponse
-import com.example.campusinteligenteiot.databinding.FragmentMainHomeBinding
-import com.google.firebase.storage.FirebaseStorage
 import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.models.image
 import io.getstream.chat.android.client.models.name
 import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.coroutines.Dispatchers
@@ -83,6 +81,9 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     private val client = ChatClient.instance()
     private lateinit var user : UsersResponse
     private val viewModel by viewModels<MainHomeViewModel>()
+    private var centerCamera: Boolean = false
+    private val BOUND_CORNER_SW = Point.fromLngLat(37.91291444576055, -4.726980754832681)
+    private val BOUND_CORNER_NE = Point.fromLngLat(37.91872327749303, -4.713251487758043)
 
     var permsRequestCode = 100
     var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
@@ -117,13 +118,51 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.mapView.getMapAsync(this)
+
+        binding.cameraMode.setOnClickListener{
+            if(!centerCamera){
+                locationComponent!!.setCameraMode(CameraMode.TRACKING)
+            }
+            else{
+                val position = CameraPosition.Builder()
+                    .target(LatLng(37.91392869112485, -4.720650591239973)) // Sets the new camera position
+                    .zoom(15.0) // Sets the zoom
+                    .bearing(500.0) // Rotate the camera
+                    .tilt(58.0) // Set the camera tilt
+                    .build() // Creates a CameraPosition from the builder
+
+                mapboxMap?.animateCamera(
+                    CameraUpdateFactory
+                        .newCameraPosition(position), 5000
+                )
+            }
+
+            centerCamera = !centerCamera
+
+        }
+
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.mapboxMap = mapboxMap
         mapboxMap.setStyle(getString(R.string.map_style)) {
                 style: Style? ->
+
+
+            val position = CameraPosition.Builder()
+                .target(LatLng(37.91392869112485, -4.720650591239973)) // Sets the new camera position
+                .zoom(15.0) // Sets the zoom
+                .bearing(500.0) // Rotate the camera
+                .tilt(58.0) // Set the camera tilt
+                .build() // Creates a CameraPosition from the builder
+
+            mapboxMap.animateCamera(
+                CameraUpdateFactory
+                    .newCameraPosition(position), 5000
+            )
+
             enableLocationComponent(style)
+
             addDestinationIconSymbolLayer(style)
             mapboxMap.addOnMapClickListener(this)
 
@@ -144,7 +183,7 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
 
             setUpLayer(style!!)
 
-            val drawable = ResourcesCompat.getDrawable(resources, R.drawable.ic_location_on_red_24dp, null)
+            val drawable = ResourcesCompat.getDrawable(this.resources, R.drawable.mapbox_marker_icon_default, null)
             val bitmapUtils = BitmapUtils.getBitmapFromDrawable(drawable)
             style!!.addImage(symbolIconId, bitmapUtils!!)
         }
@@ -162,13 +201,37 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     }
 
     private fun initSearchFab() {
+        val LeonardoDaVinci = CarmenFeature.builder().text(getString(R.string.leonardo_da_vinci))
+            .geometry(Point.fromLngLat(-4.72467863640577, 37.91506129524588))
+            .placeName(getString(R.string.campus_rabanales))
+            .id("directions-leonardodavinci")
+            .properties(JsonObject())
+            .build()
+
+        val CharlesDarwin = CarmenFeature.builder().text(getString(R.string.charles_darwin))
+            .geometry(Point.fromLngLat(-4.720118183332431, 37.91525239519548))
+            .placeName(getString(R.string.campus_rabanales))
+            .id("directions-charlesdarwin")
+            .properties(JsonObject())
+            .build()
+
+        val MarieCurie = CarmenFeature.builder().text(getString(R.string.marie_curie))
+            .geometry(Point.fromLngLat(-4.71815992944758, 37.91506770972532))
+            .placeName(getString(R.string.campus_rabanales))
+            .id("directions-charlesdarwin")
+            .properties(JsonObject())
+            .build()
+
         fab_location_search.setOnClickListener{v: View? ->
             val intent = PlaceAutocomplete.IntentBuilder()
                 .accessToken(
                     (if (Mapbox.getAccessToken() != null) Mapbox.getAccessToken() else getString(R.string.access_token))!!
                 ).placeOptions(PlaceOptions.builder()
-                    .backgroundColor(Color.parseColor("#121212"))
+                    .backgroundColor(Color.parseColor("#fcfafa"))
                     .limit(10)
+                    .addInjectedFeature(LeonardoDaVinci)
+                    .addInjectedFeature(CharlesDarwin)
+                    .addInjectedFeature(MarieCurie)
                     .build(PlaceOptions.MODE_CARDS))
                 .build(activity)
             startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE)
@@ -186,9 +249,11 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
             if (mapboxMap != null) {
                 val style = mapboxMap!!.style
                 if (style != null) {
-                    val source = style.getSourceAs<GeoJsonSource>(geoJsonSourceLayerId)
+                    val source = style.getSourceAs<GeoJsonSource>("destination-source-id")
                     source?.setGeoJson(FeatureCollection.fromFeatures(arrayOf(Feature.fromJson(selectedCarmenFeature.toJson()))))
-
+                    val originPoint = Point.fromLngLat(locationComponent!!.lastKnownLocation!!.longitude, locationComponent!!.lastKnownLocation!!.latitude)
+                    getRoute(originPoint, Feature.fromJson(selectedCarmenFeature.toJson()).geometry() as Point)
+                    btnNearbyLines!!.isEnabled = true
                     /** Move map camera to the selected location **/
                     mapboxMap!!.animateCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.Builder()
                         .target(LatLng((selectedCarmenFeature.geometry() as Point?)!!.latitude(),
@@ -280,7 +345,6 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
             locationComponent!!.activateLocationComponent(requireContext(), loadedMapStyle!!)
             locationComponent!!.setLocationComponentEnabled(true)
             //Set the component's camera mode
-            locationComponent!!.setCameraMode(CameraMode.TRACKING)
         }
     }
 
@@ -359,7 +423,7 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
                 val user: io.getstream.chat.android.client.models.User = result.data().user
                 val connectionId: String = result.data().connectionId
             } else {
-                println("NO bro")
+                println("error")
             }
         }
     }

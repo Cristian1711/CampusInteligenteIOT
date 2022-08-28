@@ -17,9 +17,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        mapbox:mapbox_cameraBearing="500"
-        mapbox:mapbox_cameraTilt="1000"
-        mapbox:mapbox_cameraZoom="16">
+        mapbox:mapbox_cameraTargetLat="37.88542151428108"
+        mapbox:mapbox_cameraTargetLng="-4.777206551808831"
+        mapbox:mapbox_cameraZoom="3">
 
     </com.mapbox.mapboxsdk.maps.MapView>
 
@@ -43,20 +43,32 @@
         app:layout_constraintEnd_toStartOf="@+id/fab_location_search"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cameraMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="90dp"
+        android:tint="@color/white"
+        app:backgroundTint="@color/mapboxNotificationBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_location_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="31dp"
-        android:layout_marginRight="31dp"
         android:layout_marginBottom="16dp"
         android:tint="@color/white"
         app:backgroundTint="@color/mapboxNotificationBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnNearbyLines"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        app:srcCompat="@android:drawable/ic_search_category_default"
+        android:contentDescription="@string/search_button_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

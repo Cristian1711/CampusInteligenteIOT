@@ -114,7 +114,7 @@ dependencies {
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    //Mapitas
+    //Maps
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.0'
     implementation('com.mapbox.mapboxsdk:mapbox-android-sdk:9.6.0') {
         exclude group: 'group_name', module: 'module_name'

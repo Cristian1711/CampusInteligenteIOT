@@ -216,6 +216,11 @@
     <string name="already_passenger">¡Ya formas parte de este viaje!</string>
     <string name="sorry_text_driver">Sentimos que la experiencia de tu viaje haya sido mala...</string>
     <string name="ole_text">¡Nos alegramos de que haya sido una gran experiencia!</string>
+    <string name="search_button_text">Botón para buscar localizaciones en el mapa</string>
+    <string name="leonardo_da_vinci">Edificio Leonardo Da Vinci</string>
+    <string name="campus_rabanales">Campus Universitario de Rabanales</string>
+    <string name="charles_darwin">Edificio Charles Darwin</string>
+    <string name="marie_curie">Edificio Marie Curie</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
