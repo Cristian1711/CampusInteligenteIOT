@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.drawer.calendar
 
+import android.content.Context
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.CalendarFragmentBinding
 import com.example.campusinteligenteiot.model.Appointment
 import com.example.campusinteligenteiot.ui.drawer.calendar.appointments.AppointmentAdapter
@@ -21,6 +24,7 @@ import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarAdapter
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils.daysInWeekArray
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils.monthYearFromDate
+import com.google.gson.Gson
 import java.time.LocalDate
 import java.util.ArrayList
 
@@ -30,6 +34,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
     private val binding get() = _binding!!
     private val viewModel by viewModels<CalendarViewModel>()
     private var dailyAppointments:List<Appointment?>? = null
+    private lateinit var currentUser: UsersResponse
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -37,6 +42,13 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
         savedInstanceState: Bundle?
     ): View? {
         _binding = CalendarFragmentBinding.inflate(inflater,container,false)
+
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("current_user", "")
+        currentUser = gson.fromJson(json, UsersResponse::class.java)
+
+
         CalendarUtils.selectedDate = LocalDate.now()
         dailyAppointments = Appointment.appointmentsForDate(CalendarUtils.selectedDate)
         setWeekView()
@@ -111,9 +123,10 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
     }
 
     fun gotoEditAppointment(){
-        findNavController().navigate(
-            R.id.action_calendarFragment_to_editAppointment
+        val bundle = bundleOf(
+            "userId" to currentUser.id
         )
+        findNavController().navigate(R.id.action_calendarFragment_to_editAppointment, bundle)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.drawer.calendar.appointments
 
+import android.app.AlertDialog
 import android.os.Build
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.example.campusinteligenteiot.databinding.EditProfileFragmentBinding
 import com.example.campusinteligenteiot.model.Appointment
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.TimePickerFragment
+import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
 import java.time.LocalTime
 
 class EditAppointment : Fragment() {
@@ -25,6 +27,7 @@ class EditAppointment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel by viewModels<EditAppointmentViewModel>()
     lateinit var appointmentTime: String
+    private lateinit var userId: String
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -32,6 +35,8 @@ class EditAppointment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = EditAppointmentFragmentBinding.inflate(inflater,container,false)
+
+        userId = arguments?.getString("userId")!!
 
         binding.eventDateTV.text = "Fecha: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate!!)
         return binding.root
@@ -41,7 +46,39 @@ class EditAppointment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.saveButton.setOnClickListener{
-            saveAppointmentAction()
+            if(binding.eventNameET.text.isEmpty()){
+                val builder = AlertDialog.Builder(context)
+                val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+                builder.setView(myView)
+                val dialog = builder.create()
+
+                myView.Question.text = getString(R.string.not_possible_to_add)
+                myView.Question2.text = getString(R.string.must_add_name)
+
+                dialog.show()
+
+                myView.cancelButton.setOnClickListener {
+                    dialog.cancel()
+                }
+            }
+            else if(binding.eventTimeTV.text.isEmpty()){
+                val builder = AlertDialog.Builder(context)
+                val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+                builder.setView(myView)
+                val dialog = builder.create()
+
+                myView.Question.text = getString(R.string.not_possible_to_add)
+                myView.Question2.text = getString(R.string.must_add_hour)
+
+                dialog.show()
+
+                myView.cancelButton.setOnClickListener {
+                    dialog.cancel()
+                }
+            }
+            else{
+                saveAppointmentAction()
+            }
         }
 
         binding.eventTimeTV.setOnClickListener {
@@ -55,14 +92,14 @@ class EditAppointment : Fragment() {
     }
 
     private fun onTimeSelected(time: String){
-        binding.eventTimeTV.setText("Has seleccionado las $time")
+        binding.eventTimeTV.setText(getString(R.string.you_have_Selected) + time)
         appointmentTime = time
     }
 
     private fun saveAppointmentAction() {
         val appointmentName = binding.eventNameET.text.toString()
         println(appointmentName)
-        val appointment = Appointment(appointmentName, CalendarUtils.selectedDate!!, appointmentTime)
+        val appointment = Appointment(appointmentName, CalendarUtils.selectedDate!!, appointmentTime, userId)
         Appointment.appointmentList.add(appointment)
         findNavController().navigate(
             R.id.action_editAppointment_to_calendarFragment

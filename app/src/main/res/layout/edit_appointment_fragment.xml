@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.drawer.calendar.appointments.EditAppointment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
     <TextView
+        android:id="@+id/EditAppointmentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/add_calendar"
+        android:textSize="25sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textAlignment="center"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Nombre:"
+        app:layout_constraintTop_toBottomOf="@id/EditAppointmentTitle"
+        app:layout_goneMarginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/title"
         android:textSize="20sp"
+        android:fontFamily="@font/montserrat_normal"
         android:textAlignment="center"
         android:textColor="@color/black"/>
 
@@ -24,6 +51,10 @@
         android:layout_gravity="center"
         android:textSize="20sp"
         android:ems="10"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:inputType="text"/>
 
     <TextView
@@ -31,10 +62,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Fecha"
+        android:layout_marginTop="30dp"
+        android:text="@string/date"
+        app:layout_constraintTop_toBottomOf="@id/eventNameET"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:textSize="20sp"
         android:textAlignment="center"
+        android:fontFamily="@font/montserrat_normal"
         android:textColor="@color/black"/>
 
     <EditText
@@ -43,8 +78,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:hint="Selecciona una hora"
-        android:textSize="20sp"
+        android:hint="@string/select_hour"
+        android:fontFamily="@font/montserrat_light_italic"
+        app:layout_constraintTop_toBottomOf="@id/eventDateTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="18sp"
         android:clickable="false"
         android:focusable="false"
         android:textAlignment="center"
@@ -52,10 +91,13 @@
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guardar"
+        android:text="@string/save"
+        app:layout_constraintTop_toBottomOf="@id/eventTimeTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/mapbox_blue"
         android:background="@null"
         android:textStyle="bold"
@@ -63,4 +105,6 @@
         android:layout_gravity="center"
         android:textSize="20sp"/>
 
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

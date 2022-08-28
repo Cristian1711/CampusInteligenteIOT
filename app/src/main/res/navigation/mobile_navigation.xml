@@ -80,7 +80,14 @@
         android:id="@+id/configFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.config.ConfigFragment"
         android:label="config_fragment"
-        tools:layout="@layout/config_fragment" />
+        tools:layout="@layout/config_fragment" >
+        <action
+            android:id="@+id/action_configFragment_to_navigation_map"
+            app:destination="@id/navigation_map" />
+        <action
+            android:id="@+id/action_configFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/channelsFragment"
         android:name="com.example.campusinteligenteiot.ui.drawer.chats.ChannelsFragment"
@@ -133,6 +140,15 @@
         <action
             android:id="@+id/action_friendsProfileFragment2_to_channelsFragment"
             app:destination="@id/channelsFragment" />
+        <action
+            android:id="@+id/action_friendsProfileFragment2_to_friendsFragment"
+            app:destination="@id/friendsFragment" />
+        <action
+            android:id="@+id/action_friendsProfileFragment2_to_tripDetailsFragment"
+            app:destination="@id/tripDetailsFragment" />
+        <action
+            android:id="@+id/action_friendsProfileFragment2_to_eventInformationFragment"
+            app:destination="@id/eventInformationFragment" />
     </fragment>
     <fragment
         android:id="@+id/busScheduleFragment"

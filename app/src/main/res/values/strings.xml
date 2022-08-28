@@ -127,7 +127,7 @@
     <string name="canceled">Cancelado</string>
     <string name="already_friend">Ya tienes a este amigo agregado</string>
     <string name="user_qr">QR del usuario</string>
-    <string name="show_text">¡Muéstralo y obtén nuevos amigos!</string>
+    <string name="show_text">¡Obtén nuevos amigos!</string>
     <string name="date_event">Fecha de celebración</string>
     <string name="place_event">Explanada principal</string>
     <string name="connect_event">Conectarse a evento</string>
@@ -221,6 +221,19 @@
     <string name="campus_rabanales">Campus Universitario de Rabanales</string>
     <string name="charles_darwin">Edificio Charles Darwin</string>
     <string name="marie_curie">Edificio Marie Curie</string>
+    <string name="jose_celestino_mutis">Edificio José Celestino Mutis</string>
+    <string name="gregor_mendel">Edificio Gregor Mendel</string>
+    <string name="severo_ochoa">Edificio Severo Ochoa</string>
+    <string name="my_Friends">Mis amigos</string>
+    <string name="new_event">Nuevo Evento</string>
+    <string name="add_calendar">Añadir al horario</string>
+    <string name="title">Título:</string>
+    <string name="date">Fecha</string>
+    <string name="select_hour">Selecciona una hora</string>
+    <string name="must_add_name">¡Debes añadir un nombre!</string>
+    <string name="not_possible_to_add">No ha sido posible añadirlo al horario</string>
+    <string name="must_add_hour">¡Debes añadir una hora!</string>
+    <string name="you_have_Selected">\"Has seleccionado las \"</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

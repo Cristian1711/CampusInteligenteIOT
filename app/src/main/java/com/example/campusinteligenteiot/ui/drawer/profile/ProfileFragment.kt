@@ -16,6 +16,8 @@ import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ProfileFragmentBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ProfileFragment : Fragment() {
 
@@ -58,6 +60,10 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    fun toString(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd/MM/yyyy").format(this)
+    }
+
     private suspend fun observeUri() {
         viewModel.getImageFromStorage(user.profileImage).observe(viewLifecycleOwner, Observer {
             setImage(it)
@@ -78,6 +84,8 @@ class ProfileFragment : Fragment() {
         binding.itemCollegedegree.collegeDegree.text = user.collegeDegree
 
         binding.itemEmail.email.text = user.email
+
+        binding.itemBirthdate.birthdate.text = toString(user.birthdate)
     }
 
 

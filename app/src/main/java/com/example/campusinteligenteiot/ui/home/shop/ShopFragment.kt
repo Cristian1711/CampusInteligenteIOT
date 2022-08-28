@@ -85,6 +85,13 @@ class ShopFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            GlobalScope.launch(Dispatchers.Main){
+                observeData()
+            }
+        }
+
         initProductsRecyclerView(view)
         showMenu()
 

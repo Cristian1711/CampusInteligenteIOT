@@ -116,8 +116,6 @@ class EditProfileFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             val response = viewModel.saveUser(user, user.id)
             fileUpload()
-            println("YA HE HECHO EL UPDATE SUPUESTAMENTE")
-            println(response.code().toString())
             user.profileImage = url
             val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
@@ -135,9 +133,15 @@ class EditProfileFragment : Fragment() {
 
         binding.itemEdit.nameEdit.setText(user.name + " " + user.surname)
 
+        binding.itemBirthdate.birthdate.text = toString(user.birthdate)
+
         binding.itemCollegedegree.collegeDegree.text = user.collegeDegree
 
         binding.itemEmail.email.text = user.email
+    }
+
+    fun toString(date: Date?) = with(date ?: Date()) {
+        SimpleDateFormat("dd/MM/yyyy").format(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

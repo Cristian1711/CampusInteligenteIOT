@@ -37,6 +37,7 @@
 
         </LinearLayout>
         <TextView
+            android:id="@+id/birthdate"
             android:text="17/11/2000"
             android:textStyle="bold"
             android:textColor="@color/black"

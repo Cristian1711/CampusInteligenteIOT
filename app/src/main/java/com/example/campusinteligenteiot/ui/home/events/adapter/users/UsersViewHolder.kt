@@ -1,4 +1,4 @@
-package com.example.campusinteligenteiot.ui.drawer.friends
+package com.example.campusinteligenteiot.ui.home.events.adapter.users
 
 import android.app.AlertDialog
 import android.content.Context
@@ -7,20 +7,15 @@ import android.os.Handler
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
-import com.example.campusinteligenteiot.databinding.ItemMyProductBinding
 import com.example.campusinteligenteiot.databinding.UserItemBinding
 import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
 import com.google.firebase.storage.FirebaseStorage
-import de.hdodenhof.circleimageview.CircleImageView
 import io.getstream.chat.android.client.ChatClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,7 +30,13 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
     lateinit var currentUser: UsersResponse
     val updateUserFriends = SaveUserUseCase()
 
-    fun render(friend : UsersResponse, user: UsersResponse, isEvent: Boolean){
+    fun render(friend : UsersResponse, user: UsersResponse, isEvent: Boolean, id: String){
+        val type: String
+        type = if(isEvent){
+            "evento"
+        } else{
+            "viaje"
+        }
         friendUser = friend
         currentUser = user
         val storageReference = FirebaseStorage.getInstance()
@@ -56,7 +57,9 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
 
         binding.showProfileButton.setOnClickListener{
             val bundle = bundleOf(
-                "userId" to friend.id
+                "userId" to friend.id,
+                "type" to type,
+                "referId" to id
             )
             val navController = Navigation.findNavController(myView)
             if(isEvent){

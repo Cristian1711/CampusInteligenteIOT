@@ -68,6 +68,13 @@ class CarPassengerFragment : Fragment() {
         binding.changeButton.setOnClickListener{
             findNavController().navigate(R.id.action_carPassengerFragment_to_carDriverFragment)
         }
+
+        binding.swipeRefresh.setOnRefreshListener {
+            binding.swipeRefresh.isRefreshing = false
+            GlobalScope.launch(Dispatchers.Main){
+                observeData()
+            }
+        }
     }
 
     private fun initTripRecyclerView(view: View) {

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -19,7 +18,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,12 +25,8 @@ import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.trip.TripResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
-import com.example.campusinteligenteiot.databinding.CarDriverFragmentBinding
-import com.example.campusinteligenteiot.databinding.CarPassengerFragmentBinding
 import com.example.campusinteligenteiot.databinding.TripDetailsFragmentBinding
-import com.example.campusinteligenteiot.ui.drawer.friends.UsersAdapter
-import com.example.campusinteligenteiot.ui.home.car.adapter.TripAdapter
-import com.example.campusinteligenteiot.ui.home.car.driver.CarDriverViewModel
+import com.example.campusinteligenteiot.ui.home.events.adapter.users.UsersAdapter
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.mapbox.api.directions.v5.models.DirectionsResponse
@@ -54,7 +48,6 @@ import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute
 import kotlinx.android.synthetic.main.add_trip_fragment.*
 import kotlinx.android.synthetic.main.add_trip_fragment.mapView
-import kotlinx.android.synthetic.main.fragment_main_home.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -322,7 +315,7 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
     private fun initUsersRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.passengersRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = UsersAdapter(currentUser, requireContext(), false)
+        adapter = UsersAdapter(currentUser, requireContext(), false, tripId!!)
         adapter.setAssistantsList(passengersList)
         recyclerView.adapter = adapter
 

@@ -3,7 +3,6 @@ package com.example.campusinteligenteiot.ui.home.events.eventInfo
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,10 +20,7 @@ import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.EventInformationFragmentBinding
-import com.example.campusinteligenteiot.databinding.HomeIOTFragmentBinding
-import com.example.campusinteligenteiot.ui.drawer.friends.UsersAdapter
-import com.example.campusinteligenteiot.ui.home.events.manageIOT.HomeIOTViewModel
-import com.example.campusinteligenteiot.ui.home.shop.adapter.ProductAdapter
+import com.example.campusinteligenteiot.ui.home.events.adapter.users.UsersAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.star_dialog.*
 import kotlinx.coroutines.Dispatchers
@@ -191,7 +187,7 @@ class EventInformationFragment : Fragment() {
     private fun initUsersRecyclerView(view: View) {
         recyclerView = view.findViewById(R.id.userRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter = UsersAdapter(user, requireContext(), true)
+        adapter = UsersAdapter(user, requireContext(), true, eventId!!)
         recyclerView.adapter = adapter
     }
 

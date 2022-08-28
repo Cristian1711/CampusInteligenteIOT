@@ -13,6 +13,7 @@ import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -28,6 +29,8 @@ import kotlinx.coroutines.launch
 
 class FriendsProfileFragment : Fragment() {
     private var userId: String? = null
+    private var type: String? = null
+    private var referId: String? = null
     private lateinit var user: UsersResponse
     private lateinit var currentUser: UsersResponse
     private val viewModel by viewModels<FriendsProfileViewModel>()
@@ -39,6 +42,8 @@ class FriendsProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         userId = arguments?.getString("userId")
+        type = arguments?.getString("type")
+        referId = arguments?.getString("referId")
         GlobalScope.launch(Dispatchers.Main) {
             val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
             val gson = Gson()
@@ -101,6 +106,26 @@ class FriendsProfileFragment : Fragment() {
 
         binding.itemEditFriends.deleteButton.setOnClickListener{
             showAlertDialogDelete()
+        }
+
+        binding.backButton.setOnClickListener {
+            if(type == null){
+                findNavController().navigate(R.id.action_friendsProfileFragment2_to_friendsFragment)
+            }
+            else{
+                if(type.equals("evento")){
+                    val bundle = bundleOf(
+                        "eventId" to referId
+                    )
+                    findNavController().navigate(R.id.action_friendsProfileFragment2_to_eventInformationFragment, bundle)
+                }
+                else{
+                    val bundle = bundleOf(
+                        "tripId" to referId
+                    )
+                    findNavController().navigate(R.id.action_friendsProfileFragment2_to_tripDetailsFragment, bundle)
+                }
+            }
         }
 
     }

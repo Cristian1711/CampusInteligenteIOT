@@ -82,8 +82,6 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
     private lateinit var user : UsersResponse
     private val viewModel by viewModels<MainHomeViewModel>()
     private var centerCamera: Boolean = false
-    private val BOUND_CORNER_SW = Point.fromLngLat(37.91291444576055, -4.726980754832681)
-    private val BOUND_CORNER_NE = Point.fromLngLat(37.91872327749303, -4.713251487758043)
 
     var permsRequestCode = 100
     var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,
@@ -218,7 +216,28 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         val MarieCurie = CarmenFeature.builder().text(getString(R.string.marie_curie))
             .geometry(Point.fromLngLat(-4.71815992944758, 37.91506770972532))
             .placeName(getString(R.string.campus_rabanales))
-            .id("directions-charlesdarwin")
+            .id("directions-mariecurie")
+            .properties(JsonObject())
+            .build()
+
+        val JoseCelestinoMutis = CarmenFeature.builder().text(getString(R.string.jose_celestino_mutis))
+            .geometry(Point.fromLngLat(-4.718169858352411, 37.9134295512542))
+            .placeName(getString(R.string.campus_rabanales))
+            .id("directions-josecelestinomutis")
+            .properties(JsonObject())
+            .build()
+
+        val GregorMendel = CarmenFeature.builder().text(getString(R.string.gregor_mendel))
+            .geometry(Point.fromLngLat(-4.719322708753907, 37.913486618041134))
+            .placeName(getString(R.string.campus_rabanales))
+            .id("directions-gregormendel")
+            .properties(JsonObject())
+            .build()
+
+        val SeveroOchoa = CarmenFeature.builder().text(getString(R.string.severo_ochoa))
+            .geometry(Point.fromLngLat(-4.720248149589935, 37.91353479832213))
+            .placeName(getString(R.string.campus_rabanales))
+            .id("directions-severoochoa")
             .properties(JsonObject())
             .build()
 
@@ -229,9 +248,13 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
                 ).placeOptions(PlaceOptions.builder()
                     .backgroundColor(Color.parseColor("#fcfafa"))
                     .limit(10)
+                    .proximity(Point.fromLngLat(locationComponent!!.lastKnownLocation!!.longitude, locationComponent!!.lastKnownLocation!!.latitude))
                     .addInjectedFeature(LeonardoDaVinci)
                     .addInjectedFeature(CharlesDarwin)
                     .addInjectedFeature(MarieCurie)
+                    .addInjectedFeature(JoseCelestinoMutis)
+                    .addInjectedFeature(GregorMendel)
+                    .addInjectedFeature(SeveroOchoa)
                     .build(PlaceOptions.MODE_CARDS))
                 .build(activity)
             startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE)
