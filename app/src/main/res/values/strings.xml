@@ -234,6 +234,9 @@
     <string name="not_possible_to_add">No ha sido posible añadirlo al horario</string>
     <string name="must_add_hour">¡Debes añadir una hora!</string>
     <string name="you_have_Selected">\"Has seleccionado las \"</string>
+    <string name="moovit">Actualmente no disponemos de datos en tiempo real, pulsa sobre el icono de Moovit para obtener información precisa</string>
+    <string name="no_moovit_installed">No tienes descargada la aplicación de Moovit, te redirigimos a ella</string>
+    <string name="not_possible_moovit">No ha sido posible abrir Moovit</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

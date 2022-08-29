@@ -60,8 +60,8 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/appointment_cell.xml" value="0.16" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/blank_fragment.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/bus_schedule_fragment.xml" value="0.152" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_cell.xml" value="0.10400000000000001" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_cell.xml" value="0.2" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_fragment.xml" value="0.16" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_driver_fragment.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_fragment.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_passenger_fragment.xml" value="0.16" />
@@ -81,7 +81,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/event_detail_fragment.xml" value="0.2" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/event_information_fragment.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/events_fragment.xml" value="0.2" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_bus_cor_rab_schedule.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_bus_cor_rab_schedule.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_bus_rab_cor_schedule.xml" value="0.23097826086956522" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_generate_q_r.xml" value="0.16" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_home.xml" value="0.14583333333333334" />
@@ -132,7 +132,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/schedule_fragment.xml" value="0.136" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/shop_fragment.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/star_dialog.xml" value="0.2" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/train_cor_rab_schedule_fragment.xml" value="0.536" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/train_cor_rab_schedule_fragment.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/train_schedule_fragment.xml" value="0.2" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/trip_details_fragment.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/trip_item.xml" value="0.4" />

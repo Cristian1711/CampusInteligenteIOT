@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.home.schedule.bus
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -8,9 +9,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.databinding.FragmentBusRabCorScheduleBinding
+import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,35 +40,59 @@ class BusRabCorScheduleFragment : Fragment() {
 
         val fecha: String = dateFormat.format(date)
 
+        binding.btnNearbyLines.setOnClickListener{
+            uri = "moovit://nearby?lat=&lon=&partner_id=<CampusInteligenteIOT>"
+            checkMoovit()
+        }
+        binding.btnGetRoutes.setOnClickListener{
+            uri = "moovit://directions?dest_lat=37.894266&dest_lon=-4.782051&dest_name=Cordoba&orig_lat=&orig_lon=&orig_name=Posicion%20Actual&auto_run=true&partner_id=<CampusInteligenteIOT>"
+            checkMoovit()
+        }
+
+
+
+    }
+
+    private fun checkMoovit() {
         try {
 
             // Assume that Moovit app exists. If not, exception will occur
+
+
+            // Assume that Moovit app exists. If not, exception will occur
             val pm = requireContext().packageManager
+
             pm.getPackageInfo("com.tranzmate", PackageManager.GET_ACTIVITIES)
+
+
+            val intent = Intent(Intent.ACTION_VIEW)
+
+            intent.data = Uri.parse(uri)
+
+            startActivity(intent)
 
         } catch (e: PackageManager.NameNotFoundException) {
 
             // Moovit not installed - send to store
+            val builder = AlertDialog.Builder(context)
+            val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+            builder.setView(myView)
+            val dialog = builder.create()
+
+            myView.Question.text = getString(R.string.not_possible_moovit)
+            myView.Question2.text = getString(R.string.no_moovit_installed)
+
+            dialog.show()
+
+            myView.cancelButton.setOnClickListener {
+                dialog.cancel()
+            }
+
+            Thread.sleep(4000)
             val url = "https://moovit.onelink.me/3986059930?pid=Developers&c=CampusInteligenteIOT"
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(url)
             startActivity(i)
         }
-
-        binding.btnNearbyLines.setOnClickListener{
-            uri = "moovit://nearby?lat=&lon=&partner_id=CampusInteligenteIOT"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(uri)
-            startActivity(intent)
-        }
-        binding.btnGetRoutes.setOnClickListener{
-            uri = "moovit://directions?dest_lat=37.894266&dest_lon=-4.782051&dest_name=Cordoba&orig_lat=&orig_lon=&orig_name=Posicion%20Actual&auto_run=true&date=$fecha&partner_id=CampusInteligenteIOT"
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(uri)
-            startActivity(intent)
-        }
-
-
-
     }
 }
