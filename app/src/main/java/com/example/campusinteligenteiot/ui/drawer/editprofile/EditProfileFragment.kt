@@ -133,7 +133,7 @@ class EditProfileFragment : Fragment() {
 
         binding.itemEdit.nameEdit.setText(user.name + " " + user.surname)
 
-        binding.itemBirthdate.birthdate.text = toString(user.birthdate)
+        binding.itemBirthdate.birthdate.text = user.birthdate
 
         binding.itemCollegedegree.collegeDegree.text = user.collegeDegree
 

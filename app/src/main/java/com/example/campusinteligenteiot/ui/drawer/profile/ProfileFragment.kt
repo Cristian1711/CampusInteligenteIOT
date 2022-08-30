@@ -85,7 +85,7 @@ class ProfileFragment : Fragment() {
 
         binding.itemEmail.email.text = user.email
 
-        binding.itemBirthdate.birthdate.text = toString(user.birthdate)
+        binding.itemBirthdate.birthdate.text = user.birthdate
     }
 
 

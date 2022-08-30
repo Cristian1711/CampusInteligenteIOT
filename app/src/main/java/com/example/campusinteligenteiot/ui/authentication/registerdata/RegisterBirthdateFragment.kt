@@ -32,6 +32,10 @@ class RegisterBirthdateFragment : Fragment() {
     private var FRIENDS = arrayListOf(
         friendId
     )
+    private var PRODUCTLIKES: ArrayList<String>? = null
+    private var APPOINTMENTSTITLES: ArrayList<String>? = null
+    private var APPOINTMENTSDATES: ArrayList<String>? = null
+    private var APPOINTMENTSHOURS: ArrayList<String>? = null
     private var DESCRIPTION = "nada"
     private var ISDRIVER = false
     private var PROFILEIMAGE = "nada"
@@ -123,13 +127,6 @@ class RegisterBirthdateFragment : Fragment() {
     }
 
     private fun uploadDataFirestore() {
-        val birthdate = Calendar.getInstance()
-
-        birthdate.clear()
-        birthdate.set(Calendar.YEAR,YEAR)
-        birthdate.set(Calendar.MONTH,MONTH)
-        birthdate.set(Calendar.DAY_OF_MONTH,DAY)
-
         val email = Firebase.auth.currentUser?.email.toString()
         val userId = Firebase.auth.currentUser?.uid.toString()
 
@@ -138,15 +135,18 @@ class RegisterBirthdateFragment : Fragment() {
             "name" to NAME,
             "surname" to SURNAME,
             "collegeDegree" to COLLEGEDEGREE,
-            "birthdate" to Timestamp(birthdate.timeInMillis/1000,0),
+            "birthdate" to "$DAY/$MONTH/$YEAR",
             "email" to email,
             "userName" to USERNAME,
             "description" to DESCRIPTION,
             "friends" to FRIENDS,
             "isDriver" to ISDRIVER,
             "profileImage" to PROFILEIMAGE,
-            "rating" to RATING
-            //"phonenumber" to PHONENUMBER
+            "rating" to RATING,
+            "productLikes" to PRODUCTLIKES,
+            "appointmentsTitles" to APPOINTMENTSTITLES,
+            "appointmentsHours" to APPOINTMENTSHOURS,
+            "appointmentsDates" to APPOINTMENTSDATES
         )
         val db = Firebase.firestore
         db.collection("User")

@@ -89,6 +89,8 @@ class FriendsProfileFragment : Fragment() {
         binding.itemCollegedegree.collegeDegree.text = user.collegeDegree
 
         binding.itemEmail.email.text = user.email
+
+        binding.itemBirthdate.birthdate.text = user.birthdate
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

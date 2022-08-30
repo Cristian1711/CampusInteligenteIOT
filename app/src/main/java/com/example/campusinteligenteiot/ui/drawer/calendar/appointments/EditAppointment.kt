@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.CalendarFragmentBinding
 import com.example.campusinteligenteiot.databinding.EditAppointmentFragmentBinding
 import com.example.campusinteligenteiot.databinding.EditProfileFragmentBinding
@@ -19,7 +20,12 @@ import com.example.campusinteligenteiot.model.Appointment
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.TimePickerFragment
 import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class EditAppointment : Fragment() {
 
@@ -28,6 +34,7 @@ class EditAppointment : Fragment() {
     private val viewModel by viewModels<EditAppointmentViewModel>()
     lateinit var appointmentTime: String
     private lateinit var userId: String
+    private lateinit var currentUser: UsersResponse
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -37,11 +44,15 @@ class EditAppointment : Fragment() {
         _binding = EditAppointmentFragmentBinding.inflate(inflater,container,false)
 
         userId = arguments?.getString("userId")!!
+        GlobalScope.launch(Dispatchers.Main){
+            currentUser = viewModel.getUser(userId)
+        }
 
         binding.eventDateTV.text = "Fecha: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate!!)
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -84,6 +95,10 @@ class EditAppointment : Fragment() {
         binding.eventTimeTV.setOnClickListener {
             showTimePickerDialog()
         }
+
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_editAppointment_to_calendarFragment)
+        }
     }
 
     private fun showTimePickerDialog() {
@@ -96,14 +111,27 @@ class EditAppointment : Fragment() {
         appointmentTime = time
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveAppointmentAction() {
         val appointmentName = binding.eventNameET.text.toString()
         println(appointmentName)
         val appointment = Appointment(appointmentName, CalendarUtils.selectedDate!!, appointmentTime, userId)
         Appointment.appointmentList.add(appointment)
-        findNavController().navigate(
-            R.id.action_editAppointment_to_calendarFragment
-        )
+        currentUser.appointmentsDates.add(toString(CalendarUtils.selectedDate!!))
+        currentUser.appointmentsHours.add(appointmentTime)
+        currentUser.appointmentsTitles.add(appointmentName)
+        GlobalScope.launch(Dispatchers.Main){
+            viewModel.updateAppointments(currentUser, currentUser.id)
+            findNavController().navigate(
+                R.id.action_editAppointment_to_calendarFragment
+            )
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun toString(date: LocalDate): String{
+        val formatters: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        return date.format(formatters)
     }
 
 }

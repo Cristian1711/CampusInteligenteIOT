@@ -5,7 +5,7 @@ import java.util.*
 
 data class UsersResponse(
     @SerializedName("id") var id: String,
-    @SerializedName("birthdate") var birthdate: Date,
+    @SerializedName("birthdate") var birthdate: String,
     @SerializedName("collegeDegree") var collegeDegree: String,
     @SerializedName("description") var description: String,
     @SerializedName("email") var email: String,
@@ -16,5 +16,9 @@ data class UsersResponse(
     @SerializedName("surname") var surname: String,
     @SerializedName("userName") var userName: String,
     @SerializedName("isDriver") var driver: Boolean,
-    @SerializedName("productLikes") var productLikes: ArrayList<String>
+    @SerializedName("productLikes") var productLikes: ArrayList<String>,
+    @SerializedName("appointmentsTitles") var appointmentsTitles: ArrayList<String>,
+    @SerializedName("appointmentsHours") var appointmentsHours: ArrayList<String>,
+    @SerializedName("appointmentsDates") var appointmentsDates: ArrayList<String>
+
 )

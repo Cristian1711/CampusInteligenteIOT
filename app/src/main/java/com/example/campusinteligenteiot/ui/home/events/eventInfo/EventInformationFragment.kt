@@ -15,12 +15,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.EventInformationFragmentBinding
 import com.example.campusinteligenteiot.ui.home.events.adapter.users.UsersAdapter
+import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.star_dialog.*
 import kotlinx.coroutines.Dispatchers
@@ -57,6 +59,7 @@ class EventInformationFragment : Fragment() {
         GlobalScope.launch(Dispatchers.Main){
             event = viewModel.getSingleEvent(eventId!!)
             observeData(eventId!!)
+            loadImage()
         }
 
         return binding.root
@@ -95,6 +98,14 @@ class EventInformationFragment : Fragment() {
                 observeData(eventId!!)
             }
 
+        }
+    }
+
+    private fun loadImage() {
+        val storageReference = FirebaseStorage.getInstance()
+        val gsReference = storageReference.getReferenceFromUrl(event.eventImage)
+        gsReference.downloadUrl.addOnSuccessListener {
+            Glide.with(requireContext()).load(it).into(binding.EventImage)
         }
     }
 

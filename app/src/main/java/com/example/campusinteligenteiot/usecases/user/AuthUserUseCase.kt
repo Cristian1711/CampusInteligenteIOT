@@ -17,8 +17,5 @@ class AuthUserUseCase(private val userRepository: UserRepository) {
         return userRepository.signInDefault(email,passwd)
     }
 
-    fun firebaseDefaultGetCurrentUser() : com.example.campusinteligenteiot.model.User{
-        return userRepository.getCurrentUser()
-    }
 
 }

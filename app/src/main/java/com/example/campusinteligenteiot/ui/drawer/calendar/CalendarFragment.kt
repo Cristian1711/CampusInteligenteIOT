@@ -26,6 +26,7 @@ import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils.d
 import com.example.campusinteligenteiot.ui.drawer.calendar.utils.CalendarUtils.monthYearFromDate
 import com.google.gson.Gson
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 
 class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
@@ -35,6 +36,8 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
     private val viewModel by viewModels<CalendarViewModel>()
     private var dailyAppointments:List<Appointment?>? = null
     private lateinit var currentUser: UsersResponse
+    @RequiresApi(Build.VERSION_CODES.O)
+    var df = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -48,7 +51,12 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
         val json = sharedPreferences.getString("current_user", "")
         currentUser = gson.fromJson(json, UsersResponse::class.java)
 
-
+        for(i in 0 until currentUser.appointmentsDates.size){
+            val appointment = Appointment(currentUser.appointmentsTitles[i],
+                LocalDate.parse(currentUser.appointmentsDates[i], df),
+                currentUser.appointmentsHours[i], currentUser.id)
+            Appointment.appointmentList.add(appointment)
+        }
         CalendarUtils.selectedDate = LocalDate.now()
         dailyAppointments = Appointment.appointmentsForDate(CalendarUtils.selectedDate)
         setWeekView()

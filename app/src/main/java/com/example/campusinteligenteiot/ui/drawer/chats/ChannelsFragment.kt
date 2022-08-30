@@ -1,5 +1,6 @@
 package com.example.campusinteligenteiot.ui.drawer.chats
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,10 +10,12 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.ChannelsFragmentBinding
 import com.example.campusinteligenteiot.ui.home.main.MainHomeViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.models.Filters
 import io.getstream.chat.android.client.models.User
@@ -35,12 +38,19 @@ class ChannelsFragment : Fragment() {
     private val client = ChatClient.instance()
 
     private val viewModel by viewModels<ChannelsViewModel>()
+    private lateinit var currentUser: UsersResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = ChannelsFragmentBinding.inflate(inflater,container,false)
+
+        val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("current_user", "")
+        currentUser = gson.fromJson(json, UsersResponse::class.java)
+
         return binding.root
     }
 
@@ -48,27 +58,18 @@ class ChannelsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         GlobalScope.launch(Dispatchers.Main) {
-            val firebaseUser = viewModel.getUser()
-
             //observeData()
 
-            val user = User(id = firebaseUser.name!!).apply {
-                name = firebaseUser.name
-                image = firebaseUser.profileImage!!
+            val user = User(id = currentUser.userName).apply {
+                name = currentUser.userName
             }
             val token = client.devToken(user.id)
-            println("id = ${firebaseUser.name}\n token = $token")
+            println("id = ${currentUser.userName}\n token = $token")
 
             client.connectUser(
                 user = user,
                 token = token
             ).enqueue()
-
-            //creo el channel pa probar
-
-
-
-
 
             // Step 3 - Set the channel list filter and order
             // This can be read as requiring only channels whose "type" is "messaging" AND

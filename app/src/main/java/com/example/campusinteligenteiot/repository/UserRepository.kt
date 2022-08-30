@@ -75,44 +75,6 @@ class UserRepository {
         return Resource.Result(user)
     }
 
-     fun getCurrentUser() : User{
-
-        val uid = "7dscT5MXidZQjtL51MPQRi5ZdK62"
-        val db = Firebase.firestore
-        val userList = db.collection("User")
-
-        val RefDoc = userList.document(uid).get().addOnSuccessListener { document ->
-            if (document.exists()) {
-                //user = documentToUser(document)
-
-            }
-        }
-
-        val image = Image("1", "@drawable/img")
-        val images = ArrayList<Image>()
-        images.add(image)
-
-        val user = User(
-            "",
-            "Paco",
-            "Martinez",
-            "pacoo23",
-            Date(1,1, 2000),
-            "paquito@gmail.com",
-            "",
-            null,
-            "descripcion de prueba",
-            "gs://racoonapps-cd246.appspot.com/profiles/placeholder.png",
-            null,
-            false,
-            null
-        )
-
-
-        return user
-
-    }
-
      fun documentToUser(document: DocumentSnapshot) : User {
 
          val birthdate = document.getDate("birthdate")
