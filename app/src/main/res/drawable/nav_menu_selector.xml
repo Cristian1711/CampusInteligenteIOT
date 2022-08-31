@@ -3,5 +3,5 @@
 
     <item android:color="@color/white" android:state_checked="false" />
 
-    <item android:color="@color/mapboxYellow"  android:state_checked="true"/>
+    <item android:color="@color/ucolightred"  android:state_checked="true"/>
 </selector>

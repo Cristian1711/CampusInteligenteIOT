@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/background01"
+    android:background="@drawable/background_gradiation"
     tools:context=".ui.drawer.profile.ProfileFragment">
     <LinearLayout
         android:orientation="vertical"
@@ -45,18 +45,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="Mi"
+                android:text="@string/my"
                 android:textSize="30sp"
                 android:textStyle="normal"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_marginStart="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:text="Perfil"
+                android:text="@string/profile"
                 android:textSize="33sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_marginStart="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

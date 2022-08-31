@@ -109,9 +109,6 @@ class ProductDetailFragment : Fragment() {
         ).enqueue { result ->
             if (result.isSuccess) {
                 val channel = result.data()
-            } else {
-                println("NO HE PODIDO CREAR EL CHAT")
-                // Handle result.error()
             }
         }
     }
@@ -120,13 +117,16 @@ class ProductDetailFragment : Fragment() {
         var like: Boolean = currentUser.productLikes.contains(product.id)
         if(like) binding.likeImageView.setImageResource(R.drawable.ic_twitter_like)
         binding.likeImageView.setOnClickListener{
-            println("HE PULSADO EL BOTON DE LIKE")
-            println(like)
-            like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
+            like = likeAnimation(binding.likeImageView, R.raw.like, like)
             if(like){
-                currentUser.productLikes.add(product.id!!)
+                if(currentUser.productLikes == null){
+                    currentUser.productLikes = arrayListOf(product.id)
+                }
+                else{
+                    currentUser.productLikes.add(product.id)
+                }
                 GlobalScope.launch(Dispatchers.Main) {
-                    viewModel.saveUser(currentUser, currentUser.id)
+                    viewModel.saveProductLikes(currentUser.productLikes, currentUser.id)
                     val sharedPreferences = context?.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
                     val editor = sharedPreferences?.edit()
                     val gson = Gson()
@@ -137,7 +137,7 @@ class ProductDetailFragment : Fragment() {
             } else{
                 currentUser.productLikes.remove(product.id)
                 GlobalScope.launch(Dispatchers.Main) {
-                    viewModel.saveUser(currentUser, currentUser.id)
+                    viewModel.saveProductLikes(currentUser.productLikes, currentUser.id)
                     val sharedPreferences = context?.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
                     val editor = sharedPreferences?.edit()
                     val gson = Gson()

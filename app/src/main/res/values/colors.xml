@@ -15,11 +15,18 @@
     <color name="colorAccent">#3F51B5</color>
     <color name="colorHint">#9E9E9E</color>
     <color name="colorHintDark">#828282</color>
-    <color name="colorBackground">#121212</color>
-
+    <color name="colorBackground">#f4f4f4</color>
+    <color name="colorBackgroundBlack">#121212</color>
+    <color name="colorBackGroundGrey">#808080</color>
     <color name="mapboxWhite">#FFFFFF</color>
     <color name="mapboxPurple">#8E00E8</color>
     <color name="mapboxGrayLight">#8E00E8</color>
+    <color name="ucoblue">#241b5c</color>
+    <color name="ucored">#a90132</color>
+    <color name="ucolightred">#bc4d53</color>
+    <color name="ucoyellow">#f1b310</color>
+    <color name="ucoblack">#121212</color>
+
 
 
     <color name="mapboxPink">#ee4e8b</color>

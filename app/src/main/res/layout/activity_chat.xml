@@ -8,12 +8,13 @@
         android:id="@+id/messageListHeaderView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
-        android:backgroundTint="@color/colorBackground"
-        android:foregroundTint="@color/colorBackground"
+        android:background="@color/ucolightred"
+        android:backgroundTint="@color/ucolightred"
+        android:foregroundTint="@color/ucolightred"
         android:paddingStart="30dp"
         android:paddingTop="20dp"
         android:paddingEnd="30dp"
+        android:paddingBottom="20dp"
         android:scrollbarThumbHorizontal="@color/colorBackground"
         android:scrollbarThumbVertical="@color/colorBackground"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +24,7 @@
         app:streamUiMessageListHeaderSearchingForNetworkProgressBarTint="@color/colorBackground"
         app:streamUiMessageListHeaderShowBackButton="true"
         app:streamUiMessageListHeaderTitleTextColor="@color/white"
+        app:streamUiMessageListHeaderOfflineLabelTextColor="@color/white"
         app:streamUiMessageListHeaderTitleTextSize="20sp" />
 
     <io.getstream.chat.android.ui.message.list.MessageListView
@@ -36,9 +38,9 @@
         app:layout_constraintTop_toBottomOf="@+id/messageListHeaderView"
         app:streamUiBackgroundColor="@color/colorBackground"
         app:streamUiDateSeparatorBackgroundColor="@color/colorHintDark"
-        app:streamUiGiphyCardButtonDividerColor="@color/colorBackground"
-        app:streamUiMessageBackgroundColorMine="@color/colorSecondary"
-        app:streamUiMessageBackgroundColorTheirs="@color/colorPrimary"
+        app:streamUiGiphyCardButtonDividerColor="@color/colorHintDark"
+        app:streamUiMessageBackgroundColorMine="@color/ucoblue"
+        app:streamUiMessageBackgroundColorTheirs="@color/ucored"
         app:streamUiMessageReplyTextColorMine="@color/white"
         app:streamUiMessageReplyTextColorTheirs="@color/white"
         app:streamUiMessageTextColorMine="@color/white"
@@ -48,7 +50,7 @@
         android:id="@+id/messageInputView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:background="@color/ucoblack"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,8 +59,12 @@
         app:streamUiMessageInputDividerBackgroundDrawable="@color/colorBackground"
         app:streamUiMessageInputTextColor="@color/colorHint"
 
-        app:streamUiSendButtonDisabledIconColor="@color/colorHint"
-        app:streamUiSendButtonEnabledIconColor="@color/colorSecondary"
+        app:streamUiSendButtonDisabledIconColor="@color/white"
+        app:streamUiAttachButtonIconDisabledColor="@color/white"
+        app:streamUiAttachButtonIconColor="@color/white"
+        app:streamUiAttachButtonIconPressedColor="@color/ucolightred"
+        app:streamUiCommandInputBadgeIcon="@color/white"
+        app:streamUiSendButtonEnabledIconColor="@color/ucolightred"
         app:streamUiSendButtonPressedIconColor="@color/colorPrimary" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

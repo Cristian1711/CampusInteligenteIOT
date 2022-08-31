@@ -44,7 +44,7 @@
         android:id="@+id/nav_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:background="@color/black"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         app:itemIconSize="30dp"
@@ -64,6 +64,7 @@
         android:layout_gravity = "start"
         app:itemIconTint="@drawable/nav_drawer_selector"
         app:itemTextColor="@drawable/nav_drawer_selector"
+        app:itemBackground="@drawable/drawer_background_selector"
         app:headerLayout="@layout/nav_header_drawer"
         app:menu="@menu/drawer_menu"/>
 

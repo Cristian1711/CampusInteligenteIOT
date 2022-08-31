@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/background01"
+    android:background="@drawable/background_gradiation"
     tools:context=".ui.drawer.friends.profile.FriendsProfileFragment">
     <LinearLayout
         android:orientation="vertical"
@@ -52,12 +52,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24" />
+                android:src="@drawable/white_back_button" />
             <TextView
-                android:text="Perfil de"
+                android:text="@string/profile_of"
                 android:textSize="30sp"
                 android:textStyle="normal"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:layout_marginStart="15dp"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"

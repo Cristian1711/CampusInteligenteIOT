@@ -1,40 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_home_icon_icons_com_73532"
-        android:title="@string/profile"
-        android:iconTint="@color/white"/>
-    <item
-        android:id="@+id/calendarFragment"
-        android:icon="@drawable/ic_calendar2"
-        android:title="@string/my_schedule"
-        android:iconTint="@color/white"/>
-    <item
-        android:id="@+id/friendsFragment"
-        android:icon="@drawable/ic_user_friends"
-        android:title="@string/friends"
-        android:iconTint="@color/white"/>
-    <item
-        android:id="@+id/channelsFragment"
-        android:icon="@drawable/ic_chat_talk"
-        android:title="@string/chats"
-        android:iconTint="@color/white"/>
-    <item
-        android:id="@+id/generateQRFragment"
-        android:icon="@drawable/stream_ui_ic_icon_download"
-        android:title="@string/generate_qr"
-        android:iconTint="@color/white"/>
-    <item
-        android:id="@+id/configFragment"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/config"
-        android:iconTint="@color/white"/>
-    <item
-        android:id="@+id/logoutFragment"
-        android:icon="@drawable/ic__exit_logout"
-        android:title="@string/logout"
-        android:iconTint="@color/white"/>
+    <item android:title="@string/personal">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/profileFragment"
+                    android:icon="@drawable/ic_home_icon_icons_com_73532"
+                    android:title="@string/profile"
+                    android:iconTint="@color/white"/>
+                <item
+                    android:id="@+id/calendarFragment"
+                    android:icon="@drawable/ic_calendar2"
+                    android:title="@string/my_schedule"
+                    android:iconTint="@color/white"/>
+            </group>
+        </menu>
+    </item>
+    <item android:title="@string/social">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/friendsFragment"
+                    android:icon="@drawable/ic_user_friends"
+                    android:title="@string/friends"
+                    android:iconTint="@color/white"/>
+                <item
+                    android:id="@+id/channelsFragment"
+                    android:icon="@drawable/ic_chat_talk"
+                    android:title="@string/chats"
+                    android:iconTint="@color/white"/>
+                <item
+                    android:id="@+id/generateQRFragment"
+                    android:icon="@drawable/stream_ui_ic_icon_download"
+                    android:title="@string/generate_qr"
+                    android:iconTint="@color/white"/>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/others">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/configFragment"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/config"
+                    android:iconTint="@color/white"/>
+                <item
+                    android:id="@+id/logoutFragment"
+                    android:icon="@drawable/ic__exit_logout"
+                    android:title="@string/logout"
+                    android:iconTint="@color/white"/>
+            </group>
+        </menu>
+    </item>
 
 </menu>

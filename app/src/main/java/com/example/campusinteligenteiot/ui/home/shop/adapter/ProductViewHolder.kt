@@ -59,7 +59,7 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
         }
 
         binding.likeImageView.setOnClickListener{
-            like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
+            like = likeAnimation(binding.likeImageView, R.raw.like, like)
             if(like){
                 //user.productLikes.add(product.id!!)
                     if(user.productLikes == null){
