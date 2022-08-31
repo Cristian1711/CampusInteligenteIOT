@@ -21,6 +21,8 @@ import androidx.fragment.app.viewModels
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.FragmentMainHomeBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.gson.JsonObject
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.api.directions.v5.models.DirectionsResponse
@@ -104,10 +106,10 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
         // Inflate the layout for this fragment
         _binding = FragmentMainHomeBinding.inflate(inflater,container,false)
         val sharedPreferences = requireContext().getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
-        val user_id = sharedPreferences?.getString("user_id", "null")
+        val current_user = sharedPreferences?.getString("current_user", "null")
 
         GlobalScope.launch(Dispatchers.Main) {
-            user = viewModel.getSingleUser(user_id!!)
+            user = viewModel.getSingleUser(Firebase.auth.currentUser!!.uid)
             createUserGetStream(user)
         }
         return binding.root

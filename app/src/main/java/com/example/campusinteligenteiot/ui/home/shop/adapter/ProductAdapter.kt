@@ -44,10 +44,13 @@ class ProductAdapter(private val user: UsersResponse, private val context: Conte
     }
 
     fun filterProductListByLikes(user: UsersResponse){
-        productMutableList = (oldProductMutableList.filter { user.productLikes.contains(it.id)}) as MutableList<ProductResponse>
+        if(user.productLikes != null){
+            productMutableList = (oldProductMutableList.filter { user.productLikes.contains(it.id)}) as MutableList<ProductResponse>
+        }
+        else{
+            productMutableList.clear()
+        }
 
-        println("LIKES")
-        println(productMutableList)
     }
 
     fun filterProductListByOwner(userId: String){

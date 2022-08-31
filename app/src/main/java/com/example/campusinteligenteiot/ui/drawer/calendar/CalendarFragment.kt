@@ -51,11 +51,13 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
         val json = sharedPreferences.getString("current_user", "")
         currentUser = gson.fromJson(json, UsersResponse::class.java)
 
-        for(i in 0 until currentUser.appointmentsDates.size){
-            val appointment = Appointment(currentUser.appointmentsTitles[i],
-                LocalDate.parse(currentUser.appointmentsDates[i], df),
-                currentUser.appointmentsHours[i], currentUser.id)
-            Appointment.appointmentList.add(appointment)
+        if(currentUser.appointmentsDates != null){
+            for(i in 0 until currentUser.appointmentsDates.size){
+                val appointment = Appointment(currentUser.appointmentsTitles[i],
+                    LocalDate.parse(currentUser.appointmentsDates[i], df),
+                    currentUser.appointmentsHours[i], currentUser.id)
+                Appointment.appointmentList.add(appointment)
+            }
         }
         CalendarUtils.selectedDate = LocalDate.now()
         dailyAppointments = Appointment.appointmentsForDate(CalendarUtils.selectedDate)

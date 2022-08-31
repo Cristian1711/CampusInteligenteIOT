@@ -16,4 +16,8 @@ interface UserApiClient {
     @Headers("Content-Type: application/json")
     @POST("http://149.91.99.198:8080/api/v1/users/saveUser/{id}")
     suspend fun saveUser(@Body params: UsersResponse, @Path("id") id: String): Response<String>
+
+    @Headers("Content-Type: application/json")
+    @POST("http://149.91.99.198:8080/api/v1/users/saveProductLikes/{id}")
+    suspend fun saveProductLikes(@Body params: ArrayList<String>, @Path("id") id: String): Response<String>
 }

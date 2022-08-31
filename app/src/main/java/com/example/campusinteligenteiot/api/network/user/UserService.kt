@@ -26,13 +26,16 @@ class UserService {
         }
     }
 
+    suspend fun saveProductLikes(idProducts: ArrayList<String>, id: String) :Response<String>{
+        return withContext(Dispatchers.IO){
+            val response = retrofit.create(UserApiClient::class.java).saveProductLikes(idProducts, id)
+            response
+        }
+    }
+
     suspend fun saveUser(user: UsersResponse, id: String) : Response<String>{
-        println(id)
-        println(user.friends)
-        println(user.rating)
         return withContext(Dispatchers.IO){
             val response = retrofit.create(UserApiClient::class.java).saveUser(user, id)
-            println("he conseguido una respuesta")
             response
         }
     }

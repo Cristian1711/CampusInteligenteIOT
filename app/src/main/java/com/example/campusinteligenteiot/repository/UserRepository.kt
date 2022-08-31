@@ -126,6 +126,10 @@ class UserRepository {
         return response
     }
 
+    suspend fun saveProductLikes(idProducts: ArrayList<String>, id: String){
+        api.saveProductLikes(idProducts, id)
+    }
+
     suspend fun getAllUsers():List<UsersResponse>{
         val response = api.getAllUsers()
         UserProvider.users = response

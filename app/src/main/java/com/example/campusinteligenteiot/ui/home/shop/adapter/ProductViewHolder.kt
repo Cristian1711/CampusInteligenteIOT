@@ -19,6 +19,7 @@ import com.example.campusinteligenteiot.databinding.ItemMyProductBinding
 import com.example.campusinteligenteiot.databinding.ItemProductBinding
 import com.example.campusinteligenteiot.model.Product
 import com.example.campusinteligenteiot.usecases.user.GetUserFromLocalUseCase
+import com.example.campusinteligenteiot.usecases.user.SaveProductLikesUseCase
 import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
@@ -30,12 +31,15 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
 
     val getUserFromLocalUseCase = GetUserFromLocalUseCase()
     val saveUserUseCase = SaveUserUseCase()
+    val saveProductLikesUseCase = SaveProductLikesUseCase()
     val binding = ItemProductBinding.bind(view)
 
     fun render(user: UsersResponse, product: ProductResponse){
         println("HE ENTRADO EN PRODUCT VIEWHOLDER")
-        var like: Boolean
-        like = user.productLikes.contains(product.id)
+        var like: Boolean = false
+        if(user.productLikes != null){
+            like = user.productLikes.contains(product.id)
+        }
         if(like) binding.likeImageView.setImageResource(R.drawable.ic_twitter_like)
         binding.productTitle.text = product.title
         binding.productPrice.text = product.price.toString() + "€"
@@ -59,9 +63,16 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
             println(like)
             like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
             if(like){
-                user.productLikes.add(product.id!!)
+                //user.productLikes.add(product.id!!)
+                    if(user.productLikes == null){
+                        user.productLikes = arrayListOf(product.id)
+                    }
+                    else{
+                        user.productLikes.add(product.id)
+                    }
                 GlobalScope.launch(Dispatchers.Main) {
-                    saveUserUseCase(user.id, user)
+                    //saveUserUseCase(user.id, user)
+                    saveProductLikesUseCase(user.productLikes, user.id)
                     val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     val gson = Gson()

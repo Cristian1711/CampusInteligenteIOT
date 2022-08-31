@@ -16,6 +16,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
+import android.widget.DatePicker
+
+import android.app.DatePickerDialog
+import android.app.DatePickerDialog.OnDateSetListener
 
 
 class RegisterBirthdateFragment : Fragment() {
@@ -42,7 +46,6 @@ class RegisterBirthdateFragment : Fragment() {
     private var RATING = hashMapOf(
         "rating" to 0
     )
-    //private var PHONENUMBER = "phonenumber"
 
     //ViewBiding
     private  var _binding: FragmentRegisterBirthdateBinding? = null
@@ -57,9 +60,7 @@ class RegisterBirthdateFragment : Fragment() {
         val surname = arguments?.getString("surname")
         val username = arguments?.getString("username")
         val collegeDegree = arguments?.getString("collegeDegree")
-        //val phoneNumber = arguments?.getString("phoneNumber")
 
-        //PHONENUMBER = phoneNumber!!
         NAME = name!!
         SURNAME = surname!!
         USERNAME = username!!
@@ -72,12 +73,17 @@ class RegisterBirthdateFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentRegisterBirthdateBinding.inflate(inflater,container,false)
+
+
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.etDate.setOnClickListener {
+            println("HE CLICKADO EL BOTON DE LA FECHA")
             showDatePickerDialog()
         }
 
@@ -92,20 +98,29 @@ class RegisterBirthdateFragment : Fragment() {
     }
 
     private fun showDatePickerDialog() {
-        val datePicker = DatePickerFragment {
-                day, month, year -> onDateSelected(day, month, year)
-        }
-        val context =
-            datePicker.show(parentFragmentManager,"datePicker")
+        val calendario = Calendar.getInstance()
+        val yy = calendario[Calendar.YEAR]
+        val mm = calendario[Calendar.MONTH]
+        val dd = calendario[Calendar.DAY_OF_MONTH]
+
+
+        val datePicker = DatePickerDialog(
+            requireActivity(),
+            { view, year, monthOfYear, dayOfMonth ->
+                val fecha = "$dayOfMonth / $monthOfYear / $year"
+                DAY = dayOfMonth
+                MONTH = monthOfYear
+                YEAR = year
+                binding.etDate.setText(fecha)
+            }, yy, mm, dd
+        )
+
+        datePicker.show()
     }
 
     private fun onDateSelected (day:Int, month:Int, year:Int) {
         val selectedMonth = month + 1
         binding.etDate.setText("$day / $selectedMonth / $year")
-
-        DAY = day
-        MONTH = selectedMonth
-        YEAR = year
 
     }
 
