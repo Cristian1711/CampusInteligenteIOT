@@ -1,7 +1,7 @@
 package com.example.campusinteligenteiot.ui.drawer.calendar.appointments
 
 import androidx.lifecycle.ViewModel
-import com.example.campusinteligenteiot.api.model.appointments.Appointments
+import com.example.campusinteligenteiot.api.model.appointments.AppointmentsCall
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.usecases.appointments.SaveAppointmentsUseCase
 import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
@@ -12,7 +12,7 @@ class EditAppointmentViewModel : ViewModel() {
     val saveUserUseCase = SaveUserUseCase()
     val searchUserUseCase = SearchUserUseCase()
 
-    suspend fun saveAppointments(appointments: Appointments, id: String){
+    suspend fun saveAppointments(appointments: AppointmentsCall, id: String){
         saveAppointmentsUseCase(id, appointments)
     }
 

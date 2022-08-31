@@ -59,8 +59,6 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
         }
 
         binding.likeImageView.setOnClickListener{
-            println("HE PULSADO EL BOTON DE LIKE")
-            println(like)
             like = likeAnimation(binding.likeImageView, R.raw.bandai_dokkan, like)
             if(like){
                 //user.productLikes.add(product.id!!)
@@ -83,7 +81,7 @@ class ProductViewHolder(view: View, private val context: Context): RecyclerView.
             } else{
                 user.productLikes.remove(product.id)
                 GlobalScope.launch(Dispatchers.Main) {
-                    saveUserUseCase(user.id, user)
+                    saveProductLikesUseCase(user.productLikes, user.id)
                     val sharedPreferences = context.getSharedPreferences("MY_PREF", Context.MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     val gson = Gson()

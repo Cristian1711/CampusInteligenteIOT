@@ -132,7 +132,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener{
         recyclerView.adapter = AppointmentAdapter(dailyAppointments)
     }
 
-    fun gotoEditAppointment(){
+    private fun gotoEditAppointment(){
         val bundle = bundleOf(
             "userId" to currentUser.id
         )

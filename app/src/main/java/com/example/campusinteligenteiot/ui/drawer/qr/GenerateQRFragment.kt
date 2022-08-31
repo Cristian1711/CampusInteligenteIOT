@@ -91,7 +91,7 @@ class GenerateQRFragment : Fragment() {
                 GlobalScope.launch(Dispatchers.Main){
                     if(!user.friends.contains(idUser)){
                         user.friends.add(idUser)
-                        viewModel.updateFriendList(user)
+                        viewModel.saveFriends(user.friends, user.id)
                         val newFriend = viewModel.getUser(idUser)
                         if(!newFriend.friends.contains(user.id)){
                             Toast.makeText(context,
@@ -99,7 +99,6 @@ class GenerateQRFragment : Fragment() {
                                                                     R.string.second_part_warning), Toast.LENGTH_SHORT).show()
                         }
                         else{
-                            //crear chat
                             createChat(user.userName, newFriend.userName)
                         }
                     }
@@ -119,16 +118,13 @@ class GenerateQRFragment : Fragment() {
         }
     }
 
-    fun createChat(currentUserUserName: String, sellerUserName: String) {
+    private fun createChat(currentUserUserName: String, sellerUserName: String) {
         client.createChannel(
             channelType = "messaging",
             members = listOf(currentUserUserName,sellerUserName)
         ).enqueue { result ->
             if (result.isSuccess) {
                 val channel = result.data()
-            } else {
-                println("NO HE PODIDO CREAR EL CHAT")
-                // Handle result.error()
             }
         }
     }

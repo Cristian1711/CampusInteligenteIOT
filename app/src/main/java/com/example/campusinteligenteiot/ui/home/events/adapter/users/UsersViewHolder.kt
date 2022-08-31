@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.UserItemBinding
+import com.example.campusinteligenteiot.usecases.user.SaveFriendsUseCase
 import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
 import com.google.firebase.storage.FirebaseStorage
 import io.getstream.chat.android.client.ChatClient
@@ -28,7 +29,7 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
     private val client = ChatClient.instance()
     lateinit var friendUser: UsersResponse
     lateinit var currentUser: UsersResponse
-    val updateUserFriends = SaveUserUseCase()
+    val updateUserFriends = SaveFriendsUseCase()
 
     fun render(friend : UsersResponse, user: UsersResponse, isEvent: Boolean, id: String){
         val type: String
@@ -113,7 +114,7 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
             setPositiveButton("Sí") { dialog: DialogInterface, _: Int ->
                 currentUser.friends.add(friendUser.id)
                 GlobalScope.launch(Dispatchers.Main){
-                    updateUserFriends(currentUser.id, currentUser)
+                    updateUserFriends(currentUser.friends, currentUser.id)
                     if(currentUser.friends.contains(friendUser.id) && friendUser.friends.contains(currentUser.id)){
                         createChat(currentUser.userName, friendUser.userName)
                     }

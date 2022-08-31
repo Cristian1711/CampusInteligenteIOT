@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.R
+import com.example.campusinteligenteiot.api.model.appointments.AppointmentsCall
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import com.example.campusinteligenteiot.databinding.CalendarFragmentBinding
 import com.example.campusinteligenteiot.databinding.EditAppointmentFragmentBinding
@@ -48,7 +49,8 @@ class EditAppointment : Fragment() {
             currentUser = viewModel.getUser(userId)
         }
 
-        binding.eventDateTV.text = "Fecha: " + CalendarUtils.formattedDate(CalendarUtils.selectedDate!!)
+        binding.eventDateTV.text =
+            "Fecha: ${CalendarUtils.formattedDate(CalendarUtils.selectedDate!!)}"
         return binding.root
     }
 
@@ -117,11 +119,22 @@ class EditAppointment : Fragment() {
         println(appointmentName)
         val appointment = Appointment(appointmentName, CalendarUtils.selectedDate!!, appointmentTime, userId)
         Appointment.appointmentList.add(appointment)
-        currentUser.appointmentsDates.add(toString(CalendarUtils.selectedDate!!))
-        currentUser.appointmentsHours.add(appointmentTime)
-        currentUser.appointmentsTitles.add(appointmentName)
+        if(currentUser.appointmentsDates == null){
+            currentUser.appointmentsDates = arrayListOf(toString(CalendarUtils.selectedDate!!))
+            currentUser.appointmentsHours = arrayListOf(appointmentTime)
+            currentUser.appointmentsTitles = arrayListOf(appointmentName)
+        }
+        else{
+            currentUser.appointmentsDates.add(toString(CalendarUtils.selectedDate!!))
+            currentUser.appointmentsHours.add(appointmentTime)
+            currentUser.appointmentsTitles.add(appointmentName)
+        }
+
+        val appointments = AppointmentsCall(currentUser.appointmentsDates, currentUser.appointmentsHours,
+        currentUser.appointmentsTitles)
+
         GlobalScope.launch(Dispatchers.Main){
-            viewModel.updateAppointments(currentUser, currentUser.id)
+            viewModel.saveAppointments(appointments, currentUser.id)
             findNavController().navigate(
                 R.id.action_editAppointment_to_calendarFragment
             )

@@ -69,7 +69,7 @@ class SellerProfileFragment : Fragment() {
             setPositiveButton("Sí") { dialog: DialogInterface, _: Int ->
                 currentUser.friends.add(user.id)
                 GlobalScope.launch(Dispatchers.Main){
-                    viewModel.updateUserFriends(currentUser)
+                    viewModel.saveFriends(currentUser.friends, currentUser.id)
                     createChat(currentUser.userName, user.userName)
                     Toast.makeText(requireContext(), getString(R.string.first_part_new_friend) + user.userName + getString(
                         R.string.second_part_new_friend), Toast.LENGTH_LONG).show()

@@ -3,6 +3,7 @@ package com.example.campusinteligenteiot.repository
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
+import com.example.campusinteligenteiot.api.model.appointments.AppointmentsCall
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
@@ -128,6 +129,14 @@ class UserRepository {
 
     suspend fun saveProductLikes(idProducts: ArrayList<String>, id: String){
         api.saveProductLikes(idProducts, id)
+    }
+
+    suspend fun saveFriends(idFriends: ArrayList<String>, id: String){
+        api.saveProductLikes(idFriends, id)
+    }
+
+    suspend fun saveAppointments(appointments: AppointmentsCall, id: String){
+        api.saveAppointments(appointments, id)
     }
 
     suspend fun getAllUsers():List<UsersResponse>{

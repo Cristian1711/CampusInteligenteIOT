@@ -238,6 +238,7 @@
     <string name="no_moovit_installed">No tienes descargada la aplicación de Moovit, te redirigimos a ella</string>
     <string name="not_possible_moovit">No ha sido posible abrir Moovit</string>
     <string name="my_calendar">Mi horario</string>
+    <string name="permissions_not_granted">Permisos rechazados por primera vez</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

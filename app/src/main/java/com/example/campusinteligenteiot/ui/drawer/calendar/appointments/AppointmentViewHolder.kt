@@ -19,6 +19,6 @@ class AppointmentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(appointment : Appointment){
         appointmentName.text = appointment.name
         appointmentDay.text = monthYearFromDate(appointment.date)
-        appointmentHour.text = appointment.time.toString()
+        appointmentHour.text = appointment.time
     }
 }

@@ -8,7 +8,6 @@ import com.example.campusinteligenteiot.repository.UserRepository
 import com.example.campusinteligenteiot.usecases.user.GetFriendsFromUserUseCase
 
 class FriendsViewModel : ViewModel() {
-    private var userRepository = UserRepository()
     var getFriendsFromUserUseCase = GetFriendsFromUserUseCase()
 
     suspend fun getFriendsFromUser(user: UsersResponse): LiveData<MutableList<UsersResponse>> {

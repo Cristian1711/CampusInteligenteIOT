@@ -53,6 +53,7 @@ class FriendsProfileFragment : Fragment() {
             setUserData(user)
             loadImage(user.profileImage)
 
+
             if(user.friends.contains(currentUser.id) && !currentUser.friends.contains(user.id)){
                 showAlertDialog()
             }
@@ -71,7 +72,7 @@ class FriendsProfileFragment : Fragment() {
 
     private fun loadImage(media: String) {
         val storageReference = FirebaseStorage.getInstance()
-        val gsReference = storageReference.getReferenceFromUrl(media!!)
+        val gsReference = storageReference.getReferenceFromUrl(media)
         gsReference.downloadUrl.addOnSuccessListener {
             Glide.with(this).load(it).into(binding.itemImage.image2)
         }
@@ -141,7 +142,7 @@ class FriendsProfileFragment : Fragment() {
             setPositiveButton("Sí") { dialog: DialogInterface, _: Int ->
                 currentUser.friends.remove(user.id)
                 GlobalScope.launch(Dispatchers.Main){
-                    viewModel.updateUserFriends(currentUser)
+                    viewModel.saveFriends(currentUser.friends, currentUser.id)
                     Toast.makeText(requireContext(), getString(R.string.delete_friend_success), Toast.LENGTH_LONG).show()
                     dialog.dismiss()
                 }
@@ -152,7 +153,7 @@ class FriendsProfileFragment : Fragment() {
         }.create().show()
     }
 
-    fun showAlertDialog() {
+    private fun showAlertDialog() {
         val alertDialog = AlertDialog.Builder(context)
 
         alertDialog.apply {
@@ -161,7 +162,7 @@ class FriendsProfileFragment : Fragment() {
             setPositiveButton("Sí") { dialog: DialogInterface, _: Int ->
                 currentUser.friends.add(user.id)
                 GlobalScope.launch(Dispatchers.Main){
-                    viewModel.updateUserFriends(currentUser)
+                    viewModel.saveFriends(currentUser.friends, currentUser.id)
                     createChat(currentUser.userName, user.userName)
                     Toast.makeText(requireContext(), getString(R.string.first_part_new_friend) + user.userName + getString(
                         R.string.second_part_new_friend), Toast.LENGTH_LONG).show()
@@ -174,16 +175,13 @@ class FriendsProfileFragment : Fragment() {
         }.create().show()
     }
 
-    fun createChat(currentUserUserName: String, sellerUserName: String) {
+    private fun createChat(currentUserUserName: String, sellerUserName: String) {
         client.createChannel(
             channelType = "messaging",
             members = listOf(currentUserUserName,sellerUserName)
         ).enqueue { result ->
             if (result.isSuccess) {
                 val channel = result.data()
-            } else {
-                println("NO HE PODIDO CREAR EL CHAT")
-                // Handle result.error()
             }
         }
     }

@@ -198,10 +198,6 @@ class TripViewHolder(view: View, private val context: Context): RecyclerView.Vie
         return res
     }
 
-    fun toSimpleString(date: Date?) = with(date ?: Date()) {
-        SimpleDateFormat("yyyy-MM-dd").format(this)
-    }
-
     fun toStringWithTime(date: Date?) = with(date ?: Date()) {
         SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this)
     }

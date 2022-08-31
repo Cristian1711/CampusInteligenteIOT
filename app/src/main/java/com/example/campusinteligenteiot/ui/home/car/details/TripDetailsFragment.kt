@@ -330,7 +330,7 @@ class TripDetailsFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClick
                 enableLocationComponent(mapboxMap!!.style)
             }
             else{
-                Toast.makeText(requireContext(), "Permisos rechazados por primera vez", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.permissions_not_granted), Toast.LENGTH_SHORT).show()
             }
         }
     }

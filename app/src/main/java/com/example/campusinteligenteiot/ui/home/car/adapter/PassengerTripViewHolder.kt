@@ -170,25 +170,6 @@ class PassengerTripViewHolder(view: View, private val context: Context): Recycle
 
     }
 
-    fun getZeroTimeDate(date: Date): Date {
-        var res: Date = date
-        val calendar = Calendar.getInstance()
-
-        calendar.time = date
-        calendar[Calendar.HOUR_OF_DAY] = 0
-        calendar[Calendar.MINUTE] = 0
-        calendar[Calendar.SECOND] = 0
-        calendar[Calendar.MILLISECOND] = 0
-
-        res = calendar.time
-
-        return res
-    }
-
-    fun toSimpleString(date: Date?) = with(date ?: Date()) {
-        SimpleDateFormat("yyyy-MM-dd").format(this)
-    }
-
     fun toStringWithTime(date: Date?) = with(date ?: Date()) {
         SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").format(this)
     }

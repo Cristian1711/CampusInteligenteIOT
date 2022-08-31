@@ -25,7 +25,7 @@ import android.app.DatePickerDialog.OnDateSetListener
 class RegisterBirthdateFragment : Fragment() {
 
     private val viewModel by viewModels<RegisterBirthdateViewModel>()
-    private var friendId = "2dhCruKw3IJAKR5jrCxH"
+    private var friendId = "2dhCruKw3IJAKR5jrCxH" //soporte
     private var NAME = "name"
     private var SURNAME = "surname"
     private var USERNAME = "username"
@@ -36,16 +36,9 @@ class RegisterBirthdateFragment : Fragment() {
     private var FRIENDS = arrayListOf(
         friendId
     )
-    private var PRODUCTLIKES: ArrayList<String>? = null
-    private var APPOINTMENTSTITLES: ArrayList<String>? = null
-    private var APPOINTMENTSDATES: ArrayList<String>? = null
-    private var APPOINTMENTSHOURS: ArrayList<String>? = null
     private var DESCRIPTION = "nada"
     private var ISDRIVER = false
     private var PROFILEIMAGE = "nada"
-    private var RATING = hashMapOf(
-        "rating" to 0
-    )
 
     //ViewBiding
     private  var _binding: FragmentRegisterBirthdateBinding? = null
@@ -83,7 +76,6 @@ class RegisterBirthdateFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.etDate.setOnClickListener {
-            println("HE CLICKADO EL BOTON DE LA FECHA")
             showDatePickerDialog()
         }
 
@@ -156,12 +148,7 @@ class RegisterBirthdateFragment : Fragment() {
             "description" to DESCRIPTION,
             "friends" to FRIENDS,
             "isDriver" to ISDRIVER,
-            "profileImage" to PROFILEIMAGE,
-            "rating" to RATING,
-            "productLikes" to PRODUCTLIKES,
-            "appointmentsTitles" to APPOINTMENTSTITLES,
-            "appointmentsHours" to APPOINTMENTSHOURS,
-            "appointmentsDates" to APPOINTMENTSDATES
+            "profileImage" to PROFILEIMAGE
         )
         val db = Firebase.firestore
         db.collection("User")

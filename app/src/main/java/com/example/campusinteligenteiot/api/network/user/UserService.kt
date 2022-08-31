@@ -1,6 +1,7 @@
 package com.example.campusinteligenteiot.api.network.user
 
 import com.example.campusinteligenteiot.api.config.RetrofitBuilder
+import com.example.campusinteligenteiot.api.model.appointments.AppointmentsCall
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.Dispatchers
@@ -29,6 +30,20 @@ class UserService {
     suspend fun saveProductLikes(idProducts: ArrayList<String>, id: String) :Response<String>{
         return withContext(Dispatchers.IO){
             val response = retrofit.create(UserApiClient::class.java).saveProductLikes(idProducts, id)
+            response
+        }
+    }
+
+    suspend fun saveFriends(idFriends: ArrayList<String>, id: String) :Response<String>{
+        return withContext(Dispatchers.IO){
+            val response = retrofit.create(UserApiClient::class.java).saveFriends(idFriends, id)
+            response
+        }
+    }
+
+    suspend fun saveAppointments(appointments: AppointmentsCall, id: String) :Response<String>{
+        return withContext(Dispatchers.IO){
+            val response = retrofit.create(UserApiClient::class.java).saveAppointments(appointments, id)
             response
         }
     }

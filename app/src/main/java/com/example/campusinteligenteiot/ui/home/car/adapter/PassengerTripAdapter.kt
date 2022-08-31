@@ -41,7 +41,6 @@ class PassengerTripAdapter(private val user: UsersResponse, private val context:
 
     fun filterTripListVisible(){
         tripMutableList = (oldTripMutableList.filter { !it.deleted && it.available && !it.driver.equals(user.id)}) as MutableList<TripResponse>
-        println("LA LISTA FILTRADA PARA LOS PASAJEROS ES $tripMutableList")
     }
 
 }
