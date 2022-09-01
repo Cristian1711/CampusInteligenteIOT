@@ -13,8 +13,8 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent"
        android:textAlignment="center"
-       android:paddingTop="30dp"
-       android:textSize="30sp"
+       app:layout_constraintBottom_toTopOf="@id/channelListView"
+       android:textSize="20sp"
        android:text="@string/my_chats"
        android:fontFamily="@font/montserrat_bold"/>
 
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chatsTitle"
         android:background="#EDEDED"
-        app:streamUiChannelTitleTextColor="@color/white"
+        app:streamUiChannelTitleTextColor="@color/black"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
