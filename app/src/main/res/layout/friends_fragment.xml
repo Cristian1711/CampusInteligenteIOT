@@ -9,6 +9,7 @@
     tools:context=".ui.drawer.friends.FriendsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:background="#EDEDED"
         android:id="@+id/friendsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -29,25 +30,24 @@
         android:layout_marginTop="30dp"
         android:text="@string/my_Friends"
         android:textAlignment="center"
-        android:fontFamily="@font/montserrat_normal"
-        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_bold"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="38dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_user_friends"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@+id/friendsNumber"
-        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toEndOf="@+id/textView26"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
+        android:layout_marginEnd="3dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/friends"/>
 
     <TextView
         android:id="@+id/friendsNumber"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_normal"
         android:text="0"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

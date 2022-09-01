@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#241b5c</color>
     <color name="colorSecondary">#B65EBA</color>
     <color name="colorSecondaryTeal">#3F51B5</color>
     <color name="colorPrimaryDark">#3F51B5</color>
@@ -26,6 +26,7 @@
     <color name="ucolightred">#bc4d53</color>
     <color name="ucoyellow">#f1b310</color>
     <color name="ucoblack">#121212</color>
+    <color name="ucogrey">#B5B2B2</color>
 
 
 

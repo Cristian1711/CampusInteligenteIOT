@@ -12,12 +12,23 @@
        android:layout_height="wrap_content"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent"
-       android:textColor="@color/black"
        android:textAlignment="center"
        android:paddingTop="30dp"
        android:textSize="30sp"
-       android:text="Mis chats"
+       android:text="@string/my_chats"
        android:fontFamily="@font/montserrat_bold"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="20dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/chat"/>
 
     <io.getstream.chat.android.ui.channel.list.ChannelListView
         android:id="@+id/channelListView"
@@ -27,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chatsTitle"
-        android:background="@color/colorBackground"
+        android:background="#EDEDED"
         app:streamUiChannelTitleTextColor="@color/white"
         />
 

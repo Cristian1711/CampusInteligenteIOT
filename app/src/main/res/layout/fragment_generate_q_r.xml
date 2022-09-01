@@ -20,30 +20,60 @@
         android:fontFamily="@font/montserrat_bold"
         app:layout_constraintTop_toTopOf="parent"/>
 
-    <Button
-        android:id="@+id/GenerateQRButton"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/generate_qr_1"
-        android:background="@drawable/button_1"
-        app:layout_constraintTop_toBottomOf="@+id/TitleText"
-        android:layout_marginTop="50dp"
-        android:minWidth="150dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/TitleText">
 
-    <Button
-        android:id="@+id/ReadQRButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/read_qr_1"
-        android:background="@drawable/button_1"
-        android:minWidth="150dp"
-        app:layout_constraintTop_toBottomOf="@+id/GenerateQRButton"
-        android:layout_marginTop="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/qr"/>
+
+            <Button
+                android:id="@+id/GenerateQRButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/generate_qr_1"
+                android:background="@drawable/button_1"
+                android:layout_marginTop="80dp"
+                android:minWidth="150dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <Button
+                android:id="@+id/ReadQRButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/read_qr_1"
+                android:background="@drawable/button_1"
+                android:minWidth="150dp"
+                app:layout_constraintTop_toBottomOf="@+id/GenerateQRButton"
+                android:layout_marginTop="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

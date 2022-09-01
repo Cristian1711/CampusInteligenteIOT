@@ -68,7 +68,7 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/blank_fragment.xml" value="0.1" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/bus_schedule_fragment.xml" value="0.152" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_cell.xml" value="0.2" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_fragment.xml" value="0.16" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/calendar_fragment.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_driver_fragment.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_fragment.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/car_passenger_fragment.xml" value="0.16" />
@@ -105,8 +105,8 @@
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_splash.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_train_rab_cor_schedule.xml" value="0.176" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/fragment_verify_email.xml" value="0.1265625" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/friend_item.xml" value="0.4" />
-        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/friends_fragment.xml" value="0.176" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/friend_item.xml" value="0.264" />
+        <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/friends_fragment.xml" value="0.4" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/friends_profile_fragment.xml" value="0.16" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/generic_dialog_1_button.xml" value="0.264" />
         <entry key="..\:/Users/crist/AndroidStudioProjects/CampusInteligenteIOT/app/src/main/res/layout/home_i_o_t_fragment.xml" value="0.2" />

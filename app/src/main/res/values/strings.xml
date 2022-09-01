@@ -244,6 +244,10 @@
     <string name="others">Otros</string>
     <string name="my">Mi</string>
     <string name="profile_of">Perfil de</string>
+    <string name="my_chats">Mis chats</string>
+    <string name="are_you_sure">¿Estás segur@ de que quieres cerrar sesión?</string>
+    <string name="ok_operation">Confirma la operación</string>
+    <string name="loading_car">Cargando módulo de compartir coche...</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
