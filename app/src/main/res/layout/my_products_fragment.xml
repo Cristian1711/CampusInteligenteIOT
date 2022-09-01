@@ -24,6 +24,46 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/titleProductsPage"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/product" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/comboBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/DrawerButton"
+        android:layout_alignTop="@+id/titleProductsPage"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="60dp"
+        android:hint="@string/categories"
+        android:visibility="invisible"
+        app:startIconDrawable="@drawable/ic_filter24dp">
+
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/montserrat_normal"
+            android:inputType="none"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="@string/without_filter"
+            android:textSize="12sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <ImageButton
         android:id="@+id/backButton"
         android:layout_width="30dp"
@@ -45,15 +85,16 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="60dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Mis Productos"
+        android:text="@string/my_products"
         android:textAlignment="center"
         android:textSize="24sp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:background="#EDEDED"
         android:id="@+id/productRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/titleProductsPage"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@id/comboBox"
         android:layout_marginTop="60dp"
         android:scrollbars="vertical"
         app:layout_constraintTop_toTopOf="parent" />

@@ -146,8 +146,10 @@ class AddTripFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickList
         }
 
         binding.buttonResetPoints.setOnClickListener {
-            navigationMapRoute!!.removeRoute()
-            firstPoint = null
+            if(firstPoint != null){
+                navigationMapRoute!!.removeRoute()
+                firstPoint = null
+            }
         }
 
         binding.buttonSave.setOnClickListener {

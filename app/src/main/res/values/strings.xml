@@ -248,6 +248,11 @@
     <string name="are_you_sure">¿Estás segur@ de que quieres cerrar sesión?</string>
     <string name="ok_operation">Confirma la operación</string>
     <string name="loading_car">Cargando módulo de compartir coche...</string>
+    <string name="possibility_rating">Puedes realizar tu valoración pulsando la estrella en la anterior ventana</string>
+    <string name="product_image">Imagen del producto</string>
+    <string name="date2">Fecha:</string>
+    <string name="edit_image">Editar imagen</string>
+    <string name="delete_product">Borrar producto</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.car.driver.add.AddTripFragment"
-    android:background="@color/md_grey_800">
+    tools:context=".ui.home.car.driver.add.AddTripFragment">
 
     <com.example.campusinteligenteiot.common.CustomScrollView
         android:id="@+id/customScrollView"
@@ -41,21 +40,22 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toEndOf="@+id/DrawerButton"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24_white" />
+                app:layout_constraintStart_toStartOf="@id/DrawerButton"
+                app:layout_constraintTop_toBottomOf="@id/DrawerButton"
+                android:src="@drawable/backbutton_grey" />
 
             <TextView
                 android:id="@+id/titleEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
                 android:text="@string/add_trip"
-                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/backButton"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -71,7 +71,6 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="16sp"
-                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:text="@string/how_many_seats"
                 />
@@ -83,7 +82,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/input"
+                android:background="@drawable/input_grey"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/seats_number"
@@ -110,7 +109,6 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="16sp"
-                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:text="@string/question_date"
                 />
@@ -122,7 +120,7 @@
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="35dp"
-                android:background="@drawable/input"
+                android:background="@drawable/input_grey"
                 android:clickable="false"
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="20dp"
@@ -148,7 +146,6 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="16sp"
-                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:text="@string/route"
                 />
@@ -179,7 +176,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/buttonResetPoints"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,13 +184,14 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="100dp"
                 android:layout_marginBottom="50dp"
-                android:src="@drawable/mapbox_ic_offline"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/mapView"
                 app:layout_constraintVertical_bias="0.0"
-                android:contentDescription="@string/reset_button" />
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/point_animation" />
 
             <TextView
                 android:id="@+id/textResetPoint"
@@ -207,10 +205,10 @@
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="12sp"
-                android:textColor="@color/white"
                 android:textAlignment="center"
                 android:text="@string/reset_initial_point"
                 />
+
 
             <Button
                 android:id="@+id/buttonSave"
@@ -221,7 +219,7 @@
                 android:layout_marginEnd="100dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/button_1"
-                android:text="GUARDAR"
+                android:text="@string/save"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
