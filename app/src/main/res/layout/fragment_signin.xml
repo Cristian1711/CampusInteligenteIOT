@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/ucoblue"
     tools:context=".ui.authentication.signin.SigninFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -30,7 +28,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="28dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:src="@drawable/logo_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,9 +45,9 @@
         android:gravity="center|start"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:text="Inicia sesión con Google"
+        android:text="@string/google"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -64,7 +62,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="80dp"
         android:background="@drawable/button_2"
-        android:text="Regístrate"
+        android:text="@string/register"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="¿Aún no tienes una cuenta?"
+        android:text="@string/no_Account"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -92,7 +90,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="35dp"
         android:background="@drawable/button_1"
-        android:text="Iniciar Sesión"
+        android:text="@string/session"
         android:textColor="@color/white"
         android:textColorHighlight="#8401FF"
         android:textStyle="bold"

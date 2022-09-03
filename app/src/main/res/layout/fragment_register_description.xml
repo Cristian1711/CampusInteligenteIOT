@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.authentication.registerdata.RegisterDescriptionFragment"
-    android:background="@color/colorBackground">
+    android:background="@color/ucoblue">
 
     <TextView
         android:id="@+id/textView36"
@@ -26,9 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginEnd="100dp"
-        android:layout_marginBottom="100dp"
         android:background="@drawable/button_3"
-        android:text="Finalizar"
+        android:text="@string/finish"
+         android:layout_marginTop="40dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,13 +47,14 @@
         android:background="@drawable/input"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Descripción"
+        android:hint="@string/description"
         android:inputType="textMultiLine"
         android:textColor="@color/black"
         android:textColorHint="@color/colorHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        app:layout_constraintBottom_toTopOf="@id/nextButton"
+        app:layout_constraintTop_toBottomOf="@id/textView13"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
@@ -60,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:text="Datos Personales"
+        android:text="@string/personal_data"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -70,12 +73,12 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="353dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="30dp"
-        android:text="Por último, danos una pequeña descripción sobre ti"
+        android:layout_marginEnd="40dp"
+        android:text="@string/ask_description"
         android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -85,12 +88,12 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="353dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="30dp"
-        android:text="Ten en cuenta que esta descripción será pública desde tu perfil"
+        android:layout_marginEnd="40dp"
+        android:text="@string/warning_description"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"

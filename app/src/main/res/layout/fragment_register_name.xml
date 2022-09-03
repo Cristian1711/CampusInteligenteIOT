@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.authentication.registerdata.RegisterNameFragment"
-    android:background="@color/colorBackground">
+    android:background="@color/ucoblue">
 
     <EditText
         android:id="@+id/nameEditText"

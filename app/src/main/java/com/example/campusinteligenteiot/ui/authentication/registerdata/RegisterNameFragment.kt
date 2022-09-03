@@ -30,9 +30,6 @@ class RegisterNameFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //val phoneNumber = arguments?.getString("phoneNumber")
-
-        //PHONENUMBER = phoneNumber!!
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

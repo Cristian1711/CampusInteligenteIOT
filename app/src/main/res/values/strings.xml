@@ -253,6 +253,21 @@
     <string name="date2">Fecha:</string>
     <string name="edit_image">Editar imagen</string>
     <string name="delete_product">Borrar producto</string>
+    <string name="no_Account">¿Aún no tienes una cuenta?</string>
+    <string name="google">Inicia sesión con Google</string>
+    <string name="register">Regístrate</string>
+    <string name="session">Iniciar Sesión</string>
+    <string name="verify_email">Hola, antes de continuar, es necesario que verifiques tu Email</string>
+    <string name="already_verified">Ya lo he verificado</string>
+    <string name="verify_your_email">Verifica tu Email</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="select_college_degree">Selecciona la carrera que estás estudiando.</string>
+    <string name="carreer">Carrera</string>
+    <string name="gallery">Galeria</string>
+    <string name="select_photo">Ya estamos acabando... Ahora elige una foto de perfil.</string>
+    <string name="finish">Finalizar</string>
+    <string name="ask_description">Por último, danos una pequeña descripción sobre ti</string>
+    <string name="warning_description">Ten en cuenta que esta descripción será pública desde tu perfil</string>
 
     <string-array name="categories">
         <item>Ninguna</item>
