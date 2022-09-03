@@ -35,6 +35,7 @@ import kotlin.experimental.and
 import android.nfc.NdefRecord
 
 import android.nfc.tech.Ndef
+import androidx.navigation.fragment.findNavController
 import com.example.campusinteligenteiot.api.model.event.EventCall
 import com.example.campusinteligenteiot.api.model.event.EventResponse
 import com.example.campusinteligenteiot.api.model.user.UsersResponse
@@ -74,6 +75,10 @@ class HomeIOTFragment : Fragment() {
 
         binding.nfcButton.setOnClickListener {
             showDefaultDialog()
+        }
+
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeIOTFragment_to_navigation_events)
         }
     }
 

@@ -12,6 +12,7 @@
         android:text="TextView"
         android:background="@drawable/rounded_edit_text_blue"
         android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_bold"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -22,6 +23,7 @@
         android:layout_weight="1"
         android:textColor="@color/white"
         android:textAlignment="center"
+        android:fontFamily="@font/montserrat_bold"
         android:background="@drawable/rounded_edit_text_red"
         android:text="TextView"
         android:textSize="24sp" />

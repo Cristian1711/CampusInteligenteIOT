@@ -11,7 +11,7 @@
             android:layout_weight="1"
             android:text="TextView"
             android:background="@drawable/rounded_edit_text_blue_gradient"
-            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_bold"
             android:textAlignment="center"
             android:textSize="24sp" />
 
@@ -20,9 +20,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@color/white"
             android:textAlignment="center"
             android:background="@drawable/rounded_edit_text_red_gradient"
             android:text="TextView"
+            android:fontFamily="@font/montserrat_bold"
             android:textSize="24sp" />
     </TableRow>

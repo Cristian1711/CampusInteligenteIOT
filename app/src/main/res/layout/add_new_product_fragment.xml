@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.home.shop.myProducts.editProduct.EditProductFragment"
-    android:background="@color/md_grey_800">
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -39,9 +39,9 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                app:layout_constraintStart_toEndOf="@+id/DrawerButton"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_baseline_arrow_back_ios_24_white" />
+                app:layout_constraintStart_toStartOf="@id/DrawerButton"
+                app:layout_constraintTop_toBottomOf="@id/DrawerButton"
+                android:src="@drawable/backbutton_grey" />
 
             <Button
                 android:id="@+id/buttonGallery"
@@ -51,7 +51,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="100dp"
                 android:background="@drawable/button_2"
-                android:text="Añadir foto"
+                android:text="@string/add_photo"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,16 +59,16 @@
 
             <TextView
                 android:id="@+id/titleEdit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="25dp"
-                android:text="Añadir nuevo producto"
-                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/add_new_product"
+                android:fontFamily="@font/montserrat_bold"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/backButton"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textAlignment="center" />
 
             <EditText
                 android:id="@+id/textDescription"
@@ -77,10 +77,10 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/input"
+                android:background="@drawable/input_grey"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Descripción"
+                android:hint="@string/description"
                 android:drawableStart="@drawable/ic_text"
                 android:drawablePadding="20dp"
                 android:paddingStart="30dp"
@@ -100,10 +100,10 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/input"
+                android:background="@drawable/input_grey"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Título del producto"
+                android:hint="@string/product_title"
                 android:drawableStart="@drawable/ic_text"
                 android:inputType="text"
                 android:textColor="@color/black"
@@ -122,10 +122,10 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/input"
+                android:background="@drawable/input_grey"
                 android:ems="10"
                 android:gravity="start|top"
-                android:hint="Precio del producto"
+                android:hint="@string/product_price"
                 android:drawableStart="@drawable/ic_text"
                 android:inputType="text"
                 android:textColor="@color/black"
@@ -195,7 +195,7 @@
                 android:layout_marginEnd="100dp"
                 android:layout_marginBottom="50dp"
                 android:background="@drawable/button_1"
-                android:text="GUARDAR"
+                android:text="@string/save"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

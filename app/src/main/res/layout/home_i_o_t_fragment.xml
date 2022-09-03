@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     tools:context=".ui.home.events.manageIOT.HomeIOTFragment">
 
 
@@ -31,23 +30,56 @@
         app:layout_constraintStart_toStartOf="@id/DrawerButton"
         app:layout_constraintTop_toBottomOf="@id/DrawerButton"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_baseline_arrow_back_ios_24_white" />
+        android:src="@drawable/backbutton_grey" />
 
   <TextView
       android:id="@+id/titleConnectEvent"
-      android:layout_width="match_parent"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:layout_constraintStart_toEndOf="@id/backButton"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      android:layout_marginTop="80dp"
+      android:layout_marginTop="20dp"
       android:text="@string/connect_event"
       android:textAlignment="center"
-      android:textColor="@color/white"
       android:fontFamily="@font/montserrat_bold"
       android:textStyle="bold"
       android:textSize="24sp"
       />
+
+    <TextView
+        android:id="@+id/connectText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/connect_2"
+        android:textAlignment="center"
+        android:fontFamily="@font/montserrat_light_italic"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/connectText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/connectText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:text="@string/connect_3"
+        android:textAlignment="center"
+        android:fontFamily="@font/montserrat_light_italic"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
@@ -57,11 +89,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/connectText2"
         app:layout_constraintVertical_bias="0.511"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_rawRes="@raw/circulo" />
+        app:lottie_rawRes="@raw/connect" />
 
 
     <Button
@@ -70,42 +102,15 @@
         android:layout_height="300dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:scaleType="fitXY"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.475"
+        app:layout_constraintTop_toBottomOf="@id/connectText2"
         tools:ignore="SpeakableTextPresentCheck"
         tools:visibility="visible" />
 
 
-    <ImageView
-        android:id="@+id/textView18"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:background="@drawable/connect_text"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:textStyle=""
-        app:layout_constraintBottom_toTopOf="@+id/nfcButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleConnectEvent"
-        app:layout_constraintVertical_bias="0.148" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/ic_entry_event"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="230dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

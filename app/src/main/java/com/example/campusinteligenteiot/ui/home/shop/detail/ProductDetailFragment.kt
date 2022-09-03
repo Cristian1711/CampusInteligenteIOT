@@ -114,7 +114,13 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun prepareLikeButton() {
-        var like: Boolean = currentUser.productLikes.contains(product.id)
+        var like: Boolean
+        if(currentUser.productLikes != null){
+            like = currentUser.productLikes.contains(product.id)
+        }
+        else{
+            like = false
+        }
         if(like) binding.likeImageView.setImageResource(R.drawable.ic_twitter_like)
         binding.likeImageView.setOnClickListener{
             like = likeAnimation(binding.likeImageView, R.raw.like, like)

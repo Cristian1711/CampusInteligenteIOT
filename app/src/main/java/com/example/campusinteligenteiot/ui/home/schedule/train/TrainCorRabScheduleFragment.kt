@@ -46,7 +46,6 @@ class TrainCorRabScheduleFragment : Fragment() {
             )
             departuresInSeconds = transformDeparturesToSecond(fullSchedule[0])
             val remainingTime = calculateNextDeparture(departuresInSeconds)
-            println("Quedan: $remainingTime segundos para la proxima salida")
             playChrono(remainingTime)
             fillTitles()
             fillTableLayout(fullSchedule)
@@ -55,8 +54,8 @@ class TrainCorRabScheduleFragment : Fragment() {
 
     private fun playChrono(remainingTime: Long) {
         if(remainingTime == 0L){
-            binding.chronometerText.text = "No hay próximas salidas"
-            binding.chronometer.text = "Espere al día siguiente"
+            binding.chronometerText.text = getString(R.string.not_more_departures)
+            binding.chronometer.text = getString(R.string.wait_next_day)
         }
         else {
 
@@ -103,11 +102,8 @@ class TrainCorRabScheduleFragment : Fragment() {
         val timeInSeconds = hour*3600 + minutes*60 + seconds
 
         for(i in (departures.indices)){
-            println("Segundos actuales: $timeInSeconds")
-            println("Tiempo en segundos salida: " + departures[i])
             if(timeInSeconds < departures[i]){
                 remainingTime = departures[i] - timeInSeconds
-                println("Diferencia: $remainingTime")
                 break
             }
         }

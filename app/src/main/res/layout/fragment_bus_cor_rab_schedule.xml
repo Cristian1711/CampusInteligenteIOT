@@ -10,7 +10,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="#EDEDED">
 
     <TextView
         android:id="@+id/descriptionText"
@@ -21,7 +21,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="30dp"
         android:text="@string/moovit"
-        android:textColor="@color/white"
+        android:fontFamily="@font/montserrat_bold"
         android:textSize="24sp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
         android:text="@string/show_nearby_lines"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:backgroundTint="@color/mapboxRed"
+        app:backgroundTint="@color/ucoblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
@@ -60,7 +60,7 @@
         android:text="@string/get_directions_cor_rab"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:backgroundTint="@color/mapboxRed"
+        app:backgroundTint="@color/ucoblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
