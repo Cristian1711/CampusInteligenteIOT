@@ -71,7 +71,7 @@ class SigninFragment : Fragment() {
 
     private fun setUpGoogle() {
         val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.google_token))
+            .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
@@ -87,27 +87,25 @@ class SigninFragment : Fragment() {
         if (requestCode == GOOGLE_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
 
-            try {
-                println("try")
+            try{
                 val account = task.getResult(ApiException::class.java)
 
-                if (account != null) {
+                if(account != null){
 
-                    val credential = GoogleAuthProvider.getCredential(account.idToken,null)
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
-
-                        if (it.isSuccessful) {
+                        if(it.isSuccessful){
                             firstTimeGoogleSignUp()
-
-                        }else {
+                        }
+                        else{
                             Toast.makeText(context, R.string.login_error, Toast.LENGTH_SHORT).show()
                         }
-
                     }
+
+
                 }
-            }catch (e: ApiException) {
-                println(e)
-                Toast.makeText(context, R.string.google_login_error, Toast.LENGTH_SHORT).show()
+            }catch (e: ApiException){
+                Toast.makeText(context, getString(R.string.error_google), Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -121,7 +119,7 @@ class SigninFragment : Fragment() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (!document.exists()) {
-                    //findNavController().navigate(R.id.action_loginFragment_to_registerUserFragment2)
+                    findNavController().navigate(R.id.action_signinFragment_to_registerNameFragment)
                 }else{
                     viewModel.gotoHome(requireView())
                 }

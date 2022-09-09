@@ -49,7 +49,6 @@ class TripService {
     suspend fun saveTrip(trip: TripCall, id: String) : Response<String> {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(TripApiClient::class.java).saveTrip(trip, id)
-            println("he conseguido una respuesta")
             response
         }
     }
@@ -57,7 +56,6 @@ class TripService {
     suspend fun deleteTrip(id: String) : TripResponse {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(TripApiClient::class.java).deleteTrip(id)
-            println("el evento eliminado")
             response.body()!!
         }
     }

@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Handler
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -18,6 +19,7 @@ import com.example.campusinteligenteiot.usecases.user.SaveFriendsUseCase
 import com.example.campusinteligenteiot.usecases.user.SaveUserUseCase
 import com.google.firebase.storage.FirebaseStorage
 import io.getstream.chat.android.client.ChatClient
+import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -46,11 +48,18 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
             Glide.with(context).load(it).into(binding.friendImage)
         }
 
+        if(user.id == friend.id){
+            binding.addFriendButton.visibility = GONE
+            binding.chatButton.visibility = GONE
+        }
+
         if(user.friends.contains(friend.id)){
             binding.addFriendButton.visibility = GONE
         }
         else{
-            binding.addFriendButton.visibility = VISIBLE
+            if(user.id != friend.id){
+                binding.addFriendButton.visibility = VISIBLE
+            }
         }
 
         binding.friendName.text = friend.name
@@ -73,16 +82,46 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
         }
 
         binding.chatButton.setOnClickListener{
-            createChat(user.userName, friend.userName)
-            val navController = Navigation.findNavController(myView)
-            Handler().postDelayed({
-                if(isEvent){
-                    navController.navigate(R.id.action_eventInformationFragment_to_channelsFragment)
+            if(isEvent){
+                createChat(user.userName, friend.userName)
+                val navController = Navigation.findNavController(myView)
+                Handler().postDelayed({
+                    if(isEvent){
+                        navController.navigate(R.id.action_eventInformationFragment_to_channelsFragment)
+                    }
+                    else{
+                        navController.navigate(R.id.action_tripDetailsFragment_to_channelsFragment)
+                    }
+                }, 1500)
+            }
+            else{
+                if(user.friends.contains(friend.id) && friend.friends.contains(user.id)){
+                    createChat(user.userName, friend.userName)
+                    val navController = Navigation.findNavController(myView)
+                    Handler().postDelayed({
+                        if(isEvent){
+                            navController.navigate(R.id.action_eventInformationFragment_to_channelsFragment)
+                        }
+                        else{
+                            navController.navigate(R.id.action_tripDetailsFragment_to_channelsFragment)
+                        }
+                    }, 1500)
                 }
                 else{
-                    navController.navigate(R.id.action_tripDetailsFragment_to_channelsFragment)
+                    val builder = AlertDialog.Builder(context)
+                    val myView = LayoutInflater.from(context).inflate(R.layout.generic_dialog_1_button, null)
+                    builder.setView(myView)
+                    val dialog = builder.create()
+
+                    myView.Question.text = context.getString(R.string.not_possible)
+                    myView.Question2.text = context.getString(R.string.must_be_friends)
+                    dialog.show()
+
+                    myView.cancelButton.setOnClickListener{
+                        dialog.cancel()
+                    }
                 }
-            }, 1500)
+            }
         }
 
         binding.addFriendButton.setOnClickListener{

@@ -21,6 +21,7 @@
         android:roundIcon="@drawable/logo_blue"
         android:supportsRtl="true"
         android:theme="@style/Theme.CampusInteligenteIOT"
+        android:screenOrientation="sensorPortrait"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.drawer.chats.ChatActivity"
@@ -34,11 +35,13 @@
             android:name=".ui.authentication.AuthenticationActivity"
             android:exported="true">
             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
-                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <meta-data
                 android:name="android.nfc.action.TECH_DISCOVERED"

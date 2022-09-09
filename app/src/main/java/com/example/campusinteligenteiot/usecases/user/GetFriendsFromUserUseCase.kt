@@ -13,10 +13,8 @@ class GetFriendsFromUserUseCase {
     suspend operator fun invoke(user : UsersResponse): LiveData<MutableList<UsersResponse>>? {
         val users = UserProvider.users
         if(!users.isNullOrEmpty()) {
-            println("NO ESTA VACIA LA LISTA DE USUARIOS")
             return userProvider.getFriendsFromUser(user, users)
         }
-        println("LA LISTA DE USUARIOS ESTA VACIA")
         return null
     }
 }

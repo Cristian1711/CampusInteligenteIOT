@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/googleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,14 +82,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/googleButton" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/signInButton"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="35dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="35dp"
-        android:background="@drawable/button_1"
+        android:background="@drawable/button_3"
         android:text="@string/session"
         android:textColor="@color/white"
         android:textColorHighlight="#8401FF"

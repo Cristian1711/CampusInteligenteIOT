@@ -21,7 +21,6 @@ class RegisterCollegeDegreeFragment : Fragment() {
     private var SURNAME = "surname"
     private var USERNAME = "username"
     private var COLLEGEDEGREE = "collegeDegree"
-    //private var PHONENUMBER = "phonenumber"
 
     //ViewBiding
     private  var _binding: FragmentRegisterCollegeDegreeBinding? = null
@@ -35,9 +34,7 @@ class RegisterCollegeDegreeFragment : Fragment() {
         val name = arguments?.getString("name")
         val surname = arguments?.getString("surname")
         val username = arguments?.getString("username")
-        //val phoneNumber = arguments?.getString("phoneNumber")
 
-        //PHONENUMBER = phoneNumber!!
         NAME = name!!
         SURNAME = surname!!
         USERNAME = username!!
@@ -59,8 +56,6 @@ class RegisterCollegeDegreeFragment : Fragment() {
 
         binding.nextButton.setOnClickListener {
             COLLEGEDEGREE = binding.collegeDegreeTypeTextView.editableText.toString()
-            println("ESTA ES LA CARRERA SELECCIONADA")
-            println(COLLEGEDEGREE)
             if (COLLEGEDEGREE != "collegeDegree") {
                 goNext()
             }else {
@@ -81,7 +76,6 @@ class RegisterCollegeDegreeFragment : Fragment() {
     private fun goNext() {
 
         val bundle = bundleOf(
-            //"phoneNumber" to PHONENUMBER,
             "name" to NAME,
             "surname" to SURNAME,
             "username" to USERNAME,

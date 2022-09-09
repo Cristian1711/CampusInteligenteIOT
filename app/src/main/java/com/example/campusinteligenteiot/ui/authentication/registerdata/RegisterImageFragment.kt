@@ -69,16 +69,6 @@ class RegisterImageFragment : Fragment() {
         val year = arguments?.getInt("year")
 
         storage = Firebase.storage
-
-        println(name)
-        println(surname)
-        println(username)
-        println(collegeDegree)
-        println(day)
-        println(month)
-        println(year)
-
-
     }
 
     override fun onCreateView(
@@ -179,8 +169,6 @@ class RegisterImageFragment : Fragment() {
 
         findNavController().navigate(
            R.id.action_registerImageFragment_to_registerDescriptionFragment)
-
-
     }
 
 

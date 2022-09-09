@@ -118,7 +118,6 @@ class RegisterBirthdateFragment : Fragment() {
 
     private fun goNext() {
         val bundle = bundleOf(
-            //"phoneNumber" to PHONENUMBER,
             "name" to NAME,
             "surname" to SURNAME,
             "username" to USERNAME,

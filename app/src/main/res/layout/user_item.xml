@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorBackground"
-            android:src="@drawable/ic_star"
+            android:src="@drawable/ic_chat_svgrepo_com"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/addFriendButton"

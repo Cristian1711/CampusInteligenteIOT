@@ -36,7 +36,6 @@ class ProductService {
     suspend fun saveProduct(product: ProductCall, id: String?) : Response<String> {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(ProductApiClient::class.java).saveProduct(product, id)
-            println("he conseguido una respuesta")
             response
         }
     }

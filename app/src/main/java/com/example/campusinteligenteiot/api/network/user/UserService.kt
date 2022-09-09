@@ -21,7 +21,6 @@ class UserService {
     suspend fun getAllUsers():List<UsersResponse>{
         return withContext(Dispatchers.IO){
             val response = retrofit.create(UserApiClient::class.java).getAllUsers()
-            println("El body de la respuesta")
             println(response.body())
             response.body() ?: emptyList()
         }

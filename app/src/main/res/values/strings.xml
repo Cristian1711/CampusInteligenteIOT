@@ -274,6 +274,10 @@
     <string name="wait_next_day">Espere al día siguiente</string>
     <string name="next_departure">Próxima salida en</string>
     <string name="add_new_product">Añadir nuevo producto</string>
+    <string name="not_possible">No es posible chatear</string>
+    <string name="must_be_friends">¡Debéis ser amigos para poder chatear juntos!</string>
+    <string name="disconnect">Desconectarse</string>
+    <string name="error_google">Se ha producido un error. Contacta con el desarrollador</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

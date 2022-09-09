@@ -82,14 +82,8 @@ class HomeActivity : AppCompatActivity() {
         viewModel.resultUsers.observe(this, Observer {
 
             UserProvider.users = viewModel.resultUsers.value!!
-            println("Lista de usuarios")
-            println(UserProvider.users)
             GlobalScope.launch(Dispatchers.Main) {
                 user = viewModel.getUserFromLocal(viewModel.getId())
-                println("DATOS USUARIO DE BASE DE DATOS LOCAL")
-                println(user.name)
-                println(user.collegeDegree)
-                println(user.surname)
                 val media = user.profileImage
                 val storageReference = FirebaseStorage.getInstance()
                 val gsReference = storageReference.getReferenceFromUrl(media!!)
@@ -150,7 +144,6 @@ class HomeActivity : AppCompatActivity() {
         if (intent != null) {
             processIntent(intent)
         }
-        //setupActionBarWithNavController(navController, appBarConfiguration)
 
 
     }
@@ -220,7 +213,7 @@ class HomeActivity : AppCompatActivity() {
                                 val bundle = bundleOf(
                                     "eventId" to eventId
                                 )
-                                println("HE RECOGIDO EL ID $eventId")
+
 
                                 navController.navigate(R.id.eventInformationFragment, bundle)
                             }

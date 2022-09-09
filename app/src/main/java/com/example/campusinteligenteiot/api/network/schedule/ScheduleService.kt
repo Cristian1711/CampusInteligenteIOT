@@ -19,7 +19,6 @@ class ScheduleService {
     suspend fun getFullSchedule():List<ScheduleResponse>{
         return withContext(Dispatchers.IO){
             val response = retrofit.create(ScheduleApiClient::class.java).getFullSchedule()
-            println("El body de la respuesta")
             println(response.body())
             response.body() ?: emptyList()
         }

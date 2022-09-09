@@ -45,7 +45,6 @@ class EventService {
     suspend fun saveEvent(event: EventCall, id: String) : Response<String> {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(EventApiClient::class.java).saveEvent(event, id)
-            println("he conseguido una respuesta")
             response
         }
     }
@@ -53,7 +52,6 @@ class EventService {
     suspend fun deleteEvent(id: String) : EventResponse {
         return withContext(Dispatchers.IO){
             val response = retrofit.create(EventApiClient::class.java).deleteEvent(id)
-            println("el evento eliminado")
             response.body()!!
         }
     }

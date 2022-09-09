@@ -31,27 +31,6 @@ class UserRepository {
     private val api = UserService()
 
      fun signUpDefault(email: String, passwd: String, repeatedPasswd: String) : Resource<FirebaseUser?>? {
-        println("creando")
-
-        /* Firebase.auth.createUserWithEmailAndPassword(email,passwd).addOnCompleteListener {authResult->
-             if (taskCompleted) return@addOnCompleteListener
-             taskCompleted = true
-
-             val newUser = Firebase.auth.currentUser
-             if (authResult.isSuccessful && newUser != null) {
-                 /*newUser.sendEmailVerification().addOnCompleteListener { emailTask->
-
-                 }
-                 Firebase.auth.signOut()*/
-                 successSignUp.postValue(authResult.isSuccessful)
-             }else {
-                 println("No se ha podido registrar")
-                 error.value = R.string.signup_error
-
-
-             }
-         }*/
-
         Firebase.auth.createUserWithEmailAndPassword(email,passwd)
         val user = Firebase.auth.currentUser
         return if (user != null) {
@@ -64,9 +43,6 @@ class UserRepository {
     }
 
      fun signInDefault(email: String, passwd: String) : Resource<FirebaseUser?>{
-
-        println("inicio sesion")
-
         Firebase.auth.signInWithEmailAndPassword(email,passwd)
         val user = Firebase.auth.currentUser
 
@@ -74,52 +50,6 @@ class UserRepository {
             println(user.email)
         }
         return Resource.Result(user)
-    }
-
-     fun documentToUser(document: DocumentSnapshot) : User {
-
-         val birthdate = document.getDate("birthdate")
-         val collegeDegree = document.getString("collegeDegree")
-         val description = document.getString("description")
-         val email = document.getString("email")
-         val userName = document.getString("userName")
-         val profileImage = document.getString("profileImage")
-         val name = document.getString("name")
-         val surname = document.getString("surname")
-
-
-        val user = User(
-            "",
-            name,
-            surname,
-            userName,
-            birthdate,
-            email,
-            collegeDegree,
-            "677881122",
-            description,
-            profileImage,
-        null,
-        false,
-        null)
-
-        return user
-    }
-
-    suspend fun getSingleUser(uid: String): User {
-
-        var user = User()
-        val job1 = userTable.document(uid)
-            .get()
-            .addOnSuccessListener { document ->
-                if(document.exists()){
-                    println("EL DOCUMENTO EXISTE")
-                    user = documentToUser(document)
-                }
-            }
-        job1.await()
-        return user
-
     }
 
     suspend fun searchUserById(id: String): UsersResponse {
@@ -132,7 +62,7 @@ class UserRepository {
     }
 
     suspend fun saveFriends(idFriends: ArrayList<String>, id: String){
-        api.saveProductLikes(idFriends, id)
+        api.saveFriends(idFriends, id)
     }
 
     suspend fun saveAppointments(appointments: AppointmentsCall, id: String){
@@ -155,17 +85,11 @@ class UserRepository {
         println(media)
         println(gsReference)
         gsReference.downloadUrl.addOnSuccessListener {
-             println("TODO BIEN")
             uri?.value = it
          }
         println(uri)
         return uri!!
     }
-
-    fun uploadFile(drawable: Drawable) {
-
-    }
-
 
 
 
