@@ -99,7 +99,7 @@ class EventDetailFragment : Fragment() {
             willAssist = starAnimation(binding.starImage, R.raw.star_animation, willAssist!!)
             if(willAssist == true){
                 binding.StarText.text =
-                    getString(R.string.star_text_2) + dateString + "!"
+                    getString(R.string.star_text_2) + ' ' + dateString + "!"
                 eventCall.attendances?.add(currentUser.id)
                 GlobalScope.launch(Dispatchers.Main) {
                     viewModel.updateEvent(event.id, eventCall)
@@ -144,13 +144,13 @@ class EventDetailFragment : Fragment() {
     }
 
     private fun setEventData(event: EventResponse) {
-        binding.attendancesText.text = getString(R.string.assist_text) + "${event.attendances.size}" + getString(R.string.person_text)
+        binding.attendancesText.text = getString(R.string.assist_text) + " ${event.attendances.size} " + getString(R.string.person_text)
         binding.eventTitle.text = event.eventTitle
         binding.PlaceAndDateText.text = event.eventPlace + " - " + dateString
         binding.DescriptionText.text = event.description
         if(willAssist == true){
             binding.StarText.text =
-                getString(R.string.star_text_2) + dateString + "!"
+                getString(R.string.star_text_2) + ' ' + dateString + "!"
         }
         else{
             binding.StarText.text = getString(R.string.star_text_1)

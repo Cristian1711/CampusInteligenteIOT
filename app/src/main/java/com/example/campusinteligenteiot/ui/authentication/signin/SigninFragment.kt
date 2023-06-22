@@ -1,6 +1,9 @@
 package com.example.campusinteligenteiot.ui.authentication.signin
 
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,6 +24,9 @@ import com.example.campusinteligenteiot.R
 import com.example.campusinteligenteiot.repository.UserRepository
 import com.example.campusinteligenteiot.databinding.FragmentSigninBinding
 import com.example.campusinteligenteiot.usecases.user.AuthUserUseCase
+import kotlinx.android.synthetic.main.generic_dialog_1_button.view.*
+import kotlinx.android.synthetic.main.generic_dialog_1_button.view.cancelButton
+import kotlinx.android.synthetic.main.report_dialog.view.*
 
 
 class SigninFragment : Fragment() {
@@ -67,6 +73,33 @@ class SigninFragment : Fragment() {
         binding.googleButton.setOnClickListener {
             setUpGoogle()
         }
+
+        binding.textView3.setOnClickListener{
+            val builder = AlertDialog.Builder(context)
+            val myView = LayoutInflater.from(context).inflate(R.layout.report_dialog, null)
+            builder.setView(myView)
+            val dialog = builder.create()
+            dialog.show()
+
+            myView.cancelButton.setOnClickListener{
+                dialog.cancel()
+            }
+
+            myView.button.setOnClickListener {
+                sendEmail(myView.emailContent.text.toString())
+                dialog.cancel()
+            }
+        }
+    }
+
+    private fun sendEmail(text: String) {
+        val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:cristiaangonzaleez36@gmail.com")
+            putExtra(Intent.EXTRA_SUBJECT, "Error de inicio de sesión")
+            putExtra(Intent.EXTRA_TEXT, text)
+        }
+
+        startActivity(emailIntent)
     }
 
     private fun setUpGoogle() {

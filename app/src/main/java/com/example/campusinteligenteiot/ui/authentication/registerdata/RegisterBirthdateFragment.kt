@@ -25,7 +25,7 @@ import android.app.DatePickerDialog.OnDateSetListener
 class RegisterBirthdateFragment : Fragment() {
 
     private val viewModel by viewModels<RegisterBirthdateViewModel>()
-    private var friendId = "2dhCruKw3IJAKR5jrCxH" //soporte
+    private var friendId = "QIoJGryig7dIHTwyIJGd9dPMLvG3" //soporte
     private var NAME = "name"
     private var SURNAME = "surname"
     private var USERNAME = "username"

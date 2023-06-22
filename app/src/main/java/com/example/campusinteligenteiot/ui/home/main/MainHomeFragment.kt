@@ -110,9 +110,25 @@ class MainHomeFragment : Fragment(), OnMapReadyCallback, MapboxMap.OnMapClickLis
 
         GlobalScope.launch(Dispatchers.Main) {
             user = viewModel.getSingleUser(Firebase.auth.currentUser!!.uid)
+            val supportUser = viewModel.getSingleUser("QIoJGryig7dIHTwyIJGd9dPMLvG3")
             createUserGetStream(user)
+            createChat(user.userName, supportUser.userName)
         }
         return binding.root
+    }
+
+    private fun createChat(userName: String, userName1: String) {
+        client.createChannel(
+            channelType = "messaging",
+            members = listOf(userName,userName1)
+        ).enqueue { result ->
+            if (result.isSuccess) {
+                val channel = result.data()
+            } else {
+                println(requireContext().getString(R.string.error_chat))
+                // Handle result.error()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

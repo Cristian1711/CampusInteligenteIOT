@@ -149,7 +149,7 @@ class UsersViewHolder(view: View, private val context: Context) : RecyclerView.V
 
         alertDialog.apply {
             setTitle(context.getString(R.string.friend_request))
-            setMessage(context.getString(R.string.question_2)+ friendUser.userName + "?")
+            setMessage(context.getString(R.string.question_2)+ ' ' + friendUser.userName + "?")
             setPositiveButton("Sí") { dialog: DialogInterface, _: Int ->
                 currentUser.friends.add(friendUser.id)
                 GlobalScope.launch(Dispatchers.Main){

@@ -8,7 +8,7 @@
         android:id="@+id/messageListHeaderView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_gradiation"
+        android:background="@color/white"
         android:paddingStart="30dp"
         android:paddingTop="20dp"
         android:paddingEnd="30dp"
@@ -48,21 +48,21 @@
         android:id="@+id/messageInputView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/ucoblack"
+        android:background="@color/white"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:streamUiMessageInputDividerBackgroundDrawable="@color/colorBackground"
-        app:streamUiMessageInputTextColor="@color/colorHint"
+        app:streamUiMessageInputDividerBackgroundDrawable="@color/black"
+        app:streamUiMessageInputTextColor="@color/black"
 
-        app:streamUiSendButtonDisabledIconColor="@color/white"
-        app:streamUiAttachButtonIconDisabledColor="@color/white"
-        app:streamUiAttachButtonIconColor="@color/white"
+        app:streamUiSendButtonDisabledIconColor="@color/black"
+        app:streamUiAttachButtonIconDisabledColor="@color/black"
+        app:streamUiAttachButtonIconColor="@color/black"
         app:streamUiAttachButtonIconPressedColor="@color/ucolightred"
-        app:streamUiCommandInputBadgeIcon="@color/white"
+        app:streamUiCommandInputBadgeIcon="@color/black"
         app:streamUiSendButtonEnabledIconColor="@color/ucolightred"
-        app:streamUiSendButtonPressedIconColor="@color/colorPrimary" />
+        app:streamUiSendButtonPressedIconColor="@color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

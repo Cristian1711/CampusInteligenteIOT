@@ -42,9 +42,41 @@
     <string name="user_location_permission_not_granted">No has aceptado los permisos de localizacion.</string>
 
     <string-array name="collegeDegrees">
-        <item>Ingenieria Informatica</item>
-        <item>Traduccion e Interpretacion</item>
-        <item>Biologia</item>
+        <item>Administración y Dirección de Empresas</item>
+        <item>Biología</item>
+        <item>Bioquímica</item>
+        <item>Ciencias Ambientales</item>
+        <item>Ciencia y Tecnología de los Alimentos</item>
+        <item>Cine y Cultura</item>
+        <item>Derecho</item>
+        <item>Educación Infantil</item>
+        <item>Educación Infantil (Itinerario Bilingüe)</item>
+        <item>Educación Primaria</item>
+        <item>Educación Primaria (Itinerario Bilingüe)</item>
+        <item>Educación Social</item>
+        <item>Enfermería</item>
+        <item>Estudios Ingleses</item>
+        <item>Filología Hispánica</item>
+        <item>Física</item>
+        <item>Fisioterapia</item>
+        <item>Gestión Cultural</item>
+        <item>Historia</item>
+        <item>Historia del Arte</item>
+        <item>Psicología</item>
+        <item>Ingeniería Civil</item>
+        <item>Ingeniería Eléctrica</item>
+        <item>Ingeniería Electrónica Industrial</item>
+        <item>Ingeniería Forestal</item>
+        <item>Ingeniería Informática</item>
+        <item>Ingeniería Mecánica</item>
+        <item>Veterinaria</item>
+        <item>Medicina</item>
+        <item>Química</item>
+        <item>Relaciones Laborales y Recursos Humanos</item>
+        <item>Traducción e Interpretación</item>
+        <item>Turismo</item>
+        <item>Ingeniería de Recursos Energéticos y Mineros</item>
+        <item>Ingeniería Agroalimentaria y del Medio Rural</item>
     </string-array>
     <string name="title_activity_auxiliary">AuxiliaryActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -162,15 +194,15 @@
     <string name="second_part_warning">\" para que lo lea también!\"</string>
     <string name="event_image_access">imagen del evento</string>
     <string name="star_text_1">¡Recuerda que puedes confirmar tu asistencia pulsando la estrellita!</string>
-    <string name="person_text">\" personas!\"</string>
-    <string name="assist_text">\"¡Van a asistir \"</string>
-    <string name="star_text_2">\"Vemos que has confirmado tu asistencia. ¡Te esperamos el día \"</string>
+    <string name="person_text"> personas!</string>
+    <string name="assist_text">¡Van a asistir </string>
+    <string name="star_text_2">Vemos que has confirmado tu asistencia. ¡Te esperamos el día </string>
     <string name="cant_enter">Aún no ha comenzado el evento, debes eperar aún.</string>
     <string name="cant_enter_2">Lo sentimos mucho.</string>
     <string name="user_list_text">Lista de usuarios que se encuentran en el evento actualmente</string>
     <string name="college_degree">Carrera Universitaria</string>
     <string name="error_chat">NO HE PODIDO CREAR EL CHAT</string>
-    <string name="question_2">\"¿Quieres enviar una solicitud de amistad a \"</string>
+    <string name="question_2">¿Quieres enviar una solicitud de amistad a</string>
     <string name="friend_request_2">Solicitud de amistad enviada con éxito</string>
     <string name="out_event">Salir del evento</string>
     <string name="out_event_question">¿Estás seguro de que quieres salir del evento?</string>
@@ -218,11 +250,11 @@
     <string name="search_button_text">Botón para buscar localizaciones en el mapa</string>
     <string name="leonardo_da_vinci">Edificio Leonardo Da Vinci</string>
     <string name="campus_rabanales">Campus Universitario de Rabanales</string>
-    <string name="charles_darwin">Edificio Charles Darwin</string>
-    <string name="marie_curie">Edificio Marie Curie</string>
-    <string name="jose_celestino_mutis">Edificio José Celestino Mutis</string>
-    <string name="gregor_mendel">Edificio Gregor Mendel</string>
-    <string name="severo_ochoa">Edificio Severo Ochoa</string>
+    <string name="charles_darwin">Edificio Charles Darwin (C1)</string>
+    <string name="marie_curie">Edificio Marie Curie (C3)</string>
+    <string name="jose_celestino_mutis">Edificio José Celestino Mutis (C4)</string>
+    <string name="gregor_mendel">Edificio Gregor Mendel (C5)</string>
+    <string name="severo_ochoa">Edificio Severo Ochoa (C6)</string>
     <string name="my_Friends">Mis amigos</string>
     <string name="new_event">Nuevo Evento</string>
     <string name="add_calendar">Añadir al horario</string>
@@ -232,7 +264,7 @@
     <string name="must_add_name">¡Debes añadir un nombre!</string>
     <string name="not_possible_to_add">No ha sido posible añadirlo al horario</string>
     <string name="must_add_hour">¡Debes añadir una hora!</string>
-    <string name="you_have_Selected">\"Has seleccionado las \"</string>
+    <string name="you_have_Selected">Has seleccionado las</string>
     <string name="moovit">Actualmente no disponemos de datos en tiempo real, por lo que los datos ofrecidos provienen de Moovit </string>
     <string name="no_moovit_installed">No tienes descargada la aplicación de Moovit, te redirigimos a ella</string>
     <string name="not_possible_moovit">No ha sido posible abrir Moovit</string>
@@ -253,7 +285,7 @@
     <string name="edit_image">Editar imagen</string>
     <string name="delete_product">Borrar producto</string>
     <string name="no_Account">¿Aún no tienes una cuenta?</string>
-    <string name="google">Inicia sesión con Google</string>
+    <string name="google">Iniciar sesión con Google</string>
     <string name="register">Regístrate</string>
     <string name="session">Iniciar Sesión</string>
     <string name="verify_email">Hola, antes de continuar, es necesario que verifiques tu Email</string>
@@ -278,6 +310,11 @@
     <string name="must_be_friends">¡Debéis ser amigos para poder chatear juntos!</string>
     <string name="disconnect">Desconectarse</string>
     <string name="error_google">Se ha producido un error. Contacta con el desarrollador</string>
+    <string name="sign_in_problems">¿Tienes problemas para iniciar sesión?</string>
+    <string name="help">Obtén ayuda.</string>
+    <string name="error_question">¿Qué error te ha surgido?</string>
+    <string name="introduce_error">Introduce el error que quieras reportar</string>
+    <string name="send">ENVIAR</string>
 
     <string-array name="categories">
         <item>Ninguna</item>

@@ -109,7 +109,7 @@ class EditAppointment : Fragment() {
     }
 
     private fun onTimeSelected(time: String){
-        binding.eventTimeTV.setText(getString(R.string.you_have_Selected) + time)
+        binding.eventTimeTV.setText(getString(R.string.you_have_Selected) + ' ' + time)
         appointmentTime = time
     }
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".ui.home.car.driver.add.AddTripFragment">
 
     <com.example.campusinteligenteiot.common.CustomScrollView
@@ -51,6 +52,7 @@
                 android:layout_marginTop="25dp"
                 android:text="@string/add_trip"
                 android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
@@ -68,6 +70,7 @@
                 app:layout_constraintTop_toBottomOf="@id/userImage"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/montserrat_normal"
+                android:textColor="@color/black"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="16sp"
@@ -108,6 +111,7 @@
                 android:fontFamily="@font/montserrat_normal"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
+                android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textAlignment="center"
                 android:text="@string/question_date"
@@ -143,6 +147,7 @@
                 app:layout_constraintTop_toBottomOf="@id/etDate"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/montserrat_normal"
+                android:textColor="@color/black"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="16sp"
@@ -202,6 +207,7 @@
                 app:layout_constraintTop_toBottomOf="@id/buttonResetPoints"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/montserrat_normal"
+                android:textColor="@color/black"
                 android:layout_marginEnd="80dp"
                 android:layout_marginStart="80dp"
                 android:textSize="12sp"
@@ -210,7 +216,7 @@
                 />
 
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/buttonSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

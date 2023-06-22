@@ -71,9 +71,6 @@ class CarPassengerFragment : Fragment() {
 
         binding.swipeRefresh.setOnRefreshListener {
             binding.swipeRefresh.isRefreshing = false
-            GlobalScope.launch(Dispatchers.Main){
-                observeData()
-            }
         }
     }
 

@@ -87,9 +87,6 @@ class ShopFragment : Fragment() {
 
         binding.swipeRefresh.setOnRefreshListener {
             binding.swipeRefresh.isRefreshing = false
-            GlobalScope.launch(Dispatchers.Main){
-                observeData()
-            }
         }
 
         initProductsRecyclerView(view)

@@ -43,14 +43,14 @@
                 app:layout_constraintTop_toBottomOf="@id/DrawerButton"
                 android:src="@drawable/backbutton_grey" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/buttonGallery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="100dp"
-                android:background="@drawable/button_2"
+                android:background="@drawable/button_1"
                 android:text="@string/add_photo"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/add_new_product"
                 android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="center" />
@@ -186,7 +187,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/buttonSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
